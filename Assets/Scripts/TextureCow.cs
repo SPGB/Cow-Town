@@ -17,6 +17,7 @@ public class TextureCow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		level = GameObject.FindGameObjectWithTag("ExpBar").GetComponent<Exp>().getLevel();
 		if (level != levelExpected){
 			if (level == 5){
 				gameObject.GetComponent<SpriteRenderer>().sprite = tex1;

@@ -6,7 +6,6 @@ public class SpawnHay : MonoBehaviour {
 	public GameObject prefab;
 	public Vector3 chanceRange;
 	public Vector2 spawnRangeX;
-	public Vector2 spawnRangeY;
 	
 	private int regulator;
 	public int regulatorCap = 1;
@@ -20,12 +19,12 @@ public class SpawnHay : MonoBehaviour {
 			if (chance == happen){
 				int value = prefab.GetComponent<CowHayCollide>().getHayValue();
 				int level = GameObject.FindGameObjectWithTag("ExpBar").GetComponent<Exp>().getLevel();
-				if ((value == 1 && level == 1) || (value == 5 && level < 10)){
+				if ((value == 5 && level < 10)){
 					Debug.Log("Spawn Cancelled... " + prefab.name.ToString());
 					return;
 				}
 				Debug.Log("Spawning... " + prefab.name.ToString());
-				Instantiate(prefab, new Vector3(Random.Range(spawnRangeX.x, spawnRangeX.y), Random.Range(spawnRangeY.x, spawnRangeY.y), 4.6f), Quaternion.identity);
+				Instantiate(prefab, new Vector3(Random.Range(spawnRangeX.x, spawnRangeX.y), 3.0f, 4.6f), Quaternion.identity);
 			}
 			regulator = 0;
 		}

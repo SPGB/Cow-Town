@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 54: {fileID: 5400000}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: hay_special
   m_TagString: Hay
@@ -86,6 +87,18 @@ MonoBehaviour:
   tex1: {fileID: 21300000, guid: 59ffd04c6e6c72945a88ddc930125292, type: 3}
   tex2: {fileID: 21300000, guid: 63213c21ba3d4ad41b19c120ff616e7c, type: 3}
   tex3: {fileID: 21300000, guid: 6171d1ca31050234ab31fe77570cc6c1, type: 3}
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60d31817273730d47b9296cefcd87270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fall: 2
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -4,7 +4,7 @@ var object : GameObject;
 
 function Update () {
 	
-	#if UNITY_EDITOR
+	#if (UNITY_EDITOR || UNITY_STANDALONE)
 	if (Input.GetMouseButton(0)){
 		var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		var hit : RaycastHit;
