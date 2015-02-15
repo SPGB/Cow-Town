@@ -11,7 +11,7 @@ public class HayFall : MonoBehaviour {
 	void Update () {
 		if (!(transform.position.y <= -2.25f)){
 			transform.Translate(0.0f, -fall * Time.deltaTime, 0.0f);
-		} else if (transform.position.y <= -2.25f && transform.position.z == 4.6f){
+		} else if (transform.position.y <= -2.25f && transform.position.z != 4.5f){
 			if (timer <= 0.0f){
 				Destroy(gameObject);
 			}

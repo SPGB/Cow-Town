@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class TextureCow : MonoBehaviour {
-
+	
+	public Sprite tex0;
 	public Sprite tex1;
 	public Sprite tex2;
 	public Sprite tex3;
@@ -12,6 +13,7 @@ public class TextureCow : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gameObject.GetComponent<SpriteRenderer>().sprite = tex0;
 		level = GameObject.FindGameObjectWithTag("ExpBar").GetComponent<Exp>().getLevel();
 	}
 	

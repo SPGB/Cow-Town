@@ -187,6 +187,11 @@ MonoBehaviour:
   prefab: {fileID: 100000, guid: 78023d171ece2b4408b5272b96d88d1f, type: 2}
   chanceRange: {x: 0, y: 100, z: 50}
   spawnRangeX: {x: -1.24132597, y: 1.27618003}
+  chanceX: 0
+  chanceY: 0
+  chance: 0
+  happen: 0
+  happenRange: 0
   regulatorCap: 2
 --- !u!114 &394633393
 MonoBehaviour:
@@ -202,6 +207,11 @@ MonoBehaviour:
   prefab: {fileID: 100000, guid: 631d6b4239be96846ac1df2fca685113, type: 2}
   chanceRange: {x: 0, y: 5000, z: 2500}
   spawnRangeX: {x: -1.24132597, y: 1.27618003}
+  chanceX: 0
+  chanceY: 0
+  chance: 0
+  happen: 0
+  happenRange: 0
   regulatorCap: 4
 --- !u!1 &457092764
 GameObject:
@@ -415,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2bc13c10dcb6c248a7731f46769fd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tex0: {fileID: 21300000, guid: 3247a0fd63cd19b45a0786f7fd656c0a, type: 3}
   tex1: {fileID: 21300000, guid: 0fba288b6319510498053185a8494bb8, type: 3}
   tex2: {fileID: 21300000, guid: 250e815a2c6e8e04cac5a94f5a4632f8, type: 3}
   tex3: {fileID: 21300000, guid: a6f764b818eadde4f9f0deedace1cbf3, type: 3}

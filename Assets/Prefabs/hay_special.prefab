@@ -10,10 +10,10 @@ GameObject:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
   - 65: {fileID: 6500000}
-  - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: hay_special
   m_TagString: Hay
@@ -75,7 +75,7 @@ MonoBehaviour:
   popup: {fileID: 100000, guid: 8bf46b468654b0e4f965ec5625ebec9f, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
