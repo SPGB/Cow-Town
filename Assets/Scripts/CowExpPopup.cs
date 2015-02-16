@@ -12,9 +12,7 @@ public class CowExpPopup : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log("Dying");
 		if (die >= 60){
-			Debug.Log("Dead");
 			Destroy(gameObject);
 		}
 		die++;

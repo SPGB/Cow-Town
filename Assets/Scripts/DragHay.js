@@ -12,8 +12,10 @@ function Update () {
 	
 	#if (UNITY_EDITOR || UNITY_STANDALONE)
 	if (Input.GetMouseButton(0)){
+//		GameControl.control.dragging = true;
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, hit, 100)){
+			Debug.DrawRay(ray.origin, ray.direction);
 			if (hit.transform.gameObject.tag == "Hay"){
 				object = hit.transform.gameObject;
 				cameraTransform = Camera.main.transform.InverseTransformPoint(0, 0, 0);
@@ -25,6 +27,7 @@ function Update () {
 		}
 	}
 	if (Input.GetMouseButtonUp(0)) {
+//		GameControl.control.dragging = false;
 		object.transform.Translate(0.0f, 0.0f, 0.1f);
 		object = null;
 	}
@@ -34,10 +37,12 @@ function Update () {
 		if (Physics.Raycast(ray, hit, 100)){
 			if (hit.transform.gameObject.tag == "Hay"){
 				object = hit.transform.gameObject;
-				if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved){
+				if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary){
+//					GameControl.control.dragging = true;
 					cameraTransform = Camera.main.transform.InverseTransformPoint(0, 0, 0);
 					object.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, cameraTransform.z + 4.5f));
-				} else if (touch.phase == TouchPhase.Ended){
+				} else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled){
+//					GameControl.control.dragging = false;
 					object.transform.Translate(0.0f, 0.0f, 0.1f);
 					object = null;
 				}

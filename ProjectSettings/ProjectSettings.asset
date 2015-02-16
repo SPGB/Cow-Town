@@ -67,11 +67,11 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: ca.sunbucks.cowtown
+  iPhoneBundleIdentifier: ca.unnamed.cowtown
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   productGUID: 6de94a33e04b6334c87e6fcaba52f55b
-  iPhoneBundleVersion: 1.4
+  iPhoneBundleVersion: 1.5
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 1
