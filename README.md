@@ -10,5 +10,7 @@
 
 
 *Support for Windows, Mac OS, Linux.*
+
 *Support for multiple Android devices.*
-*Support for multiple screen resolutions.*
+
+*Support for multiple screen resolutions between 480x854 and 1025x765.*
