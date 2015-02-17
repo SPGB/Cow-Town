@@ -19,4 +19,5 @@
 * [Android](https://www.dropbox.com/s/siffogk77ugmnh6/Cow_Town.apk?dl=0 "APK File")
 
 QR Code to scan with a QR scanner on your mobile:
+
 ![alt text](http://i.imgur.com/RT4esnK.png "Scan with QR scanner on mobile")
