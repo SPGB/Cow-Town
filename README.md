@@ -1,2 +1,14 @@
 # Cow-Town
-IN DEVELOPMENT
+*IN DEVELOPMENT*
+
+###Features
+* Cow levels, the cow levels up when a certain amount of exp is reached, the required amount raises every level.
+* Hay/Hay of Life, adds 1/5 exp to the cow when dragged to it, or to the trough when hay falls to it.
+* Trough that feeds hay to the cow when the game is closed, or hidden on mobiles. The current rate that the trough gives exp is 0.5 exp every minute, or 1 exp every 2 minutes that the game is closed/hidden.
+* Multiple cow skins that are unlocked at different levels.
+* Data loading every time the game is opened and whenever the cow's exp is a multiple of 10, and data saving every time the game is closed/hidden and whenever the cow's exp is a multiple of 10.
+
+
+*Support for Windows, Mac OS, Linux.*
+*Support for multiple Android devices.*
+*Support for multiple screen resolutions.*

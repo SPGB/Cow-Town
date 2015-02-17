@@ -30,14 +30,18 @@ public class DragHay : MonoBehaviour {
 			}
 			if (selected){
 				target.z = 4.5f;
-				obj.transform.position = Vector3.MoveTowards(obj.transform.position, target, 1.0f);
+				if (obj) {
+					obj.transform.position = Vector3.MoveTowards(obj.transform.position, target, 1.0f);
+				}
 			}
 		}
 		if (Input.GetMouseButtonUp(0)) {
 			selected = false;
 			GameControl.control.haySelected = null;
-			obj.transform.Translate(0.0f, 0.0f, 0.1f);
-			obj = null;
+			if (obj){
+				obj.transform.Translate(0.0f, 0.0f, 0.1f);
+				obj = null;
+			}
 		}
 		#endif
 		
