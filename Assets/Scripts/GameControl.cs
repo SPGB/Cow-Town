@@ -21,7 +21,11 @@ public class GameControl : MonoBehaviour {
 	
 	public GameObject haySelected;
 	
-	private bool saveMod = false;
+	//private bool saveModExp = false;
+	
+	private DateTime updateTime1;
+	private DateTime updateTime2;
+	private TimeSpan updateTimeSpan;
 	
 	// Use this for initialization
 	void Awake () {
@@ -35,17 +39,25 @@ public class GameControl : MonoBehaviour {
 	
 	void Start () {
 		Load();
+		updateTime1 = DateTime.Now;
 	}
 	
 	void Update () {
-		if (exp % 10 == 0){
-			if (!saveMod){
-				Save();
-				Load();
-				saveMod = true;
-			}
-		} else {
-			saveMod = false;
+		//if (exp % 10 == 0){
+		//	if (!saveModExp){
+		//		Save();
+		//		Load();
+		//		saveModExp = true;
+		//	}
+		//} else {
+		//	saveModExp = false;
+		//}
+		
+		updateTime2 = DateTime.Now;
+		updateTimeSpan = updateTime2 - updateTime1;
+		if ((int)updateTimeSpan.TotalMinutes >= 1){
+			Save();
+			updateTime1 = DateTime.Now;
 		}
 	}
 	
@@ -58,9 +70,9 @@ public class GameControl : MonoBehaviour {
 		Save();
 	}
 	void OnApplicationFocus (bool status) {
-		if (status == false){
+		if (status == true){
 			Load();
-		} else if (status == true){
+		} else if (status == false){
 			Save();
 		}
 	}
