@@ -12,8 +12,10 @@ public class HayCollide : MonoBehaviour {
 				GameControl.control.exp += hayValue;
 				if (hayValue == 1){
 					GameControl.control.totalHay++;
+					GameControl.control.happiness += 10;
 				} else if (hayValue == 5){
 					GameControl.control.totalSpecial++;
+					GameControl.control.happiness += 25;
 				}
 				//float x = GameObject.FindGameObjectWithTag("Cow").gameObject.transform.position.x;
 				//float y = (GameObject.FindGameObjectWithTag("Cow").gameObject.transform.position.y) + 1.2f;
