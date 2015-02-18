@@ -1576,6 +1576,10 @@ MonoBehaviour:
   totalHay: 0
   totalSpecial: 0
   haySelected: {fileID: 0}
+  statsRandomized: 0
+  numberOfCowsBred: 0
+  statMin: 10
+  statMax: 18
 --- !u!4 &2008925017
 Transform:
   m_ObjectHideFlags: 0

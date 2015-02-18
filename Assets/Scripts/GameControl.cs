@@ -30,6 +30,11 @@ public class GameControl : MonoBehaviour {
 	
 	public GameObject haySelected;
 	
+	public bool statsRandomized = false;
+	public int numberOfCowsBred = 0;
+	public int statMin = 10;
+	public int statMax = 18;
+	
 	//private bool saveModExp = false;
 	
 	private DateTime updateTime1;
@@ -50,6 +55,16 @@ public class GameControl : MonoBehaviour {
 		Load();
 		Debug.Log("LOAD ON START");
 		updateTime1 = DateTime.Now;
+		
+		happinessExpected = 0.0f;
+		expExpected = 0.0f;
+		statMin = 10 + numberOfCowsBred;
+		statMax = 18 + numberOfCowsBred;
+		
+		if (!statsRandomized){
+			randomizeStats(statMin, statMax, statMin, statMax, statMin, statMax);
+			statsRandomized = true;
+		}
 	}
 	
 	void Update () {
@@ -80,6 +95,14 @@ public class GameControl : MonoBehaviour {
 		happinessMax = 100.0f + (Mathf.Floor(cowIntelligence / 2));
 	}
 	
+	public void randomizeStats(int strMin, int strMax, int conMin, int conMax, int intMin, int intMax){
+		GameControl.control.cowStrength = float.Parse(UnityEngine.Random.Range(strMin, strMax).ToString("F1"));
+		//Debug.Log("Str: " + GameControl.control.cowStrength);
+		GameControl.control.cowConstitution = float.Parse(UnityEngine.Random.Range(conMin, conMax).ToString("F1"));
+		//Debug.Log("Con: " + GameControl.control.cowConstitution);
+		GameControl.control.cowIntelligence = float.Parse(UnityEngine.Random.Range(intMin, intMax).ToString("F1"));
+		//Debug.Log("Int: " + GameControl.control.cowIntelligence);
+	}
 	
 	void OnDestroy () {
 		Save();
@@ -128,6 +151,9 @@ public class GameControl : MonoBehaviour {
 		data.totalHay = totalHay;
 		data.totalSpecial = totalSpecial;
 		
+		data.statsRandomized = statsRandomized;
+		data.numberOfCowsBred = numberOfCowsBred;
+		
 		data.saveTime = DateTime.Now;
 		
 		Debug.Log("Saving to... " + Application.persistentDataPath + "/playerInfo.dat" + " at: " + DateTime.Now);
@@ -162,6 +188,9 @@ public class GameControl : MonoBehaviour {
 			
 			totalHay = data.totalHay;
 			totalSpecial = data.totalSpecial;
+			
+			statsRandomized = data.statsRandomized;
+			numberOfCowsBred = data.numberOfCowsBred;
 			
 			DateTime loadTime = DateTime.Now;
 			TimeSpan interval = loadTime - data.saveTime;
@@ -199,6 +228,9 @@ class PlayerData{
 	
 	public float totalHay;
 	public float totalSpecial;
+	
+	public bool statsRandomized;
+	public int numberOfCowsBred;
 	
 	public DateTime saveTime;
 	
