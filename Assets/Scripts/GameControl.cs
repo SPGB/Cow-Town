@@ -55,11 +55,6 @@ public class GameControl : MonoBehaviour {
 		Debug.Log("LOAD ON START");
 		updateTime1 = DateTime.Now;
 		
-		exp = 0.0f;
-		troughCurExp = 0.0f;
-		totalHay = 0.0f;
-		totalSpecial = 0.0f;
-		
 		happinessExpected = 0.0f;
 		expExpected = 0.0f;
 		statMin = 10 + numberOfCowsBred;
