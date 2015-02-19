@@ -10,8 +10,7 @@ public class GameControl : MonoBehaviour {
 	
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
-	public float expReqToLevel = 10.0f;
-	public int level = 1;
+	public float level = 1.0f;
 	
 	public float happiness = 0.0f;
 	public float happinessExpected = 0.0f;
@@ -56,6 +55,11 @@ public class GameControl : MonoBehaviour {
 		Debug.Log("LOAD ON START");
 		updateTime1 = DateTime.Now;
 		
+		exp = 0.0f;
+		troughCurExp = 0.0f;
+		totalHay = 0.0f;
+		totalSpecial = 0.0f;
+		
 		happinessExpected = 0.0f;
 		expExpected = 0.0f;
 		statMin = 10 + numberOfCowsBred;
@@ -84,6 +88,10 @@ public class GameControl : MonoBehaviour {
 			Save();
 			Debug.Log("SAVE ON UPDATE");
 			updateTime1 = DateTime.Now;
+		}
+		
+		if (troughCurExp > troughMaxExp){
+			troughCurExp = troughMaxExp;
 		}
 		
 		if (cowConstitution <= 27){
@@ -138,7 +146,6 @@ public class GameControl : MonoBehaviour {
 		data.troughCurExp = troughCurExp;
 		data.troughMaxExp = troughMaxExp;
 		data.expExpected = expExpected;
-		data.expReqToLevel = expReqToLevel;
 		data.level = level;
 		
 		data.happiness = happiness;
@@ -176,7 +183,6 @@ public class GameControl : MonoBehaviour {
 			troughCurExp = data.troughCurExp;
 			troughMaxExp = data.troughMaxExp;
 			expExpected = data.expExpected;
-			expReqToLevel = data.expReqToLevel;
 			level = data.level;
 			
 			happiness = data.happiness;
@@ -213,8 +219,7 @@ class PlayerData{
 
 	public float exp;
 	public float expExpected;
-	public float expReqToLevel;
-	public int level;
+	public float level;
 	
 	public float happiness;
 	public float happinessExpected;

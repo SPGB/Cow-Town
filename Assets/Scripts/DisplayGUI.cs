@@ -11,6 +11,9 @@ public class DisplayGUI : MonoBehaviour {
 	private GUIText strength;
 	private GUIText constitution;
 	private GUIText intelligence;
+	
+	//private GUIText levelTest;
+	//private GUIText expTest;
 
 	void Start () {
 		happiness = transform.Find("happinessHolder").Find("happinessValue").GetComponent<GUIText>();
@@ -21,13 +24,16 @@ public class DisplayGUI : MonoBehaviour {
 		strength = transform.Find("cowStats").Find("strengthValue").GetComponent<GUIText>();
 		constitution = transform.Find("cowStats").Find("constitutionValue").GetComponent<GUIText>();
 		intelligence = transform.Find("cowStats").Find("intelligenceValue").GetComponent<GUIText>();
+		
+		//levelTest = transform.Find("levelTest").GetComponent<GUIText>();
+		//expTest = transform.Find("expTest").GetComponent<GUIText>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		happiness.text = GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString() + " (-" + GameControl.control.happinessLose.ToString("F1") + "/s)";
 		level.text = GameControl.control.level.ToString();
-		exp.text = GameControl.control.exp.ToString() + " / " + GameControl.control.expReqToLevel.ToString();
+		exp.text = GameControl.control.exp.ToString();
 		float troughExp = GameControl.control.troughCurExp;
 		if (troughExp >= 30.0f){
 			int troughHours = (int)Mathf.Floor((troughExp * 2) / 60);
@@ -45,5 +51,9 @@ public class DisplayGUI : MonoBehaviour {
 		strength.text = GameControl.control.cowStrength.ToString();
 		constitution.text = GameControl.control.cowConstitution.ToString();
 		intelligence.text = GameControl.control.cowIntelligence.ToString();
+		
+		//float levelVal = (100 * ((GameControl.control.totalHay + GameControl.control.totalSpecial) / ((GameControl.control.totalHay + GameControl.control.totalSpecial) + 1000)));
+		//levelTest.text = "LevelTest: " + levelVal.ToString("F2");
+		//expTest.text = "Bar Multi: " + (levelVal - Mathf.Floor(levelVal - 1));
 	}
 }

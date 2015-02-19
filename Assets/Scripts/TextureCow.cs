@@ -10,7 +10,7 @@ public class TextureCow : MonoBehaviour {
 	
 	public Sprite cowTex;
 	
-	private int levelExpected = 0;
+	private float levelExpected = 0.0f;
 
 	// Use this for initialization
 	void Start () {
