@@ -3,7 +3,8 @@ using System.Collections;
 
 public class SpawnHay : MonoBehaviour {
 
-	public GameObject prefab;
+	public GameObject prefab_hay;
+	public GameObject prefab_rock;
 	public Vector3 chanceRange;
 	
 	public float chanceX;
@@ -36,11 +37,13 @@ public class SpawnHay : MonoBehaviour {
 			chance = Random.Range(chanceX, chanceY);
 			happen = (chanceRange.z);
 			if (chance >= (happen - (0.5f + (0.02f * (GameControl.control.level - 1)))) && chance <= (happen + (0.5f + (0.02 * (GameControl.control.level - 1))))){
-				int value = prefab.GetComponent<HayCollide>().getHayValue();
+				bool is_rock = Random.Range(0, 5) < 2;
+				GameObject new_object = (is_rock)? prefab_rock : prefab_hay;
+				int value = new_object.GetComponent<HayCollide>().getHayValue();
 				if ((value == 5 && GameControl.control.level < 5)){
 					return;
 				}
-				Instantiate(prefab, new Vector3(Random.Range(screenSizeX1.x, screenSizeX2.x), screenSizeY.y, 4.6f), Quaternion.identity);
+				Instantiate(new_object, new Vector3(Random.Range(screenSizeX1.x, screenSizeX2.x), screenSizeY.y, 4.6f), Quaternion.identity);
 			}
 			regulator = 0;
 		}

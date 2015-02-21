@@ -2,7 +2,13 @@ fileFormatVersion: 2
 guid: 9579d784f21a06642aefe9ee8a940798
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - semi: {instanceID: 0}
+  - full: {instanceID: 0}
+  - background_texture: {fileID: 2800000, guid: f44515a8bc4ddce44b1c24ebc469ba35,
+      type: 3}
+  - foreground_texture: {fileID: 2800000, guid: 9af122b1ba790de49a6af101849caf2b,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

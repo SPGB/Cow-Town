@@ -1,34 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Exp : MonoBehaviour {
+public class Exp : MonoBehaviour { //experience bar for cow
 	
-	private float expBarLength = 0.0f;
-	private float expBarMaxLength = 2.5f;
-	
-	private float barMulti;
-	
-	//private Vector3 startPos;
+	public float expBarLength = 0.0f; //the filled in part of the bar
+	private float expBarMaxLength = 215f; //the maximum exp bar length
 
-	// Use this for initialization
+	public Texture background_texture; //the backing
+	public Texture foreground_texture; //the blue bar
+
+	private float position_x = 283; //pos from bottom
+	public float barMulti; //the % progress into the level
+
 	void Start () {
 		barMulti = GameControl.control.level - (Mathf.Floor(GameControl.control.level));
-		expBarLength = expBarMaxLength * barMulti;
-		gameObject.transform.localScale = new Vector3(expBarLength, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-		//startPos = gameObject.transform.position;
-		//startPos.x -= 0.5f;
-		//gameObject.transform.position = new Vector3(startPos.x, gameObject.transform.position.y, gameObject.transform.position.z);
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-		if (GameControl.control.exp != GameControl.control.expExpected){//expBar.transform.x != expBarExpectedLength){
-			GameControl.control.level = (100 * (GameControl.control.exp / (GameControl.control.exp + 1000)));
-			barMulti = GameControl.control.level - (Mathf.Floor(GameControl.control.level));
-			expBarLength = expBarMaxLength * barMulti;
-			//gameObject.transform.position = new Vector3(startPos.x + ((expBarMaxLength * (exp / expReqToLevel)) / 2), gameObject.transform.position.y, gameObject.transform.position.z);
-			gameObject.transform.localScale = new Vector3(expBarLength, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-			GameControl.control.expExpected = GameControl.control.exp;
-		}
+
+		GameControl.control.level = (100 * (GameControl.control.exp / (GameControl.control.exp + 1000)));
+		barMulti = GameControl.control.level - (Mathf.Floor(GameControl.control.level));
+		expBarLength = expBarMaxLength * barMulti;
+	}
+
+	void OnGUI () {
+		// Create one Group to contain both images
+		// Adjust the first 2 coordinates to place it somewhere else on-screen
+		GUI.BeginGroup (new Rect ( (Screen.width - expBarMaxLength ) / 2,Screen.height - position_x, expBarMaxLength,10));
+		// Draw the background image
+		GUI.DrawTexture (new Rect (0,0, expBarMaxLength,10), background_texture);
+		// Create a second Group which will be clipped
+		// We want to clip the image and not scale it, which is why we need the second Group
+		GUI.BeginGroup (new Rect (0,0, expBarLength, 10));
+		// Draw the foreground image
+		GUI.DrawTexture (new Rect (0,0,expBarLength,10), foreground_texture);
+		// End both Groups
+		GUI.EndGroup ();
+		GUI.EndGroup ();
 	}
 }

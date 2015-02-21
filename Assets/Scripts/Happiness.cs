@@ -8,33 +8,27 @@ public class Happiness : MonoBehaviour {
 	public Material full;
 
 	private float hapBarLength = 0.0f;
-	private float hapBarMaxLength = 2.5f;
+	private float hapBarMaxLength = 215f;
 	
 	private DateTime hapTime1;
 	private DateTime hapTime2;
 	private TimeSpan hapTimeSpan;
-	
+
+	public Texture background_texture; //the backing
+	public Texture foreground_texture; //the blue bar
+	private float position_x = 272.8f; //pos from bottom
+
 	// Use this for initialization
 	void Start () {
 		hapTime1 = DateTime.Now;
-		hapBarLength = hapBarMaxLength * (GameControl.control.happiness / GameControl.control.happinessMax);
-		gameObject.transform.localScale = new Vector3(hapBarLength, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (GameControl.control.happiness != GameControl.control.happinessExpected){//expBar.transform.x != expBarExpectedLength){
-			if (GameControl.control.happiness >= GameControl.control.happinessMax){
-				GameControl.control.happiness = GameControl.control.happinessMax;
-				renderer.material = full;
-			} else {
-				renderer.material = semi;
-			}
-			hapBarLength = hapBarMaxLength * (GameControl.control.happiness / GameControl.control.happinessMax);
-			GameControl.control.happinessExpected = GameControl.control.happiness;
-			//gameObject.transform.position = new Vector3(startPos.x + ((expBarMaxLength * (exp / expReqToLevel)) / 2), gameObject.transform.position.y, gameObject.transform.position.z);
-			gameObject.transform.localScale = new Vector3(hapBarLength, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+		if (GameControl.control.happiness >= GameControl.control.happinessMax){
+			GameControl.control.happiness = GameControl.control.happinessMax;
 		}
+		hapBarLength = hapBarMaxLength * (GameControl.control.happiness / GameControl.control.happinessMax);
 		
 		hapTime2 = DateTime.Now;
 		hapTimeSpan = hapTime2 - hapTime1;
@@ -42,5 +36,21 @@ public class Happiness : MonoBehaviour {
 			GameControl.control.happiness -= GameControl.control.happinessLose;
 			hapTime1 = DateTime.Now;
 		}
+	}
+	
+	void OnGUI () {
+		// Create one Group to contain both images
+		// Adjust the first 2 coordinates to place it somewhere else on-screen
+		GUI.BeginGroup (new Rect ( (Screen.width - hapBarMaxLength ) / 2,Screen.height - position_x, hapBarMaxLength,10));
+		// Draw the background image
+		GUI.DrawTexture (new Rect (0,0, hapBarMaxLength,10), background_texture);
+		// Create a second Group which will be clipped
+		// We want to clip the image and not scale it, which is why we need the second Group
+		GUI.BeginGroup (new Rect (0,0, hapBarLength, 10));
+		// Draw the foreground image
+		GUI.DrawTexture (new Rect (0,0,hapBarLength,10), foreground_texture);
+		// End both Groups
+		GUI.EndGroup ();
+		GUI.EndGroup ();
 	}
 }

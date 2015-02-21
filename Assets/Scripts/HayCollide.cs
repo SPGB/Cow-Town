@@ -4,22 +4,18 @@ using System.Collections;
 public class HayCollide : MonoBehaviour {
 
 	public int hayValue = 1;
+	public int happiness_mod = 1;
 	public GameObject popup;
 
 	void OnCollisionStay(Collision col){
 		if (col.gameObject.tag == "Cow"){
 			if (transform.position.z == 4.5f){
 				GameControl.control.exp += hayValue;
-				if (hayValue == 1){
-					GameControl.control.totalHay++;
-					GameControl.control.happiness += 10;
-				} else if (hayValue == 5){
+				if (hayValue == 5){
 					GameControl.control.totalSpecial++;
-					GameControl.control.happiness += 25;
 				}
-				//float x = GameObject.FindGameObjectWithTag("Cow").gameObject.transform.position.x;
-				//float y = (GameObject.FindGameObjectWithTag("Cow").gameObject.transform.position.y) + 1.2f;
-				//Instantiate(popup, new Vector3(x, y, 4.5f), Quaternion.identity);
+				GameControl.control.happiness += happiness_mod;
+
 				Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
 				Destroy(gameObject);
 			}
