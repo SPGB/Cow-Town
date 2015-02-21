@@ -88,6 +88,15 @@ public class GameControl : MonoBehaviour {
 		if (troughCurExp > troughMaxExp){
 			troughCurExp = troughMaxExp;
 		}
+		if (troughCurExp < 0.0f){
+			troughCurExp = 0.0f;
+		}
+		if (happiness > happinessMax){
+			happiness = happinessMax;
+		}
+		if (happiness < 0.0f){
+			happiness = 0.0f;
+		}
 		
 		if (cowConstitution <= 27){
 			happinessLose = 1.0f - (cowConstitution / 30);

@@ -19,16 +19,12 @@ public class SpawnHay : MonoBehaviour {
 	public Vector3 screenSizeY;
 	
 	void Start () {
-		#if (UNITY_STANDALONE || UNITY_ANDROID || UNITY_IPHONE || UNITY_WP8)
 		screenSizeX1 = camera.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		screenSizeX2 = camera.ScreenToWorldPoint(new Vector3(camera.pixelWidth - 50, 0, 0));
 		screenSizeY = camera.ScreenToWorldPoint(new Vector3(0, camera.pixelHeight + 100, 0));
-		#endif
 		
-		//#if UNITY_EDITOR
 		//screenSizeX = new Vector3(-3.5f, 3.5f, 0.0f);
 		//screenSizeY = new Vector3(4.5f, 0.0f, 0.0f);
-		//#endif
 		Debug.Log("Screen to World: X: " + screenSizeX1.x + " / " + screenSizeX2.x + " | Y: " + screenSizeY.y);
 	}
 
@@ -39,7 +35,7 @@ public class SpawnHay : MonoBehaviour {
 			chanceY = (chanceRange.y);
 			chance = Random.Range(chanceX, chanceY);
 			happen = (chanceRange.z);
-			if (chance >= (happen - (0.5f + (0.1f * (GameControl.control.level - 1)))) && chance <= (happen + (0.5f + (0.1f * (GameControl.control.level - 1))))){
+			if (chance >= (happen - (0.5f + (0.02f * (GameControl.control.level - 1)))) && chance <= (happen + (0.5f + (0.02 * (GameControl.control.level - 1))))){
 				int value = prefab.GetComponent<HayCollide>().getHayValue();
 				if ((value == 5 && GameControl.control.level < 5)){
 					return;

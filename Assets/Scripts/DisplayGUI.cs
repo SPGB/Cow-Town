@@ -31,8 +31,15 @@ public class DisplayGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		happiness.text = GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString() + " (-" + GameControl.control.happinessLose.ToString("F1") + "/s)";
-		level.text = GameControl.control.level.ToString();
+		bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
+		if (GameControl.control.happiness < 0.1f){
+			happiness.text = GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString();
+		} else if (hapDif){
+			happiness.text = GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString() + " (-" + GameControl.control.happiness.ToString("F1") + "/5s)";
+		} else {
+			happiness.text = GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString() + " (-" + GameControl.control.happinessLose.ToString("F1") + "/5s)";
+		}
+		level.text = GameControl.control.level.ToString("F2");
 		exp.text = GameControl.control.exp.ToString();
 		float troughExp = GameControl.control.troughCurExp;
 		if (troughExp >= 30.0f){

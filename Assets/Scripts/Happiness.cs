@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class Happiness : MonoBehaviour {
@@ -9,10 +10,13 @@ public class Happiness : MonoBehaviour {
 	private float hapBarLength = 0.0f;
 	private float hapBarMaxLength = 2.5f;
 	
-	private float timer = 40.0f;
+	private DateTime hapTime1;
+	private DateTime hapTime2;
+	private TimeSpan hapTimeSpan;
 	
 	// Use this for initialization
 	void Start () {
+		hapTime1 = DateTime.Now;
 		hapBarLength = hapBarMaxLength * (GameControl.control.happiness / GameControl.control.happinessMax);
 		gameObject.transform.localScale = new Vector3(hapBarLength, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
 	}
@@ -32,10 +36,11 @@ public class Happiness : MonoBehaviour {
 			gameObject.transform.localScale = new Vector3(hapBarLength, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
 		}
 		
-		if (timer <= 0.0f && GameControl.control.happiness >= 0.0f){
+		hapTime2 = DateTime.Now;
+		hapTimeSpan = hapTime2 - hapTime1;
+		if ((int)hapTimeSpan.TotalSeconds >= 5){
 			GameControl.control.happiness -= GameControl.control.happinessLose;
-			timer = 40.0f;
+			hapTime1 = DateTime.Now;
 		}
-		timer -= 0.1f;
 	}
 }
