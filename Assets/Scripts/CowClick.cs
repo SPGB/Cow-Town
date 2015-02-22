@@ -4,7 +4,7 @@ using System.Collections;
 public class CowClick : MonoBehaviour {
 
 	public Texture menu;
-	private bool gui = false;
+	public Texture closeButton;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +32,10 @@ public class CowClick : MonoBehaviour {
 			GUI.BeginGroup(new Rect (50, 50, width, height)); // left, top, width, height
 				// Draw the background image
 				GUI.DrawTexture(new Rect (0, 0, width, height), menu);
+				if (GUI.Button(new Rect(width - 60, 10, 50, 50), closeButton)){
+					GameControl.control.pauseMenu = false;
+					Time.timeScale = 1.0f;
+				}
 			// End both Groups
 			GUI.EndGroup ();
 		}
