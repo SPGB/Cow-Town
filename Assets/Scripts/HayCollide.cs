@@ -9,18 +9,24 @@ public class HayCollide : MonoBehaviour {
 
 	void OnCollisionStay(Collision col){
 		if (col.gameObject.tag == "Cow"){
-			if (transform.position.z == 4.5f){
+			if (transform.position.z == 4.6f){
+			
+				GameControl.control.happiness += happiness_mod;
+				
+				Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
+				
+				Destroy(gameObject);
+				
+				if (happiness_mod < 0) return;
+				
 				GameControl.control.exp += hayValue;
 				if (hayValue == 5){
 					GameControl.control.totalSpecial++;
 				}
-				GameControl.control.happiness += happiness_mod;
-
-				Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
-				Destroy(gameObject);
 			}
+			
 		} else if (col.gameObject.tag == "Trough"){
-			if (transform.position.z == 4.6f){
+			if (transform.position.z == 4.4f && happiness_mod > 0){
 				if (GameControl.control.troughCurExp < GameControl.control.troughMaxExp){
 					GameControl.control.troughCurExp += hayValue;
 					if (hayValue == 1){

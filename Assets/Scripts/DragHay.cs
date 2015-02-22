@@ -2,49 +2,22 @@
 using System.Collections;
 
 public class DragHay : MonoBehaviour {
+
+	private float z;
 	
-	public GameObject obj;
+	void OnMouseDrag () {
+		z = transform.position.z;
+		transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 4.6f));
+		rigidbody.drag = 4.0f;
+	}
 	
-	private Ray ray;
-	private RaycastHit hit;
-	private Vector3 cameraTransform;
-	private Vector3 target;
+	void OnMouseUp () {
+		transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, z));
+	}
 	
-	private bool selected;
-	
+	/**
 	// Update is called once per frame
 	void Update () {
-		#if (UNITY_EDITOR || UNITY_STANDALONE)
-		if (Input.GetMouseButton(0)){
-			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			if (Physics.Raycast(ray, out hit, 100.0f)){
-				Debug.DrawRay(ray.origin, ray.direction);
-				if (hit.transform.gameObject.tag == "Hay"){
-					obj = hit.transform.gameObject;
-					selected = true;
-					GameControl.control.haySelected = obj;
-					cameraTransform = Camera.main.transform.InverseTransformPoint(0, 0, 0);
-					obj.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraTransform.z + 4.5f));
-				}
-			}
-			if (selected){
-				target.z = 4.5f;
-				if (obj) {
-					obj.transform.position = Vector3.MoveTowards(obj.transform.position, target, 1.0f);
-				}
-			}
-		}
-		if (Input.GetMouseButtonUp(0)) {
-			selected = false;
-			GameControl.control.haySelected = null;
-			if (obj){
-				obj.transform.Translate(0.0f, 0.0f, 0.1f);
-				obj = null;
-			}
-		}
-		#endif
-		
 		#if (UNITY_ANDROID || UNITY_IPHONE || UNITY_WP8)
 		foreach (Touch touch in Input.touches){			
 			ray = Camera.main.ScreenPointToRay(touch.position);
@@ -67,9 +40,11 @@ public class DragHay : MonoBehaviour {
 			}
 			if (selected){
 				target.z = 4.5f;
+				obj.rigidbody.drag = 4.0f;
 				obj.transform.position = Vector3.MoveTowards(obj.transform.position, target, 1.0f);
 			}
 		}
 		#endif
 	}
+	**/
 }

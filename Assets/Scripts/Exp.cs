@@ -24,18 +24,20 @@ public class Exp : MonoBehaviour { //experience bar for cow
 	}
 
 	void OnGUI () {
-		// Create one Group to contain both images
-		// Adjust the first 2 coordinates to place it somewhere else on-screen
-		GUI.BeginGroup (new Rect ( (Screen.width - expBarMaxLength ) / 2,Screen.height - position_x, expBarMaxLength,10));
-		// Draw the background image
-		GUI.DrawTexture (new Rect (0,0, expBarMaxLength,10), background_texture);
-		// Create a second Group which will be clipped
-		// We want to clip the image and not scale it, which is why we need the second Group
-		GUI.BeginGroup (new Rect (0,0, expBarLength, 10));
-		// Draw the foreground image
-		GUI.DrawTexture (new Rect (0,0,expBarLength,10), foreground_texture);
-		// End both Groups
-		GUI.EndGroup ();
-		GUI.EndGroup ();
+		if (!GameControl.control.pauseMenu){
+			// Create one Group to contain both images
+			// Adjust the first 2 coordinates to place it somewhere else on-screen
+			GUI.BeginGroup (new Rect ( (Screen.width - expBarMaxLength ) / 2,Screen.height - position_x, expBarMaxLength,10));
+				// Draw the background image
+				GUI.DrawTexture (new Rect (0,0, expBarMaxLength,10), background_texture);
+				// Create a second Group which will be clipped
+				// We want to clip the image and not scale it, which is why we need the second Group
+				GUI.BeginGroup (new Rect (0,0, expBarLength, 10));
+					// Draw the foreground image
+					GUI.DrawTexture (new Rect (0,0,expBarLength,10), foreground_texture);
+				// End both Groups
+				GUI.EndGroup ();
+			GUI.EndGroup ();
+		}
 	}
 }

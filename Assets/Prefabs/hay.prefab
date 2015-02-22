@@ -9,11 +9,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
-  - 65: {fileID: 6500000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
-  - 54: {fileID: 5400000}
   - 114: {fileID: 11400004}
+  - 54: {fileID: 5400000}
+  - 65: {fileID: 6500000}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: hay
   m_TagString: Hay
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5, y: 3, z: 4.5999999}
+  m_LocalPosition: {x: .803079188, y: 1.41172004, z: 4.5999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,12 +42,12 @@ Rigidbody:
   m_GameObject: {fileID: 100000}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 7
   m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
@@ -58,8 +59,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .5, y: .699999988, z: .400000006}
-  m_Center: {x: -.0299999993, y: -.0799999982, z: 0}
+  m_Size: {x: .800000012, y: 1.29999995, z: .400000006}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hayValue: 1
+  happiness_mod: 10
   popup: {fileID: 100000, guid: 59a81cc1fb535af449edcdf6e0e9e260, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
@@ -98,7 +100,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60d31817273730d47b9296cefcd87270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fall: 1
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8ea26c65b8e4f469fdee28420189c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

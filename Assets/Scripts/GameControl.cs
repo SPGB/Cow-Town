@@ -8,6 +8,8 @@ public class GameControl : MonoBehaviour {
 	
 	public static GameControl control;
 	
+	public bool pauseMenu = false;
+	
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
 	public float level = 1.0f;

@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class HayFall : MonoBehaviour {
 
-	public float fall;
+	private bool startTime;
 	
-	private float timer = 5.0f;
+	private DateTime deleteTime1;
+	private DateTime deleteTime2;
+	private TimeSpan deleteTimeSpan;
 
 	// Update is called once per frame
 	void Update () {
-		if (!(transform.position.y <= -3.25f)){
-			if (GameControl.control.haySelected != this.gameObject){
-				transform.Translate(0.0f, -fall * Time.deltaTime, 0.0f);
+		if (transform.position.y <= -3.25f){
+			if (!startTime){
+				deleteTime1 = DateTime.Now;
+				startTime = true;
 			}
-		} else if (transform.position.y <= -3.25f && transform.position.z != 4.5f){
-			if (timer <= 0.0f){
+			deleteTime2 = DateTime.Now;
+			deleteTimeSpan = deleteTime2 - deleteTime1;
+			if (deleteTimeSpan.TotalSeconds > 2.5){
 				Destroy(gameObject);
 			}
-			timer -= 0.1f;
 		}
+		if (rigidbody.drag > 0.05f)	rigidbody.drag = rigidbody.drag - 0.05f;
 	}
 }

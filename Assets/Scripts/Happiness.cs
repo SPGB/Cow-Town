@@ -4,8 +4,8 @@ using System.Collections;
 
 public class Happiness : MonoBehaviour {
 
-	public Material semi;
-	public Material full;
+	//public Material semi;
+	//public Material full;
 
 	private float hapBarLength = 0.0f;
 	private float hapBarMaxLength = 215f;
@@ -39,18 +39,20 @@ public class Happiness : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-		// Create one Group to contain both images
-		// Adjust the first 2 coordinates to place it somewhere else on-screen
-		GUI.BeginGroup (new Rect ( (Screen.width - hapBarMaxLength ) / 2,Screen.height - position_x, hapBarMaxLength,10));
-		// Draw the background image
-		GUI.DrawTexture (new Rect (0,0, hapBarMaxLength,10), background_texture);
-		// Create a second Group which will be clipped
-		// We want to clip the image and not scale it, which is why we need the second Group
-		GUI.BeginGroup (new Rect (0,0, hapBarLength, 10));
-		// Draw the foreground image
-		GUI.DrawTexture (new Rect (0,0,hapBarLength,10), foreground_texture);
-		// End both Groups
-		GUI.EndGroup ();
-		GUI.EndGroup ();
+		if (!GameControl.control.pauseMenu){
+			// Create one Group to contain both images
+			// Adjust the first 2 coordinates to place it somewhere else on-screen
+			GUI.BeginGroup (new Rect ( (Screen.width - hapBarMaxLength ) / 2,Screen.height - position_x, hapBarMaxLength,10));
+				// Draw the background image
+				GUI.DrawTexture (new Rect (0,0, hapBarMaxLength,10), background_texture);
+				// Create a second Group which will be clipped
+				// We want to clip the image and not scale it, which is why we need the second Group
+				GUI.BeginGroup (new Rect (0,0, hapBarLength, 10));
+					// Draw the foreground image
+					GUI.DrawTexture (new Rect (0,0,hapBarLength,10), foreground_texture);
+				// End both Groups
+				GUI.EndGroup ();
+			GUI.EndGroup ();
+		}
 	}
 }

@@ -31,22 +31,25 @@ public class SpawnHay : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (regulator >= regulatorCap){
-			chanceX = (chanceRange.x);
-			chanceY = (chanceRange.y);
-			chance = Random.Range(chanceX, chanceY);
-			happen = (chanceRange.z);
-			if (chance >= (happen - (0.5f + (0.02f * (GameControl.control.level - 1)))) && chance <= (happen + (0.5f + (0.02 * (GameControl.control.level - 1))))){
-				bool is_rock = Random.Range(0, 5) < 2;
-				GameObject new_object = (is_rock)? prefab_rock : prefab_hay;
-				int value = new_object.GetComponent<HayCollide>().getHayValue();
-				if ((value == 5 && GameControl.control.level < 5)){
-					return;
+		if (Time.timeScale != 0.0f){
+			if (regulator >= regulatorCap){
+				chanceX = (chanceRange.x);
+				chanceY = (chanceRange.y);
+				chance = Random.Range(chanceX, chanceY);
+				happen = (chanceRange.z);
+				if (chance >= (happen - (0.5f + (0.02f * (GameControl.control.level - 1)))) && chance <= (happen + (0.5f + (0.02 * (GameControl.control.level - 1))))){
+					bool is_rock = Random.Range(0, 5) < 2;
+					GameObject new_object = (is_rock)? prefab_rock : prefab_hay;
+					int value = new_object.GetComponent<HayCollide>().getHayValue();
+					if ((value == 5 && GameControl.control.level < 5)){
+						return;
+					}
+					if (!is_rock) Instantiate(new_object, new Vector3(Random.Range(screenSizeX1.x, screenSizeX2.x), screenSizeY.y, 4.4f), Quaternion.identity);
+					else Instantiate(new_object, new Vector3(Random.Range(screenSizeX1.x, screenSizeX2.x), screenSizeY.y, 4.6f), Quaternion.identity);
 				}
-				Instantiate(new_object, new Vector3(Random.Range(screenSizeX1.x, screenSizeX2.x), screenSizeY.y, 4.6f), Quaternion.identity);
+				regulator = 0;
 			}
-			regulator = 0;
+			regulator++;
 		}
-		regulator++;
 	}
 }
