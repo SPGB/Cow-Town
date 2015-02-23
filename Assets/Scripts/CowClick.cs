@@ -17,14 +17,15 @@ public class CowClick : MonoBehaviour {
 	}
 	
 	void OnMouseDown () {
-		if (!GameControl.control.pauseMenu){
-			GameControl.control.pauseMenu = true;
+		if (!GameControl.control.pause){
+			GameControl.control.pause = true;
 			Time.timeScale = 0.0f;
 		}
 	}
 	
 	void OnGUI () {
-		if (GameControl.control.pauseMenu){
+		if (GameControl.control.pause){
+			GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.9f);
 			float width = Screen.width - 100;
 			float height = Screen.height - 100;
 			// Create one Group to contain both images
@@ -32,8 +33,8 @@ public class CowClick : MonoBehaviour {
 			GUI.BeginGroup(new Rect (50, 50, width, height)); // left, top, width, height
 				// Draw the background image
 				GUI.DrawTexture(new Rect (0, 0, width, height), menu);
-				if (GUI.Button(new Rect(width - 60, 10, 50, 50), closeButton)){
-					GameControl.control.pauseMenu = false;
+				if (GUI.Button(new Rect(width - 130, 10, 90, 30), closeButton, GUIStyle.none)){
+					GameControl.control.pause = false;
 					Time.timeScale = 1.0f;
 				}
 			// End both Groups

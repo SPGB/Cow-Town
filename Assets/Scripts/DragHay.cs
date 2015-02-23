@@ -5,14 +5,21 @@ public class DragHay : MonoBehaviour {
 
 	private float z;
 	
-	void OnMouseDrag () {
+	void Start () {
 		z = transform.position.z;
-		transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 4.6f));
-		rigidbody.drag = 4.0f;
+	}
+	
+	void OnMouseDrag () {
+		if (!GameControl.control.pause){
+			transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 4.6f));
+			rigidbody.drag = 4.0f;
+		}
 	}
 	
 	void OnMouseUp () {
-		transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, z));
+		if (!GameControl.control.pause){
+			transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, z));
+		}
 	}
 	
 	/**
