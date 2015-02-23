@@ -1553,6 +1553,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1254b5432e86c54458770348f388abae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exp: 10
+  max_exp: 50
+  bar_offset_y: 425
+  bar_offset_x: -135
+  bar_height: 32
+  foreground_texture: {fileID: 2800000, guid: 75ad5d612eb90f042b22d2e09bf1d805, type: 3}
 --- !u!1 &1876373374
 GameObject:
   m_ObjectHideFlags: 0
@@ -1683,6 +1689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: 0
+  version: 0.01A
   exp: 0
   expExpected: 0
   level: 1
@@ -1693,8 +1700,7 @@ MonoBehaviour:
   happinessLose: 1
   cowIntelligence: 10
   happinessMax: 100
-  troughCurExp: 0
-  troughMaxExp: 150
+  trough: {fileID: 1752089083}
   totalHay: 0
   totalSpecial: 0
   haySelected: {fileID: 0}
@@ -1752,6 +1758,30 @@ Prefab:
     - target: {fileID: 400004, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
+      propertyPath: foreground_texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 75ad5d612eb90f042b22d2e09bf1d805, type: 3}
+    - target: {fileID: 11400000, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
+      propertyPath: bar_offset
+      value: 445
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
+      propertyPath: bar_offset_x
+      value: -135
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
+      propertyPath: max_exp
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
+      propertyPath: exp
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
+      propertyPath: bar_multi
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}

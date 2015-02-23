@@ -8,13 +8,15 @@ public class HayCollide : MonoBehaviour {
 	public GameObject popup;
 
 	void OnCollisionStay(Collision col){
+		//Debug.Log(col.gameObject.tag);
 		if (col.gameObject.tag == "Cow"){
 			if (transform.position.z == 4.6f){
 			
 				GameControl.control.happiness += happiness_mod;
 				
-				Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
-				
+				GameObject new_popup = (GameObject) Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
+				new_popup.GetComponent<CowExpPopup>().val = "+" + happiness_mod;
+
 				Destroy(gameObject);
 				
 				if (happiness_mod < 0) return;
@@ -26,21 +28,20 @@ public class HayCollide : MonoBehaviour {
 			}
 			
 		} else if (col.gameObject.tag == "Trough"){
-			if (transform.position.z == 4.4f && happiness_mod > 0){
-				if (GameControl.control.troughCurExp < GameControl.control.troughMaxExp){
-					GameControl.control.troughCurExp += hayValue;
-					if (hayValue == 1){
-						GameControl.control.totalHay++;
-					} else if (hayValue == 5){
-						GameControl.control.totalSpecial++;
-					}
-					//float x = GameObject.FindGameObjectWithTag("Trough").gameObject.transform.position.x;
-					//float y = GameObject.FindGameObjectWithTag("Trough").gameObject.transform.position.y;
-					//Instantiate(popup, new Vector3(x, y, 4.5f), Quaternion.identity);
-					Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
-					Destroy(gameObject);
+			if (happiness_mod > 0){
+				if (GameControl.control.trough.get_exp() < GameControl.control.trough.get_max_exp()){
+
+					GameControl.control.trough.set_exp(GameControl.control.trough.get_exp() + hayValue);
+					GameControl.control.totalHay++;
+					if (hayValue == 5){ GameControl.control.totalSpecial++; }
+
+					GameObject new_popup = (GameObject) Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
+					new_popup.GetComponent<CowExpPopup>().val = "+" + happiness_mod;
 				}
+				Destroy(gameObject);
 			}
+
+
 		}
 	}
 	

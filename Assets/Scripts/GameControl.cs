@@ -9,7 +9,7 @@ public class GameControl : MonoBehaviour {
 	public static GameControl control;
 	
 	public bool pauseMenu = false;
-	
+	public String version = "0.01A";
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
 	public float level = 1.0f;
@@ -22,9 +22,10 @@ public class GameControl : MonoBehaviour {
 	public float happinessLose = 1.0f;
 	public float cowIntelligence = 10.0f;
 	public float happinessMax = 100.0f;
-	
-	public float troughCurExp = 0.0f;
-	public float troughMaxExp = 50.0f;
+
+	public Trough trough;
+	//public float troughCurExp = 0.0f;
+	//public float troughMaxExp = 50.0f;
 	
 	public float totalHay = 0.0f;
 	public float totalSpecial = 0.0f;
@@ -61,7 +62,11 @@ public class GameControl : MonoBehaviour {
 		expExpected = 0.0f;
 		statMin = 10 + numberOfCowsBred;
 		statMax = 18 + numberOfCowsBred;
-		
+
+		if (!trough) {
+			trough = GameObject.Find ("Trough").GetComponent<Trough>();
+		}
+
 		if (!statsRandomized){
 			randomizeStats(statMin, statMax, statMin, statMax, statMin, statMax);
 			statsRandomized = true;
@@ -86,13 +91,14 @@ public class GameControl : MonoBehaviour {
 			Debug.Log("SAVE ON UPDATE");
 			updateTime1 = DateTime.Now;
 		}
-		
-		if (troughCurExp > troughMaxExp){
-			troughCurExp = troughMaxExp;
-		}
-		if (troughCurExp < 0.0f){
-			troughCurExp = 0.0f;
-		}
+		/*
+			if (troughCurExp > troughMaxExp){
+				troughCurExp = troughMaxExp;
+			}
+			if (troughCurExp < 0.0f){
+				troughCurExp = 0.0f;
+			}
+		*/
 		if (happiness > happinessMax){
 			happiness = happinessMax;
 		}
@@ -149,8 +155,8 @@ public class GameControl : MonoBehaviour {
 		
 		PlayerData data = new PlayerData();
 		data.exp = exp;
-		data.troughCurExp = troughCurExp;
-		data.troughMaxExp = troughMaxExp;
+		data.troughCurExp = trough.get_exp();
+		data.troughMaxExp = trough.get_max_exp();
 		data.expExpected = expExpected;
 		data.level = level;
 		
@@ -186,8 +192,10 @@ public class GameControl : MonoBehaviour {
 			Debug.Log("Loading from... " + Application.persistentDataPath + "/playerInfo.dat" + " at: " + DateTime.Now);
 			
 			exp = data.exp;
-			troughCurExp = data.troughCurExp;
-			troughMaxExp = data.troughMaxExp;
+
+			trough.set_exp(data.troughCurExp);
+			//troughMaxExp = data.troughMaxExp; @todo
+
 			expExpected = data.expExpected;
 			level = data.level;
 			
@@ -207,15 +215,16 @@ public class GameControl : MonoBehaviour {
 			DateTime loadTime = DateTime.Now;
 			TimeSpan interval = loadTime - data.saveTime;
 			int hayUsed = ((int)interval.TotalMinutes) / 2;
-			
+
+			float current_exp = trough.get_exp();
 			for (int i = 0; i < hayUsed; i++){
-				if (troughCurExp > 0){
-					exp++;
-					troughCurExp--;
-				} else {
+				if (current_exp == 0){
 					break;
 				}
+				exp++;
+				current_exp--;
 			}
+			trough.set_exp(current_exp);
 		}
 	}
 }

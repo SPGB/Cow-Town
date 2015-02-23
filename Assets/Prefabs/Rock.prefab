@@ -85,7 +85,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hayValue: 1
   happiness_mod: -40
-  popup: {fileID: 100000, guid: 8bf46b468654b0e4f965ec5625ebec9f, type: 2}
+  popup: {fileID: 100000, guid: 59a81cc1fb535af449edcdf6e0e9e260, type: 2}
 --- !u!114 &11471598
 MonoBehaviour:
   m_ObjectHideFlags: 1
