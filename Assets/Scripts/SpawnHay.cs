@@ -15,18 +15,10 @@ public class SpawnHay : MonoBehaviour {
 	private int regulator;
 	public int regulatorCap = 1;
 	
-	public Vector3 screenSizeX1;
-	public Vector3 screenSizeX2;
-	public Vector3 screenSizeY;
-	
 	void Start () {
-		screenSizeX1 = camera.ScreenToWorldPoint(new Vector3(50, 0, 0));
-		screenSizeX2 = camera.ScreenToWorldPoint(new Vector3(camera.pixelWidth - 50, 0, 0));
-		screenSizeY = camera.ScreenToWorldPoint(new Vector3(0, camera.pixelHeight + 100, 0));
-		
 		//screenSizeX = new Vector3(-3.5f, 3.5f, 0.0f);
 		//screenSizeY = new Vector3(4.5f, 0.0f, 0.0f);
-		Debug.Log("Screen to World: X: " + screenSizeX1.x + " / " + screenSizeX2.x + " | Y: " + screenSizeY.y);
+		Debug.Log("Screen to World: X: " + GameControl.control.screenSizeX1.x + " / " + GameControl.control.screenSizeX2.x + " | Y: " + GameControl.control.screenSizeY.y);
 	}
 
 	// Update is called once per frame
@@ -44,8 +36,8 @@ public class SpawnHay : MonoBehaviour {
 					if ((value == 5 && GameControl.control.level < 5)){
 						return;
 					}
-					if (!is_rock) Instantiate(new_object, new Vector3(Random.Range(screenSizeX1.x, screenSizeX2.x), screenSizeY.y, 4.4f), Quaternion.identity);
-					else Instantiate(new_object, new Vector3(Random.Range(screenSizeX1.x, screenSizeX2.x), screenSizeY.y, 4.6f), Quaternion.identity);
+					if (!is_rock) Instantiate(new_object, new Vector3(Random.Range(GameControl.control.screenSizeX1.x, GameControl.control.screenSizeX2.x), GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity);
+					else Instantiate(new_object, new Vector3(Random.Range(GameControl.control.screenSizeX1.x, GameControl.control.screenSizeX2.x), GameControl.control.screenSizeY.y, 4.6f), Quaternion.identity);
 				}
 				regulator = 0;
 			}

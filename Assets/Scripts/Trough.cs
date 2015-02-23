@@ -20,18 +20,28 @@ public class Trough : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		wheel1.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
-		wheel2.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
-		wheel3.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
+		if (transform.position.x < GameControl.control.screenSizeX1.x + 1.5f){
+			transform.position = new Vector3(GameControl.control.screenSizeX1.x + 1.5f, transform.position.y, transform.position.z);
+		} else if (transform.position.x > GameControl.control.screenSizeX2.x - 1.5f){
+			transform.position = new Vector3(GameControl.control.screenSizeX2.x - 1.5f, transform.position.y, transform.position.z);
+		} else {
+			wheel1.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
+			wheel2.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
+			wheel3.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
+		}
 	}
 	
 	void OnMouseDrag () {
-		mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		amount = transform.position.x - mousePos.x;
-		transform.position = new Vector3(mousePos.x, transform.position.y, transform.position.z);
+		if (!GameControl.control.pause){
+			mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			amount = transform.position.x - mousePos.x;
+			transform.position = new Vector3(mousePos.x, transform.position.y, transform.position.z);
+		}
 	}
 	
 	void OnMouseUp () {
-		amount = 0.0f;
+		if (!GameControl.control.pause){
+			amount = 0.0f;
+		}
 	}
 }

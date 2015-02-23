@@ -8,7 +8,7 @@ public class GameControl : MonoBehaviour {
 	
 	public static GameControl control;
 	
-	public bool pauseMenu = false;
+	public bool pause;
 	
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
@@ -35,6 +35,10 @@ public class GameControl : MonoBehaviour {
 	public int numberOfCowsBred = 0;
 	public int statMin = 10;
 	public int statMax = 18;
+	
+	public Vector3 screenSizeX1;
+	public Vector3 screenSizeX2;
+	public Vector3 screenSizeY;
 	
 	//private bool saveModExp = false;
 	
@@ -66,6 +70,10 @@ public class GameControl : MonoBehaviour {
 			randomizeStats(statMin, statMax, statMin, statMax, statMin, statMax);
 			statsRandomized = true;
 		}
+		
+		screenSizeX1 = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
+		screenSizeX2 = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
+		screenSizeY = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight + 100, 0));
 	}
 	
 	void Update () {
@@ -78,6 +86,19 @@ public class GameControl : MonoBehaviour {
 		//} else {
 		//	saveModExp = false;
 		//}
+		
+		if (Input.GetKey(KeyCode.Escape)){
+			Save();
+			if (Application.loadedLevelName == "barn"){
+				Application.LoadLevel("title");
+			} else {
+				Application.Quit();
+			}
+		}
+		if (Input.GetKey(KeyCode.Menu)){
+			Save();
+			pause = !pause;
+		}
 		
 		updateTime2 = DateTime.Now;
 		updateTimeSpan = updateTime2 - updateTime1;

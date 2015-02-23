@@ -35,7 +35,7 @@ public class DisplayGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnGUI () {
-		float inc = (GameControl.control.pauseMenu)? 100 : 0; 
+		float inc = (GameControl.control.pause)? 100 : 0; 
 		GUI.BeginGroup(new Rect (0, 0, Screen.width, Screen.height)); // left, top, width, height
 		bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
 		if (GameControl.control.happiness < 0.1f){
@@ -61,7 +61,7 @@ public class DisplayGUI : MonoBehaviour {
 			GUI.Label(new Rect(10 + inc, 100 + inc, 100, 100), "Trough:\t\t\t\t\t" + GameControl.control.troughCurExp.ToString() + " / " + GameControl.control.troughMaxExp.ToString() + " (" + troughMinutes.ToString("F0") + " minutes)", style);
 		}
 		
-		if (GameControl.control.pauseMenu){
+		if (GameControl.control.pause){
 			GUI.Label(new Rect(10 + inc, 200 + inc, 100, 100), "Strength:\t\t\t\t" + GameControl.control.cowStrength.ToString(), style);
 			GUI.Label(new Rect(10 + inc, 230 + inc, 100, 100), "Constitution:\t\t\t" + GameControl.control.cowConstitution.ToString(), style);
 			GUI.Label(new Rect(10 + inc, 260 + inc, 100, 100), "Intelligence:\t\t\t" + GameControl.control.cowIntelligence.ToString(), style);

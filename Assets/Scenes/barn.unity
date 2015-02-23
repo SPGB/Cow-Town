@@ -419,9 +419,6 @@ MonoBehaviour:
   chance: 0
   happen: 0
   regulatorCap: 2
-  screenSizeX1: {x: 0, y: 0, z: 0}
-  screenSizeX2: {x: 0, y: 0, z: 0}
-  screenSizeY: {x: 0, y: 0, z: 0}
 --- !u!114 &394633393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,9 +438,6 @@ MonoBehaviour:
   chance: 0
   happen: 0
   regulatorCap: 4
-  screenSizeX1: {x: 0, y: 0, z: 0}
-  screenSizeX2: {x: 0, y: 0, z: 0}
-  screenSizeY: {x: 0, y: 0, z: 0}
 --- !u!1 &512791831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,7 +1676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303e5357081a4b4459fab2187aa05c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: 0
+  pause: 0
   exp: 0
   expExpected: 0
   level: 1
@@ -1702,6 +1696,9 @@ MonoBehaviour:
   numberOfCowsBred: 0
   statMin: 10
   statMax: 18
+  screenSizeX1: {x: 0, y: 0, z: 0}
+  screenSizeX2: {x: 0, y: 0, z: 0}
+  screenSizeY: {x: 0, y: 0, z: 0}
 --- !u!4 &2008925017
 Transform:
   m_ObjectHideFlags: 0
