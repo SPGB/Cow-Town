@@ -341,6 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pause: 0
+  version: 0.01A
   exp: 0
   expExpected: 0
   level: 1
@@ -351,8 +352,7 @@ MonoBehaviour:
   happinessLose: 1
   cowIntelligence: 10
   happinessMax: 100
-  troughCurExp: 0
-  troughMaxExp: 150
+  trough: {fileID: 0}
   totalHay: 0
   totalSpecial: 0
   haySelected: {fileID: 0}

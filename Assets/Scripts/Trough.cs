@@ -23,6 +23,10 @@ public class Trough : MonoBehaviour {
 		wheel1 = GameObject.Find("wheel1");
 		wheel2 = GameObject.Find("wheel2");
 		wheel3 = GameObject.Find("wheel3");
+
+		if (!GameControl.control.trough) {
+			GameControl.control.trough = this;
+		}
 	}
 	
 	// Update is called once per frame
@@ -43,7 +47,7 @@ public class Trough : MonoBehaviour {
 	} 
 
 	void OnGUI () {
-		if (GameControl.control.pauseMenu) return;
+		if (GameControl.control.pause) return;
 		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
 		GUI.BeginGroup (new Rect ( pos.x + bar_offset_x, pos.y + bar_offset_y, max_exp * bar_multi,bar_height));
 		GUI.BeginGroup (new Rect ( 0,0, exp * bar_multi,bar_height));

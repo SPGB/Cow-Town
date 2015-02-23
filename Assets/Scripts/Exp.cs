@@ -24,7 +24,7 @@ public class Exp : MonoBehaviour { //experience bar for cow
 	}
 
 	void OnGUI () {
-		if (GameControl.control.pauseMenu) return;
+		if (GameControl.control.pause) return;
 
 		// Create one Group to contain both images
 		// Adjust the first 2 coordinates to place it somewhere else on-screen

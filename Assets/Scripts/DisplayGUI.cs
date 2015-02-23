@@ -35,14 +35,14 @@ public class DisplayGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnGUI () {
-		if (!GameControl.control.pauseMenu) {
+		if (!GameControl.control.pause) {
 			GUI.BeginGroup(new Rect (0, 0, Screen.width, Screen.height)); // left, top, width, height
 			GUI.Label(new Rect(10, 20, 100, 100), "Cow Town - v" + GameControl.control.version, style);
 			GUI.Label(new Rect(10, 40, 100, 100), "Lv" + Mathf.Floor(GameControl.control.level).ToString(), style);
 			GUI.EndGroup();
 			return;
 		}
-		float inc = (GameControl.control.pauseMenu)? 100 : 0; 
+		float inc = (GameControl.control.pause)? 100 : 0; 
 		GUI.BeginGroup(new Rect (0, 0, Screen.width, Screen.height)); // left, top, width, height
 		bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
 		if (GameControl.control.happiness < 0.1f){

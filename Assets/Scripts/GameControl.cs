@@ -8,7 +8,7 @@ public class GameControl : MonoBehaviour {
 	
 	public static GameControl control;
 	
-	public bool pauseMenu = false;
+	public bool pause = false;
 	public String version = "0.01A";
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
@@ -42,7 +42,11 @@ public class GameControl : MonoBehaviour {
 	private DateTime updateTime1;
 	private DateTime updateTime2;
 	private TimeSpan updateTimeSpan;
-	
+
+	public Vector3 screenSizeX1;
+	public Vector3 screenSizeX2;
+	public Vector3 screenSizeY;
+
 	// Use this for initialization
 	void Awake () {
 		if (control == null){
@@ -63,27 +67,30 @@ public class GameControl : MonoBehaviour {
 		statMin = 10 + numberOfCowsBred;
 		statMax = 18 + numberOfCowsBred;
 
-		if (!trough) {
-			trough = GameObject.Find ("Trough").GetComponent<Trough>();
-		}
-
 		if (!statsRandomized){
 			randomizeStats(statMin, statMax, statMin, statMax, statMin, statMax);
 			statsRandomized = true;
 		}
+
+		screenSizeX1 = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
+		screenSizeX2 = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
+		screenSizeY = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight + 100, 0));
 	}
 	
 	void Update () {
-		//if (exp % 10 == 0){
-		//	if (!saveModExp){
-		//		Save();
-		//		Load();
-		//		saveModExp = true;
-		//	}
-		//} else {
-		//	saveModExp = false;
-		//}
-		
+		if (Input.GetKey(KeyCode.Escape)){
+			Save();
+			if (Application.loadedLevelName == "barn"){
+				Application.LoadLevel("title");
+			} else {
+				Application.Quit();
+			}
+		}
+		if (Input.GetKey(KeyCode.Menu)){
+			Save();
+			pause = !pause;
+		}
+
 		updateTime2 = DateTime.Now;
 		updateTimeSpan = updateTime2 - updateTime1;
 		if ((int)updateTimeSpan.TotalMinutes >= 1){
@@ -128,33 +135,24 @@ public class GameControl : MonoBehaviour {
 		Save();
 		Debug.Log("SAVE ON DESTROY");
 	}
-	
-#if UNITY_ANDROID || UNITY_IPHONE || UNITY_WP8
-	//void OnApplicationPause () {
-	//	Save();
-	//	Debug.Log("SAVE ON APP PAUSE");
-	//}
-	void OnApplicationFocus (bool status) {
-		if (status == true){
-			Load();
-			Debug.Log("LOAD ON APP GAIN FOCUS");
-		} else if (status == false){
-			Save();
-			Debug.Log("SAVE ON APP LOSE FOCUS");
-		}
+
+	public void update_camera() {
+		screenSizeX1 = Camera.main.ScreenToWorldPoint (new Vector3 (50, 0, 0));
+		screenSizeX2 = Camera.main.ScreenToWorldPoint (new Vector3 (Camera.main.pixelWidth - 50, 0, 0));
+		screenSizeY = Camera.main.ScreenToWorldPoint (new Vector3 (0, Camera.main.pixelHeight + 100, 0));
 	}
-	void OnApplicationQuit () {
-		Save();
-		Debug.Log("SAVE ON APP QUIT");
-	}
-#endif
 	
 	public void Save(){
+		if (!trough) {
+			Debug.Log ("no trough, not saving");
+			return;
+		}
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 		
 		PlayerData data = new PlayerData();
 		data.exp = exp;
+
 		data.troughCurExp = trough.get_exp();
 		data.troughMaxExp = trough.get_max_exp();
 		data.expExpected = expExpected;
@@ -193,9 +191,6 @@ public class GameControl : MonoBehaviour {
 			
 			exp = data.exp;
 
-			trough.set_exp(data.troughCurExp);
-			//troughMaxExp = data.troughMaxExp; @todo
-
 			expExpected = data.expExpected;
 			level = data.level;
 			
@@ -216,15 +211,19 @@ public class GameControl : MonoBehaviour {
 			TimeSpan interval = loadTime - data.saveTime;
 			int hayUsed = ((int)interval.TotalMinutes) / 2;
 
-			float current_exp = trough.get_exp();
-			for (int i = 0; i < hayUsed; i++){
-				if (current_exp == 0){
-					break;
+			if (trough) {
+				trough.set_exp(data.troughCurExp);
+				float current_exp = trough.get_exp();
+				for (int i = 0; i < hayUsed; i++){
+					if (current_exp == 0){
+						break;
+					}
+					exp++;
+					current_exp--;
 				}
-				exp++;
-				current_exp--;
+				trough.set_exp(current_exp);
 			}
-			trough.set_exp(current_exp);
+
 		}
 	}
 }

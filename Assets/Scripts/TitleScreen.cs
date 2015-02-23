@@ -28,7 +28,10 @@ public class TitleScreen : MonoBehaviour {
 		GUI.DrawTexture(new Rect (0, 0, width, height), menu);
 		if (GUI.Button(new Rect((width / 2) - 45, (height / 2) - 30, 90, 30), play, GUIStyle.none)){
 			Application.LoadLevel("barn");
-			GameControl.control.pause = false;
+			if (GameControl.control) {
+				GameControl.control.pause = false;
+				GameControl.control.update_camera();
+			}
 		}
 		if (GUI.Button(new Rect((width / 2) - 45, (height / 2) + 30, 90, 30), exit, GUIStyle.none)){
 			Application.Quit();

@@ -15,7 +15,7 @@ public class HayCollide : MonoBehaviour {
 				GameControl.control.happiness += happiness_mod;
 				
 				GameObject new_popup = (GameObject) Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
-				new_popup.GetComponent<CowExpPopup>().val = "+" + happiness_mod;
+				new_popup.GetComponent<CowExpPopup>().val = ( (happiness_mod > 0)? "+" : "") + happiness_mod.ToString();
 
 				Destroy(gameObject);
 				
@@ -28,7 +28,7 @@ public class HayCollide : MonoBehaviour {
 			}
 			
 		} else if (col.gameObject.tag == "Trough"){
-			if (happiness_mod > 0){
+			if (happiness_mod > 0 && GameControl.control.trough){
 				if (GameControl.control.trough.get_exp() < GameControl.control.trough.get_max_exp()){
 
 					GameControl.control.trough.set_exp(GameControl.control.trough.get_exp() + hayValue);
@@ -36,7 +36,7 @@ public class HayCollide : MonoBehaviour {
 					if (hayValue == 5){ GameControl.control.totalSpecial++; }
 
 					GameObject new_popup = (GameObject) Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
-					new_popup.GetComponent<CowExpPopup>().val = "+" + happiness_mod;
+					new_popup.GetComponent<CowExpPopup>().val = ( (happiness_mod > 0)? "+" : "") + happiness_mod.ToString();
 				}
 				Destroy(gameObject);
 			}
