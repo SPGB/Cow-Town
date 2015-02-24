@@ -4,6 +4,7 @@ using System.Collections;
 public class CowExpPopup : MonoBehaviour {
 
 	private float die;
+	public Texture tex;
 	public string val = "+1";
 	public float offset_y = -9.5f;
 	public float offset_x = -1f;
@@ -27,12 +28,14 @@ public class CowExpPopup : MonoBehaviour {
 	}
 	void OnGUI () {
 		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-		GUI.BeginGroup (new Rect (pos.x + offset_x, pos.y + offset_y, 50, 30)); // left, top, width, height
+		GUI.BeginGroup (new Rect (pos.x + offset_x, pos.y + offset_y, 50, 50)); // left, top, width, height
+		
+		GUI.DrawTexture(new Rect(0, 0, 50, 50), tex);
 
-		DrawOutline(new Rect (0, 0, 100, 100), val, 2, style);
+		DrawOutline(new Rect (7, 15, 100, 100), val, 2, style);
 
-		style.normal.textColor = new Color(255,255,255,1); 
-		GUI.Label (new Rect (0, 0, 100, 100), val, style);
+		style.normal.textColor = new Color(255,255,255,1);
+		GUI.Label (new Rect (7, 15, 100, 100), val, style);
 		GUI.EndGroup ();
 	}
 

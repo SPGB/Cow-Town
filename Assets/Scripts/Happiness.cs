@@ -30,11 +30,13 @@ public class Happiness : MonoBehaviour {
 		}
 		hapBarLength = hapBarMaxLength * (GameControl.control.happiness / GameControl.control.happinessMax);
 		
-		hapTime2 = DateTime.Now;
-		hapTimeSpan = hapTime2 - hapTime1;
-		if ((int)hapTimeSpan.TotalSeconds >= 5){
-			GameControl.control.happiness -= GameControl.control.happinessLose;
-			hapTime1 = DateTime.Now;
+		if (!GameControl.control.pause){
+			hapTime2 = DateTime.Now;
+			hapTimeSpan = hapTime2 - hapTime1;
+			if ((int)hapTimeSpan.TotalSeconds >= 5){
+				GameControl.control.happiness -= GameControl.control.happinessLose;
+				hapTime1 = DateTime.Now;
+			}
 		}
 	}
 	

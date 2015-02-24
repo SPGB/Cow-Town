@@ -40,6 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aaf69156782573499950dad03f44d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tex: {fileID: 2800000, guid: 9336ebf53f8fec743a1ab58ceee98583, type: 3}
   val: +1
   offset_y: 95
   offset_x: -1

@@ -17,6 +17,8 @@ public class Trough : MonoBehaviour {
 	private float bar_multi = 5.37f;
 	public float bar_height = 32;
 	public Texture foreground_texture;
+	
+	private float dist_from_edge = 1.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -26,11 +28,28 @@ public class Trough : MonoBehaviour {
 
 		if (!GameControl.control.trough) {
 			GameControl.control.trough = this;
+			GameControl.control.Load();
+			Debug.Log("setting trough");
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (!GameControl.control.trough) {
+			GameControl.control.trough = this;
+			Debug.Log("setting trough");
+		}
+	
+		if (transform.position.x < GameControl.control.screenSizeX1.x + dist_from_edge){
+			Vector3 temp = new Vector3(GameControl.control.screenSizeX1.x + dist_from_edge, transform.position.y, transform.position.z);
+			transform.position = temp;
+			amount = 0.0f;
+		} else if (transform.position.x > GameControl.control.screenSizeX2.x - dist_from_edge){
+			Vector3 temp = new Vector3(GameControl.control.screenSizeX2.x - dist_from_edge, transform.position.y, transform.position.z);
+			transform.position = temp;
+			amount = 0.0f;
+		}
+		
 		wheel1.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
 		wheel2.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
 		wheel3.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
@@ -65,5 +84,13 @@ public class Trough : MonoBehaviour {
 	}
 	public float get_max_exp() {
 		return max_exp;
+	}
+	
+	public void set_xpos(float x){
+		Vector3 temp = new Vector3(x, transform.position.y, transform.position.z);
+		transform.position = temp;
+	}
+	public float get_xpos(){
+		return transform.position.x;
 	}
 }

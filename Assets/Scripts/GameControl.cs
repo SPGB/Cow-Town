@@ -8,7 +8,7 @@ public class GameControl : MonoBehaviour {
 	
 	public static GameControl control;
 	
-	public bool pause = false;
+	public bool pause;
 	public String version = "0.01A";
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
@@ -24,8 +24,12 @@ public class GameControl : MonoBehaviour {
 	public float happinessMax = 100.0f;
 
 	public Trough trough;
-	//public float troughCurExp = 0.0f;
-	//public float troughMaxExp = 50.0f;
+	public Cow cow;
+	public DateTime cowBorn;
+	public TimeSpan cowAge;
+	public bool isBorn;
+	public float troughCurExp;
+	public float troughMaxExp;
 	
 	public float totalHay = 0.0f;
 	public float totalSpecial = 0.0f;
@@ -46,6 +50,8 @@ public class GameControl : MonoBehaviour {
 	public Vector3 screenSizeX1;
 	public Vector3 screenSizeX2;
 	public Vector3 screenSizeY;
+	
+	public GUIStyle text;
 
 	// Use this for initialization
 	void Awake () {
@@ -58,6 +64,9 @@ public class GameControl : MonoBehaviour {
 	}
 	
 	void Start () {
+		text = new GUIStyle();
+		text.fontSize = 20;
+		
 		Load();
 		Debug.Log("LOAD ON START");
 		updateTime1 = DateTime.Now;
@@ -75,9 +84,27 @@ public class GameControl : MonoBehaviour {
 		screenSizeX1 = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		screenSizeX2 = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
 		screenSizeY = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight + 100, 0));
+		
+		if (cow){
+			if (!isBorn){
+				cowBorn = DateTime.Now;
+				cow.born = cowBorn;
+				isBorn = true;
+				Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
+			} else {
+				cow.born = cowBorn;
+				Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
+			}
+		}
 	}
 	
 	void Update () {
+		if (pause){
+			Time.timeScale = 0.0f;
+		} else {
+			Time.timeScale = 1.0f;
+		}
+	
 		if (Input.GetKey(KeyCode.Escape)){
 			Save();
 			if (Application.loadedLevelName == "barn"){
@@ -120,6 +147,11 @@ public class GameControl : MonoBehaviour {
 		}
 		
 		happinessMax = 100.0f + (Mathf.Floor(cowIntelligence / 2));
+		
+		if (Application.loadedLevelName == "barn"){
+			troughCurExp = trough.get_exp();
+			troughMaxExp = trough.get_max_exp();
+		}
 	}
 	
 	public void randomizeStats(int strMin, int strMax, int conMin, int conMax, int intMin, int intMax){
@@ -143,18 +175,21 @@ public class GameControl : MonoBehaviour {
 	}
 	
 	public void Save(){
-		if (!trough) {
-			Debug.Log ("no trough, not saving");
-			return;
-		}
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 		
 		PlayerData data = new PlayerData();
+		if (Application.loadedLevelName == "barn"){
+			data.troughPos = trough.get_xpos();
+		}
+		
+		data.cowBorn = cowBorn;
+		data.isBorn = isBorn;
+		
 		data.exp = exp;
 
-		data.troughCurExp = trough.get_exp();
-		data.troughMaxExp = trough.get_max_exp();
+		data.troughCurExp = troughCurExp;
+		data.troughMaxExp = troughMaxExp;
 		data.expExpected = expExpected;
 		data.level = level;
 		
@@ -188,6 +223,16 @@ public class GameControl : MonoBehaviour {
 			file.Close();
 			
 			Debug.Log("Loading from... " + Application.persistentDataPath + "/playerInfo.dat" + " at: " + DateTime.Now);
+			
+			if (Application.loadedLevelName == "barn"){
+				trough.set_xpos(data.troughPos);
+			}
+			
+			isBorn = data.isBorn;
+			
+			if (cowBorn != data.cowBorn) {
+				cowBorn = data.cowBorn;
+			}
 			
 			exp = data.exp;
 
@@ -230,6 +275,11 @@ public class GameControl : MonoBehaviour {
 
 [Serializable]
 class PlayerData{
+
+	public DateTime cowBorn;
+	public bool isBorn;
+
+	public float troughPos;
 
 	public float exp;
 	public float expExpected;

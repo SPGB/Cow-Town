@@ -1,25 +1,33 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
-public class CowClick : MonoBehaviour {
+public class Cow : MonoBehaviour {
 
 	public Texture menu;
 	public Texture closeButton;
+	
+	public DateTime born;
+	public DateTime now;
+	public TimeSpan age;
 
 	// Use this for initialization
 	void Start () {
-		
+		GameControl.control.cow = this;
+		GameControl.control.Load();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (born != GameControl.control.cowBorn) born = GameControl.control.cowBorn;
+		now = DateTime.Now;
+		age = now - born;
+		GameControl.control.cowAge = age;
 	}
 	
 	void OnMouseDown () {
 		if (!GameControl.control.pause){
 			GameControl.control.pause = true;
-			Time.timeScale = 0.0f;
 		}
 	}
 	
@@ -35,7 +43,6 @@ public class CowClick : MonoBehaviour {
 				GUI.DrawTexture(new Rect (0, 0, width, height), menu);
 				if (GUI.Button(new Rect(width - 130, 10, 90, 30), closeButton, GUIStyle.none)){
 					GameControl.control.pause = false;
-					Time.timeScale = 1.0f;
 				}
 			// End both Groups
 			GUI.EndGroup ();
