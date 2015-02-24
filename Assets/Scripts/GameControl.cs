@@ -148,7 +148,7 @@ public class GameControl : MonoBehaviour {
 		
 		happinessMax = 100.0f + (Mathf.Floor(cowIntelligence / 2));
 		
-		if (Application.loadedLevelName == "barn"){
+		if (trough){
 			troughCurExp = trough.get_exp();
 			troughMaxExp = trough.get_max_exp();
 		}
@@ -224,7 +224,7 @@ public class GameControl : MonoBehaviour {
 			
 			Debug.Log("Loading from... " + Application.persistentDataPath + "/playerInfo.dat" + " at: " + DateTime.Now);
 			
-			if (Application.loadedLevelName == "barn"){
+			if (trough){
 				trough.set_xpos(data.troughPos);
 			}
 			
@@ -257,6 +257,7 @@ public class GameControl : MonoBehaviour {
 			int hayUsed = ((int)interval.TotalMinutes) / 2;
 
 			if (trough) {
+				trough.set_max_exp(data.troughMaxExp);
 				trough.set_exp(data.troughCurExp);
 				float current_exp = trough.get_exp();
 				for (int i = 0; i < hayUsed; i++){

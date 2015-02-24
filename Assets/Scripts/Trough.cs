@@ -15,6 +15,7 @@ public class Trough : MonoBehaviour {
 	public float bar_offset_y = 425f;
 	public float bar_offset_x = -147f;
 	private float bar_multi = 5.37f;
+	private float bar_width;
 	public float bar_height = 32;
 	public Texture foreground_texture;
 	
@@ -53,6 +54,8 @@ public class Trough : MonoBehaviour {
 		wheel1.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
 		wheel2.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
 		wheel3.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
+		
+		bar_width = (50f * bar_multi) * (exp / max_exp);
 	}
 	
 	void OnMouseDrag () {
@@ -69,9 +72,9 @@ public class Trough : MonoBehaviour {
 		if (GameControl.control.pause) return;
 		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
 		GUI.BeginGroup (new Rect ( pos.x + bar_offset_x, pos.y + bar_offset_y, max_exp * bar_multi,bar_height));
-		GUI.BeginGroup (new Rect ( 0,0, exp * bar_multi,bar_height));
+		GUI.BeginGroup (new Rect ( 0,0, bar_width,bar_height));
 		// Draw the foreground image
-		GUI.DrawTexture (new Rect (0,0,max_exp * bar_multi,bar_height), foreground_texture);
+		GUI.DrawTexture (new Rect (0,0, 50f * bar_multi,bar_height), foreground_texture);
 		// End both Groups
 		GUI.EndGroup ();
 		GUI.EndGroup ();
@@ -81,6 +84,9 @@ public class Trough : MonoBehaviour {
 	}
 	public float get_exp() {
 		return exp;
+	}
+	public void set_max_exp(float new_max_exp){
+		max_exp = new_max_exp;
 	}
 	public float get_max_exp() {
 		return max_exp;

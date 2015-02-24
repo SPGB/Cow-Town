@@ -1000,6 +1000,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 2800000, guid: 92082627b0e84b14db2f0004a6caa5df, type: 3}
   closeButton: {fileID: 2800000, guid: 02df828cf45bc5d49a2071d1a8b296a9, type: 3}
+  shopButton: {fileID: 2800000, guid: fd2d2b7c23075194eb5c9c6ad4f543ed, type: 3}
+  buyButton: {fileID: 2800000, guid: aeef69dfdfde7564382de02b6dbaa899, type: 3}
+  inventory: []
+  inv_names: []
+  inv_int: []
+  inv_str: []
+  inv_con: []
+  inv_rarity: []
 --- !u!1 &1154411366
 GameObject:
   m_ObjectHideFlags: 0
