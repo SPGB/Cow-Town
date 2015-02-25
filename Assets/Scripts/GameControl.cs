@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -22,10 +23,11 @@ public class GameControl : MonoBehaviour {
 	public float happinessLose = 1.0f;
 	public float cowIntelligence = 10.0f;
 	public float happinessMax = 100.0f;
+	public List<string> inventory = new List<string>();
 
 	public Trough trough;
 	public Cow cow;
-	public DateTime cowBorn;
+	public DateTime cowBorn = DateTime.Now;
 	public TimeSpan cowAge;
 	public bool isBorn;
 	public float troughCurExp;
@@ -36,10 +38,8 @@ public class GameControl : MonoBehaviour {
 	
 	public GameObject haySelected;
 	
-	public bool statsRandomized = false;
 	public int numberOfCowsBred = 0;
-	public int statMin = 10;
-	public int statMax = 18;
+	public bool statsRandomized;
 	
 	//private bool saveModExp = false;
 	
@@ -73,19 +73,13 @@ public class GameControl : MonoBehaviour {
 		
 		happinessExpected = 0.0f;
 		expExpected = 0.0f;
-		statMin = 10 + numberOfCowsBred;
-		statMax = 18 + numberOfCowsBred;
-
-		if (!statsRandomized){
-			randomizeStats(statMin, statMax, statMin, statMax, statMin, statMax);
-			statsRandomized = true;
-		}
-
+		
 		screenSizeX1 = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		screenSizeX2 = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
 		screenSizeY = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight + 100, 0));
 		
 		if (cow){
+			Load();
 			if (!isBorn){
 				cowBorn = DateTime.Now;
 				cow.born = cowBorn;
@@ -93,6 +87,11 @@ public class GameControl : MonoBehaviour {
 				Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
 			} else {
 				cow.born = cowBorn;
+				cow.statsRandomized = statsRandomized;
+				cow.strength = cowStrength;
+				cow.constitution = cowConstitution;
+				cow.intelligence = cowIntelligence;
+				cow.inventory = inventory;
 				Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
 			}
 		}
@@ -140,27 +139,24 @@ public class GameControl : MonoBehaviour {
 			happiness = 0.0f;
 		}
 		
-		if (cowConstitution <= 27){
-			happinessLose = 1.0f - (cowConstitution / 30);
-		} else if (!(cowConstitution <= 27)) {
+		if (cow.newConstitution <= 27){
+			happinessLose = 1.0f - (cow.newConstitution / 30);
+		} else if (!(cow.newConstitution <= 27)) {
 			happinessLose = 0.1f;
 		}
 		
-		happinessMax = 100.0f + (Mathf.Floor(cowIntelligence / 2));
+		happinessMax = 100.0f + (Mathf.Floor(cow.newIntelligence / 2));
 		
 		if (trough){
 			troughCurExp = trough.get_exp();
 			troughMaxExp = trough.get_max_exp();
 		}
-	}
-	
-	public void randomizeStats(int strMin, int strMax, int conMin, int conMax, int intMin, int intMax){
-		GameControl.control.cowStrength = float.Parse(UnityEngine.Random.Range(strMin, strMax).ToString("F1"));
-		//Debug.Log("Str: " + GameControl.control.cowStrength);
-		GameControl.control.cowConstitution = float.Parse(UnityEngine.Random.Range(conMin, conMax).ToString("F1"));
-		//Debug.Log("Con: " + GameControl.control.cowConstitution);
-		GameControl.control.cowIntelligence = float.Parse(UnityEngine.Random.Range(intMin, intMax).ToString("F1"));
-		//Debug.Log("Int: " + GameControl.control.cowIntelligence);
+		
+		cowBorn = cow.born;
+		inventory = cow.inventory;
+		cowStrength = cow.strength;
+		cowConstitution = cow.constitution;
+		cowIntelligence = cow.intelligence;
 	}
 	
 	void OnDestroy () {
@@ -206,6 +202,8 @@ public class GameControl : MonoBehaviour {
 		data.statsRandomized = statsRandomized;
 		data.numberOfCowsBred = numberOfCowsBred;
 		
+		data.inventory = inventory;
+		
 		data.saveTime = DateTime.Now;
 		
 		Debug.Log("Saving to... " + Application.persistentDataPath + "/playerInfo.dat" + " at: " + DateTime.Now);
@@ -223,10 +221,6 @@ public class GameControl : MonoBehaviour {
 			file.Close();
 			
 			Debug.Log("Loading from... " + Application.persistentDataPath + "/playerInfo.dat" + " at: " + DateTime.Now);
-			
-			if (trough){
-				trough.set_xpos(data.troughPos);
-			}
 			
 			isBorn = data.isBorn;
 			
@@ -252,11 +246,14 @@ public class GameControl : MonoBehaviour {
 			statsRandomized = data.statsRandomized;
 			numberOfCowsBred = data.numberOfCowsBred;
 			
+			inventory = data.inventory;
+			
 			DateTime loadTime = DateTime.Now;
 			TimeSpan interval = loadTime - data.saveTime;
 			int hayUsed = ((int)interval.TotalMinutes) / 2;
 
 			if (trough) {
+				trough.set_xpos(data.troughPos);
 				trough.set_max_exp(data.troughMaxExp);
 				trough.set_exp(data.troughCurExp);
 				float current_exp = trough.get_exp();
@@ -301,6 +298,8 @@ class PlayerData{
 	
 	public bool statsRandomized;
 	public int numberOfCowsBred;
+	
+	public List<string> inventory = new List<string>();
 	
 	public DateTime saveTime;
 	

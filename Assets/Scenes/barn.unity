@@ -1002,6 +1002,18 @@ MonoBehaviour:
   closeButton: {fileID: 2800000, guid: 02df828cf45bc5d49a2071d1a8b296a9, type: 3}
   shopButton: {fileID: 2800000, guid: fd2d2b7c23075194eb5c9c6ad4f543ed, type: 3}
   buyButton: {fileID: 2800000, guid: aeef69dfdfde7564382de02b6dbaa899, type: 3}
+  strength: 10
+  expectedStrength: 9
+  newStrength: 10
+  constitution: 10
+  expectedConstitution: 9
+  newConstitution: 10
+  intelligence: 10
+  expectedIntelligence: 9
+  newIntelligence: 10
+  statsRandomized: 0
+  statMin: 10
+  statMax: 18
   inventory: []
   inv_names: []
   inv_int: []
@@ -1746,6 +1758,7 @@ MonoBehaviour:
   happinessLose: 1
   cowIntelligence: 10
   happinessMax: 100
+  inventory: []
   trough: {fileID: 1752089083}
   cow: {fileID: 0}
   isBorn: 0
@@ -1754,10 +1767,8 @@ MonoBehaviour:
   totalHay: 0
   totalSpecial: 0
   haySelected: {fileID: 0}
-  statsRandomized: 0
   numberOfCowsBred: 0
-  statMin: 10
-  statMax: 18
+  statsRandomized: 0
   screenSizeX1: {x: 0, y: 0, z: 0}
   screenSizeX2: {x: 0, y: 0, z: 0}
   screenSizeY: {x: 0, y: 0, z: 0}
