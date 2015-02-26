@@ -8,6 +8,7 @@ using System.IO;
 public class GameControl : MonoBehaviour {
 	
 	public static GameControl control;
+	public static PushNotificationsAndroid pushNoti;
 	
 	public bool pause;
 	public String version = "0.01A";
@@ -29,9 +30,10 @@ public class GameControl : MonoBehaviour {
 	public Cow cow;
 	public DateTime cowBorn = DateTime.Now;
 	public TimeSpan cowAge;
-	public bool isBorn;
-	public float troughCurExp;
-	public float troughMaxExp;
+	public bool isBorn = false;
+	public float troughCurExp = 0.0f;
+	public float troughMaxExp = 50.0f;
+	public float troughPos;
 	
 	public float totalHay = 0.0f;
 	public float totalSpecial = 0.0f;
@@ -64,6 +66,8 @@ public class GameControl : MonoBehaviour {
 	}
 	
 	void Start () {
+		pushNoti = GetComponent<PushNotificationsAndroid>();
+		
 		text = new GUIStyle();
 		text.fontSize = 20;
 		
@@ -77,27 +81,19 @@ public class GameControl : MonoBehaviour {
 		screenSizeX1 = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		screenSizeX2 = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
 		screenSizeY = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight + 100, 0));
-		
-		if (cow){
-			Load();
-			if (!isBorn){
-				cowBorn = DateTime.Now;
-				cow.born = cowBorn;
-				isBorn = true;
-				Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
-			} else {
-				cow.born = cowBorn;
-				cow.statsRandomized = statsRandomized;
-				cow.strength = cowStrength;
-				cow.constitution = cowConstitution;
-				cow.intelligence = cowIntelligence;
-				cow.inventory = inventory;
-				Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
-			}
-		}
 	}
 	
 	void Update () {
+		if (!cow) {
+			cow = GameObject.Find("cow").GetComponent<Cow>();
+			Load();
+		}
+		if (!trough) {
+			trough = GameObject.Find("trough").GetComponent<Trough>();
+			Load();
+		}
+		if (!pushNoti) pushNoti = GetComponent<PushNotificationsAndroid>();
+		
 		if (pause){
 			Time.timeScale = 0.0f;
 		} else {
@@ -139,30 +135,44 @@ public class GameControl : MonoBehaviour {
 			happiness = 0.0f;
 		}
 		
-		if (cow.newConstitution <= 27){
-			happinessLose = 1.0f - (cow.newConstitution / 30);
-		} else if (!(cow.newConstitution <= 27)) {
-			happinessLose = 0.1f;
+		if (cow) {
+			if (cow.newConstitution <= 27){
+				happinessLose = 1.0f - (cow.newConstitution / 30);
+			} else if (!(cow.newConstitution <= 27)) {
+				happinessLose = 0.1f;
+			}
+			
+			happinessMax = 100.0f + (Mathf.Floor(cow.newIntelligence / 2));
+			
+			cowBorn = cow.born;
+			inventory = cow.inventory;
+			cowStrength = cow.strength;
+			cowConstitution = cow.constitution;
+			cowIntelligence = cow.intelligence;
 		}
-		
-		happinessMax = 100.0f + (Mathf.Floor(cow.newIntelligence / 2));
 		
 		if (trough){
 			troughCurExp = trough.get_exp();
 			troughMaxExp = trough.get_max_exp();
+			troughPos = trough.get_xpos();
 		}
-		
-		cowBorn = cow.born;
-		inventory = cow.inventory;
-		cowStrength = cow.strength;
-		cowConstitution = cow.constitution;
-		cowIntelligence = cow.intelligence;
 	}
 	
 	void OnDestroy () {
 		Save();
 		Debug.Log("SAVE ON DESTROY");
 	}
+	
+	#if !(UNITY_STANDALONE || UNITY_EDITOR)
+	void OnApplicationPause (bool paused) {
+		if (paused){
+			pushNoti.scheduleLocalNotification("Your cow is hungry!", (int)(5 * (happiness / (1 - (cowConstitution / 30)))));
+			pushNoti.scheduleLocalNotification("Your trough is empty!", (int)(60 * (troughCurExp * 2)));
+		} else {
+			pushNoti.clearLocalNotifications();
+		}
+	}
+	#endif
 
 	public void update_camera() {
 		screenSizeX1 = Camera.main.ScreenToWorldPoint (new Vector3 (50, 0, 0));
@@ -175,9 +185,8 @@ public class GameControl : MonoBehaviour {
 		FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 		
 		PlayerData data = new PlayerData();
-		if (Application.loadedLevelName == "barn"){
-			data.troughPos = trough.get_xpos();
-		}
+		
+		data.troughPos = troughPos;
 		
 		data.cowBorn = cowBorn;
 		data.isBorn = isBorn;
@@ -266,8 +275,71 @@ public class GameControl : MonoBehaviour {
 				}
 				trough.set_exp(current_exp);
 			}
-
+			
+			if (cow){
+				if (inventory.Count < 1){
+					inventory.Add("hat_afro\n0\n1\n0\nrare");
+					inventory.Add("hat_horns\n0\n3\n0\nrare");
+					inventory.Add("armor_steel\n-1\n1\n3\nrare");
+					inventory.Add("hat_winter\n2\n0\n2\nwinter");
+					inventory.Add("cloak_designer\n2\n2\n2\nunique");
+					inventory.Add("hat_birthday\n0\n0\n3\nunique");
+					inventory.Add("accessory_lei\n0\n0\n1\nuncommon");
+					inventory.Add("accessory_pipe\n1\n0\n0\ncommon");
+				}
+				string oldFormat = "yyyy##MM##dd HH*mm*ss";
+				string oldTime = "1800##01##01 00*00*00";
+				DateTime old = DateTime.ParseExact(oldTime, oldFormat, null);
+				DateTime now = DateTime.Now;
+				TimeSpan diff = now - old;
+				if (diff.TotalDays > 365){
+					cowBorn = DateTime.Now;
+				}
+				
+				if (!isBorn){
+					cowBorn = DateTime.Now;
+					cow.born = cowBorn;
+					isBorn = true;
+					Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
+				} else {
+					cow.born = cowBorn;
+					cow.strength = cowStrength;
+					cow.constitution = cowConstitution;
+					cow.intelligence = cowIntelligence;
+					cow.inventory = inventory;
+					Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
+				}
+			}
 		}
+	}
+	
+	public void Reset(){
+		cowBorn = DateTime.Now;
+		isBorn = false;
+		
+		troughPos = 0.0f;
+		
+		exp = 0.0f;
+		expExpected = 0.0f;
+		level = 1.0f;
+		
+		happiness = 0.0f;
+		happinessExpected = 0.0f;
+		
+		cowStrength = 10.0f;
+		cowConstitution = 10.0f;
+		cowIntelligence = 10.0f;
+		
+		troughCurExp = 0.0f;
+		troughMaxExp = 50.0f;
+		
+		totalHay = 0.0f;
+		totalSpecial = 0.0f;
+		
+		statsRandomized = false;
+		numberOfCowsBred = 0;
+		
+		inventory = new List<string>();
 	}
 }
 

@@ -11,7 +11,7 @@ public class Trough : MonoBehaviour {
 	
 	private float amount;
 	public float exp = 0f;
-	public float max_exp = 50f;
+	public float max_exp = 50.0f;
 	public float bar_offset_y = 425f;
 	public float bar_offset_x = -147f;
 	private float bar_multi = 5.37f;
