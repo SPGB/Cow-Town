@@ -4,7 +4,7 @@ using System.Collections;
 public class TitleScreen : MonoBehaviour {
 
 	public Texture menu;
-	public Texture hay;
+	public Texture button_play;
 	public Texture rock;
 
 	// Use this for initialization
@@ -30,10 +30,7 @@ public class TitleScreen : MonoBehaviour {
 		//GUI.DrawTexture(new Rect((width / 2) - 10, 0, 20, height), menu);
 		//GUI.DrawTexture(new Rect(0, (height / 2) - 10, width, 20), menu);
 		//GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-		if (GUI.Button(new Rect((width / 2) - (hay.width / 2) - 50, (height / 2) - (hay.height / 2) - 100, hay.width, hay.height), hay, GUIStyle.none)){
-			startGame();
-		}
-		if (GUI.Button(new Rect((width / 2) - (hay.width / 2) - 50, (height / 2) - (hay.height / 2) - (100 - 40), width, hay.height), "\t\t\t\t\t\tPLAY", GameControl.control.text)){
+		if (GUI.Button(new Rect((width / 2) - (button_play.width / 2) - 50, (height / 2) - (button_play.height / 2) - 100, button_play.width, button_play.height), button_play, GUIStyle.none)){
 			startGame();
 		}
 		if (GUI.Button(new Rect((width / 2) - (rock.width / 2) - 50, (height / 2) - (rock.height / 2) + 100, rock.width, rock.height), rock, GUIStyle.none)){
