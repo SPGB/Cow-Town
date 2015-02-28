@@ -527,6 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab_hay: {fileID: 100000, guid: 78023d171ece2b4408b5272b96d88d1f, type: 2}
   prefab_rock: {fileID: 149734, guid: fa0c53c5e4a69f14a83db8f4cac631c7, type: 2}
+  prefab_coin: {fileID: 100000, guid: 3fdff71ba10508f4794c87cfdb5b5302, type: 2}
   chanceRange: {x: 0, y: 100, z: 50}
   chanceX: 0
   chanceY: 0
@@ -546,6 +547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab_hay: {fileID: 149734, guid: fa0c53c5e4a69f14a83db8f4cac631c7, type: 2}
   prefab_rock: {fileID: 100000, guid: 78023d171ece2b4408b5272b96d88d1f, type: 2}
+  prefab_coin: {fileID: 100000, guid: 3fdff71ba10508f4794c87cfdb5b5302, type: 2}
   chanceRange: {x: 0, y: 5000, z: 2500}
   chanceX: 0
   chanceY: 0
@@ -1224,6 +1226,7 @@ MonoBehaviour:
   shopButton: {fileID: 2800000, guid: fd2d2b7c23075194eb5c9c6ad4f543ed, type: 3}
   buyButton: {fileID: 2800000, guid: aeef69dfdfde7564382de02b6dbaa899, type: 3}
   deleteSaveButton: {fileID: 2800000, guid: 23ea3e1f6d71ef9419e7526dbdd6bac9, type: 3}
+  nullItems: 0
   items: {fileID: 0}
   item1: {fileID: 0}
   item2: {fileID: 0}
@@ -2195,6 +2198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pause: 0
   version: 0.01A
+  money: 0
   exp: 0
   expExpected: 0
   level: 1

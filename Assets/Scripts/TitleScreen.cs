@@ -30,7 +30,7 @@ public class TitleScreen : MonoBehaviour {
 		//GUI.DrawTexture(new Rect((width / 2) - 10, 0, 20, height), menu);
 		//GUI.DrawTexture(new Rect(0, (height / 2) - 10, width, 20), menu);
 		//GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-		if (GUI.Button(new Rect((width / 2) - (button_play.width / 2) - 50, (height / 2) - (button_play.height / 2) - 100, button_play.width, button_play.height), button_play, GUIStyle.none)){
+		if (GUI.Button(new Rect((width / 2) - (button_play.width / 2), (height / 2) - (button_play.height / 2) - 100, button_play.width, button_play.height), button_play, GUIStyle.none)){
 			startGame();
 		}
 		if (GUI.Button(new Rect((width / 2) - (rock.width / 2) - 50, (height / 2) - (rock.height / 2) + 100, rock.width, rock.height), rock, GUIStyle.none)){

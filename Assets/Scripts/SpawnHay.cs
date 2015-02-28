@@ -5,6 +5,7 @@ public class SpawnHay : MonoBehaviour {
 
 	public GameObject prefab_hay;
 	public GameObject prefab_rock;
+	public GameObject prefab_coin;
 	public Vector3 chanceRange;
 	
 	public float chanceX;
@@ -31,10 +32,13 @@ public class SpawnHay : MonoBehaviour {
 				happen = (chanceRange.z);
 				if (chance >= (happen - (0.5f + (0.02f * (GameControl.control.level - 1)))) && chance <= (happen + (0.5f + (0.02 * (GameControl.control.level - 1))))){
 					bool is_rock = Random.Range(0, 5) < 2;
-					GameObject new_object = (is_rock)? prefab_rock : prefab_hay;
-					int value = new_object.GetComponent<HayCollide>().getHayValue();
-					if ((value == 5 && GameControl.control.level < 5)){
-						return;
+					bool is_coin = Random.Range(0, 5) < 2;
+					GameObject new_object = (is_rock)? prefab_rock : ((is_coin)? prefab_coin : prefab_hay);
+					if (!is_coin){
+						int value = new_object.GetComponent<HayCollide>().getHayValue();
+						if ((value == 5 && GameControl.control.level < 5)){
+							return;
+						}
 					}
 					if (!is_rock) Instantiate(new_object, new Vector3(Random.Range(GameControl.control.screenSizeX1.x, GameControl.control.screenSizeX2.x), GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity);
 					else Instantiate(new_object, new Vector3(Random.Range(GameControl.control.screenSizeX1.x, GameControl.control.screenSizeX2.x), GameControl.control.screenSizeY.y, 4.6f), Quaternion.identity);

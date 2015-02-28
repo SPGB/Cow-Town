@@ -12,6 +12,8 @@ public class GameControl : MonoBehaviour {
 	
 	public bool pause;
 	public String version = "0.01A";
+	
+	public int money = 0;
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
 	public float level = 1.0f;
@@ -134,6 +136,9 @@ public class GameControl : MonoBehaviour {
 		if (happiness < 0.0f){
 			happiness = 0.0f;
 		}
+		if (money < 0){
+			money = 0;
+		}
 		
 		if (cow) {
 			if (cow.newConstitution <= 27){
@@ -191,6 +196,8 @@ public class GameControl : MonoBehaviour {
 		data.cowBorn = cowBorn;
 		data.isBorn = isBorn;
 		
+		data.money = money;
+		
 		data.exp = exp;
 
 		data.troughCurExp = troughCurExp;
@@ -238,6 +245,7 @@ public class GameControl : MonoBehaviour {
 			}
 			
 			exp = data.exp;
+			money = data.money;
 
 			expExpected = data.expExpected;
 			level = data.level;
@@ -277,15 +285,15 @@ public class GameControl : MonoBehaviour {
 			}
 			
 			if (cow){
-				if (inventory.Count < 1){
-					inventory.Add("hat_afro\n0\n1\n0\nrare");
-					inventory.Add("hat_horns\n0\n3\n0\nrare");
-					inventory.Add("armor_steel\n-1\n1\n3\nrare");
-					inventory.Add("hat_winter\n2\n0\n2\nwinter");
-					inventory.Add("cloak_designer\n2\n2\n2\nunique");
-					inventory.Add("hat_birthday\n0\n0\n3\nunique");
-					inventory.Add("accessory_lei\n0\n0\n1\nuncommon");
-					inventory.Add("accessory_pipe\n1\n0\n0\ncommon");
+				if (inventory.Count <= 8){
+					inventory.Add("armor_steel\n1\n3\n-1\nrare");
+					inventory.Add("cloak_loremaster\n2\n2\n2\nunique");
+					inventory.Add("hat_goldenafro\n3\n0\n0\nrare");
+					inventory.Add("pet_blair\n2\n2\n2\nrare");
+				}
+				for (int i = 0; i < 12; i++){
+					if (inventory.Count != 12) inventory.Add("empty\n0\n0\n0\ncommon");
+					else break;
 				}
 				string oldFormat = "yyyy##MM##dd HH*mm*ss";
 				string oldTime = "1800##01##01 00*00*00";
@@ -319,6 +327,8 @@ public class GameControl : MonoBehaviour {
 		
 		troughPos = 0.0f;
 		
+		money = 0;
+		
 		exp = 0.0f;
 		expExpected = 0.0f;
 		level = 1.0f;
@@ -339,7 +349,10 @@ public class GameControl : MonoBehaviour {
 		statsRandomized = false;
 		numberOfCowsBred = 0;
 		
-		inventory = new List<string>();
+		for (int i = 0; i < 12; i++){
+			inventory.RemoveAt(i);
+			inventory.Add("empty\n0\n0\n0\ncommon");
+		}
 	}
 }
 
@@ -350,6 +363,8 @@ class PlayerData{
 	public bool isBorn;
 
 	public float troughPos;
+
+	public int money;
 
 	public float exp;
 	public float expExpected;

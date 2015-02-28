@@ -12,6 +12,8 @@ public class Cow : MonoBehaviour {
 	public Texture deleteSaveButton;
 	private bool shop;
 	
+	public int nullItems;
+	
 	public GameObject items;
 	
 	public GameObject item1;
@@ -82,6 +84,13 @@ public class Cow : MonoBehaviour {
 		GameControl.control.cowAge = age;
 		GameControl.control.inventory = inventory;
 		
+		for (int c = 0; c < 12; c++){
+			if (inventory[c] == "empty\n0\n0\n0\ncommon"){
+				inventory.RemoveAt(c);
+				inventory.Add("empty\n0\n0\n0\ncommon");
+			}
+		}
+		
 		for (int i = 0; i < inventory.Count; i++){
 			string[] split = inventory[i].Split();
 			inv_names[i] = split[0].ToString();
@@ -136,6 +145,18 @@ public class Cow : MonoBehaviour {
 		items.transform.GetChild(3).localPosition = item4.transform.localPosition;
 		items.transform.GetChild(3).localScale = item4.transform.localScale;
 		items.transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = item4.GetComponent<SpriteRenderer>().sprite;
+		
+		nullItems = 0;
+		foreach (string item in inventory){
+			if (item == "empty\n0\n0\n0\ncommon") nullItems++;
+		}
+	}
+	
+	public void switchItem(int itemInt1, int itemInt2){
+		string switch1 = inventory[itemInt1];
+		string switch2 = inventory[itemInt2];
+		inventory[itemInt1] = switch2;
+		inventory[itemInt2] = switch1;
 	}
 	
 	public void randomizeStats(int strMin, int strMax, int conMin, int conMax, int intMin, int intMax){
@@ -167,19 +188,28 @@ public class Cow : MonoBehaviour {
 			GUI.BeginGroup(new Rect (50, 50, width, height)); // left, top, width, height
 				// Draw the background image
 				GUI.DrawTexture(new Rect (0, 0, width, height), menu);
-				GUI.Label(new Rect(60, 280, 100, 100), "Inventory:\t\t" + inventory.Count, GameControl.control.text);
+				GUI.Label(new Rect(60, 280, 100, 100), "Inventory:\t\t\t\t" + (inventory.Count - nullItems), GameControl.control.text);
 				GUI.BeginGroup(new Rect(60, 310, 200, 150));
 					int i = 0;
 					for (int y = 0; y < 3; y++){
 						for (int x = 0; x < 4; x++){
-							Texture image = (Texture)Resources.Load("items/textures/" + inv_names[i++], typeof(Texture));
-							//Texture image = (Texture)Resources.Load(inv_names[i++], typeof(Texture));
-							GUI.DrawTexture(new Rect(0 + (x * 50), 0 + (y * 50), 50, 50), image);
+							GUI.BeginGroup(new Rect(0 + (x * 50), 0 + (y * 50), 50, 50));
+								Texture image = (Texture)Resources.Load("items/textures/" + inv_names[i], typeof(Texture));
+								//Texture image = (Texture)Resources.Load(inv_names[i++], typeof(Texture));
+								GUI.DrawTexture(new Rect(0, 0, 50, 50), image);
+								if (inventory[i] != "empty\n0\n0\n0\ncommon"){
+									if (GUI.Button(new Rect(35, 5, 10, 10), closeButton, GUIStyle.none)){
+										inventory.RemoveAt(i);
+										inventory.Add("empty\n0\n0\n0\ncommon");
+									}
+								}
+							GUI.EndGroup();
+							i++;
 						}
 					}
 				GUI.EndGroup();
 			// End both Groups
-			GUI.EndGroup ();
+			GUI.EndGroup();
 			
 			GUI.BeginGroup(new Rect (0, 0, Screen.width, Screen.height)); // left, top, width, height
 				bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
@@ -198,7 +228,9 @@ public class Cow : MonoBehaviour {
 					GUI.Label(new Rect(110, 120, 100, 100), "\t\t\t\t\t\t\t\t\t(-" + GameControl.control.happinessLose.ToString("F1") + "/5s)", GameControl.control.text);
 				}
 				
-				GUI.Label(new Rect(110, 150, 100, 100), "Experience:\t\t\t" + GameControl.control.exp.ToString(), GameControl.control.text);
+				GUI.Label(new Rect(110, 145, 100, 100), "Money:\t\t\t\t\t$" + GameControl.control.money, GameControl.control.text);
+				
+				GUI.Label(new Rect(110, 165, 100, 100), "Experience:\t\t\t" + GameControl.control.exp.ToString(), GameControl.control.text);
 				
 				if (trough_obj.get_exp() >= 30.0f){
 					int troughHours = (int)Mathf.Floor((trough_obj.get_exp() * 2) / 60);
@@ -232,12 +264,12 @@ public class Cow : MonoBehaviour {
 				if (shop){
 					GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.95f);
 					GUI.DrawTexture(new Rect (0, 0, width, height), menu);
-					GUI.Label(new Rect(60, 60, 100, 100), "Trough Max +25:", GameControl.control.text);
+					GUI.Label(new Rect(60, 60, 100, 100), "Trough Max +25, $500:", GameControl.control.text);
 					
 					if (GUI.Button(new Rect(width - 130, 55, 90, 30), buyButton, GUIStyle.none)){ // Trough upgrade
-						if (GameControl.control.exp > 500){
+						if (GameControl.control.money > 500){
 							GameControl.control.trough.set_max_exp(GameControl.control.trough.get_max_exp() + 25);
-							GameControl.control.exp -= 500;
+							GameControl.control.money -= 500;
 						}
 					}
 				} else {
