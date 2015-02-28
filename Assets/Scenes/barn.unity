@@ -182,7 +182,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 65610963}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.31428576, y: 1.49253726, z: -6}
+  m_LocalPosition: {x: 7.31428576, y: 1.49253726, z: -1}
   m_LocalScale: {x: .714285731, y: .74626863, z: 1}
   m_Children: []
   m_Father: {fileID: 753144923}
@@ -431,6 +431,7 @@ GameObject:
   - 114: {fileID: 394633393}
   - 114: {fileID: 394633391}
   - 212: {fileID: 394633394}
+  - 114: {fileID: 394633395}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -576,6 +577,71 @@ SpriteRenderer:
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 4fbef95030903e140aef9ce1cd42795b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &394633395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 394633385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57047522d41309f46934bac4588406e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  COMMON: 
+  common1: {fileID: 100000, guid: e059b6c493226194196800c63c00c95d, type: 2}
+  common2: {fileID: 100000, guid: c892874169345ba43a43eddb070ca83c, type: 2}
+  common3: {fileID: 100000, guid: 33657e69c105a084da738b20cc488212, type: 2}
+  common4: {fileID: 100000, guid: e10147bcec75ae3419cb4adae6e798b4, type: 2}
+  common5: {fileID: 100000, guid: 3ab65e87d86664642b54f2665cae7de0, type: 2}
+  common6: {fileID: 100000, guid: 5ad24c171eb5617468b213917c42feb0, type: 2}
+  UNCOMMON: 
+  uncommon1: {fileID: 100000, guid: 837355595446287448c20fb9c084c7b7, type: 2}
+  uncommon2: {fileID: 100000, guid: 0d6ec26384f2176488a1d99143f977ea, type: 2}
+  uncommon3: {fileID: 100000, guid: 029efcd4a228ffc49aba53c2111c0d05, type: 2}
+  uncommon4: {fileID: 100000, guid: fed0e894080fccf418c1a4fb92512332, type: 2}
+  uncommon5: {fileID: 100000, guid: 36ce3b2f4c968a0438aa990f1a4e2d4a, type: 2}
+  uncommon6: {fileID: 100000, guid: fed0e894080fccf418c1a4fb92512332, type: 2}
+  uncommon7: {fileID: 100000, guid: 87850b716e633a349bd68bae96a2b769, type: 2}
+  uncommon8: {fileID: 100000, guid: 3fc37931722ed2f4c8887ffcd17e8af7, type: 2}
+  uncommon9: {fileID: 100000, guid: c08156f5292285e468284fb0d38c3c2a, type: 2}
+  uncommon10: {fileID: 100000, guid: 8f7d4ec0662fec84582a1b90f91c867c, type: 2}
+  uncommon11: {fileID: 100000, guid: 18520b1ac77a51149a9ab921f0ec201e, type: 2}
+  RARE: 
+  rare1: {fileID: 100000, guid: fe95307f89a6584418d7168acf5f9fee, type: 2}
+  rare2: {fileID: 100000, guid: 77ca8e5ce1efe0f4db9194a5836e2655, type: 2}
+  rare3: {fileID: 100000, guid: dec4349db61e24c4b99b9b4f759d3c36, type: 2}
+  rare4: {fileID: 100000, guid: b9a2e91d9210fa14eb7fb59b658bc459, type: 2}
+  rare5: {fileID: 100000, guid: 2bc9a6827d6bc8746bdca82a14938d1f, type: 2}
+  rare6: {fileID: 100000, guid: 745a656a83a05ed43b3059c9b7bc6bc7, type: 2}
+  rare7: {fileID: 100000, guid: 8645e7e9e78acb74e982cd4113623508, type: 2}
+  rare8: {fileID: 100000, guid: 7bce5c74ccf5a8c419251a91fa5b48f7, type: 2}
+  rare9: {fileID: 100000, guid: 5ac72c30e35adf841928f9f62c1d5990, type: 2}
+  rare10: {fileID: 100000, guid: b5d29e38d1111be418c71435343a2d8c, type: 2}
+  rare11: {fileID: 100000, guid: 7de9a3efb56917a438060062c999f489, type: 2}
+  rare12: {fileID: 100000, guid: 8e12eaa9c0198414d817fca0bdac85a5, type: 2}
+  rare13: {fileID: 100000, guid: c7705502e57bac8458d58257809e3baa, type: 2}
+  rare14: {fileID: 100000, guid: ce9706445ed17e7409ada764cd2248d9, type: 2}
+  rare15: {fileID: 100000, guid: f1cf83bfda71eaf439e02caea4e71978, type: 2}
+  rare16: {fileID: 100000, guid: 3e9d4fe24130ce740a9aa855ba355415, type: 2}
+  rare17: {fileID: 100000, guid: e6bd576de4aef9b4d933880fcd32d4a5, type: 2}
+  rare18: {fileID: 100000, guid: 7464d187392408343837925bdce73a7c, type: 2}
+  rare19: {fileID: 100000, guid: 78772cdf0a9fa7e45b1e44e7ffbe0b9d, type: 2}
+  rare20: {fileID: 100000, guid: a18446d26fd5e724b99f7e5235782b73, type: 2}
+  rare21: {fileID: 100000, guid: aa5bd00b8f3f38841bf264126afae1f5, type: 2}
+  rare22: {fileID: 100000, guid: 316812c26f263fb4d9ded63168d2d704, type: 2}
+  rare23: {fileID: 100000, guid: cc2f4ec14ad65904389eeaef6f87dfdd, type: 2}
+  rare24: {fileID: 100000, guid: 1452b413a49ab724593d612e578ba977, type: 2}
+  rare25: {fileID: 100000, guid: 164b969175c64474296b2416efb22d66, type: 2}
+  rare26: {fileID: 100000, guid: 052669e06cdd3424e9050f280c70f991, type: 2}
+  rare27: {fileID: 100000, guid: f6463e0fc56ec6c4d90fc284756a4772, type: 2}
+  chanceRange: {x: 0, y: 100, z: 50}
+  chanceX: 0
+  chanceY: 0
+  chance: 0
+  happen: 0
+  spawning: 0
+  regulatorCap: 5
 --- !u!1 &453652903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,8 +1418,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1209906557}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.31428576, y: 3.92537308, z: -6}
+  m_LocalRotation: {x: -4.37113883e-08, y: -1, z: -4.37113883e-08, w: 1.91068547e-15}
+  m_LocalPosition: {x: 2.31428576, y: 3.92537308, z: -1}
   m_LocalScale: {x: .714285731, y: .74626863, z: 1}
   m_Children: []
   m_Father: {fileID: 753144923}
@@ -1833,8 +1899,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1660953371}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.41428566, y: 5.9104476, z: -6}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
+  m_LocalPosition: {x: -5.41428566, y: 5.9104476, z: -1}
   m_LocalScale: {x: .714285731, y: .74626863, z: 1}
   m_Children: []
   m_Father: {fileID: 753144923}
@@ -2198,6 +2264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pause: 0
   version: 0.01A
+  popup: {fileID: 100000, guid: 59a81cc1fb535af449edcdf6e0e9e260, type: 2}
   money: 0
   exp: 0
   expExpected: 0

@@ -22,9 +22,12 @@ public class Cloud : MonoBehaviour {
 	}
 
 	void OnBecameInvisible () {
+		direction_right = !direction_right;
 		Vector3 temp = transform.position;
 		temp.y = Random.Range(0f, 4f);
 		transform.position = temp;
-		direction_right = !direction_right;
+		Quaternion quat = transform.rotation;
+		quat.y = (direction_right)? 180.0f : 0.0f;
+		transform.rotation = quat;
 	}
 }

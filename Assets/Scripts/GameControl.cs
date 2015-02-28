@@ -13,6 +13,8 @@ public class GameControl : MonoBehaviour {
 	public bool pause;
 	public String version = "0.01A";
 	
+	public GameObject popup;
+	
 	public int money = 0;
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
@@ -285,12 +287,6 @@ public class GameControl : MonoBehaviour {
 			}
 			
 			if (cow){
-				if (inventory.Count <= 8){
-					inventory.Add("armor_steel\n1\n3\n-1\nrare");
-					inventory.Add("cloak_loremaster\n2\n2\n2\nunique");
-					inventory.Add("hat_goldenafro\n3\n0\n0\nrare");
-					inventory.Add("pet_blair\n2\n2\n2\nrare");
-				}
 				for (int i = 0; i < 12; i++){
 					if (inventory.Count != 12) inventory.Add("empty\n0\n0\n0\ncommon");
 					else break;
@@ -349,8 +345,8 @@ public class GameControl : MonoBehaviour {
 		statsRandomized = false;
 		numberOfCowsBred = 0;
 		
+		inventory.Clear();
 		for (int i = 0; i < 12; i++){
-			inventory.RemoveAt(i);
 			inventory.Add("empty\n0\n0\n0\ncommon");
 		}
 	}

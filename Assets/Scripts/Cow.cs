@@ -101,13 +101,13 @@ public class Cow : MonoBehaviour {
 		}
 		
 		item1 = (GameObject)Resources.Load("items/prefabs/" + inv_names[0], typeof(GameObject));
-		item1.transform.localPosition = new Vector3(item1.transform.localPosition.x, item1.transform.localPosition.y, -0.1f);
+		item1.transform.localPosition = new Vector3(item1.transform.localPosition.x, item1.transform.localPosition.y, -0.05f);
 		item2 = (GameObject)Resources.Load("items/prefabs/" + inv_names[1], typeof(GameObject));
-		item2.transform.localPosition = new Vector3(item2.transform.localPosition.x, item2.transform.localPosition.y, -0.2f);
+		item2.transform.localPosition = new Vector3(item2.transform.localPosition.x, item2.transform.localPosition.y, -0.1f);
 		item3 = (GameObject)Resources.Load("items/prefabs/" + inv_names[2], typeof(GameObject));
-		item3.transform.localPosition = new Vector3(item3.transform.localPosition.x, item3.transform.localPosition.y, -0.3f);
+		item3.transform.localPosition = new Vector3(item3.transform.localPosition.x, item3.transform.localPosition.y, -0.15f);
 		item4 = (GameObject)Resources.Load("items/prefabs/" + inv_names[3], typeof(GameObject));
-		item4.transform.localPosition = new Vector3(item4.transform.localPosition.x, item4.transform.localPosition.y, -0.4f);
+		item4.transform.localPosition = new Vector3(item4.transform.localPosition.x, item4.transform.localPosition.y, -0.2f);
 		
 		if (GameControl.control.level >= 5){
 			if (expectedStrength != newStrength){
@@ -176,6 +176,8 @@ public class Cow : MonoBehaviour {
 			GameControl.control.pause = true;
 			GameControl.control.Save();
 		}
+		
+		Debug.Log("Inventory Display Size: " + (inventory.Count - nullItems).ToString() + ", actual inventory size: " + inventory.Count.ToString());
 	}
 	
 	void OnGUI () {
