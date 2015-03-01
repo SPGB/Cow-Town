@@ -189,6 +189,7 @@ public class SpawnItems : MonoBehaviour {
 			itemStringSpawn = (rarity >= 92)? ((rarity >=97)? rareStrings[i-1] : uncommonStrings[i-1]) : commonStrings[i-1];
 			
 			new_object.AddComponent<BoxCollider>();
+			new_object.GetComponent<BoxCollider>().size = new Vector3(new_object.collider.bounds.size.x + 0.3f, new_object.collider.bounds.size.y + 0.3f, 0.4f);
 			new_object.AddComponent<Rigidbody>();
 			new_object.rigidbody.drag = 7;
 			new_object.rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;

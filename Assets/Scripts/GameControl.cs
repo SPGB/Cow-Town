@@ -291,14 +291,6 @@ public class GameControl : MonoBehaviour {
 					if (inventory.Count != 12) inventory.Add("empty\n0\n0\n0\ncommon");
 					else break;
 				}
-				string oldFormat = "yyyy##MM##dd HH*mm*ss";
-				string oldTime = "1800##01##01 00*00*00";
-				DateTime old = DateTime.ParseExact(oldTime, oldFormat, null);
-				DateTime now = DateTime.Now;
-				TimeSpan diff = now - old;
-				if (diff.TotalDays > 365){
-					cowBorn = DateTime.Now;
-				}
 				
 				if (!isBorn){
 					cowBorn = DateTime.Now;
