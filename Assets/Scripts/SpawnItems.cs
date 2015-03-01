@@ -184,7 +184,7 @@ public class SpawnItems : MonoBehaviour {
 			int rarity = Random.Range(0, 100);
 			int i = (rarity >= 92)? ((rarity >=97)? Random.Range(1, rareItems.Count) : Random.Range(1, uncommonItems.Count)) : Random.Range(1, commonItems.Count);
 			
-			GameObject new_object = Instantiate(((rarity >= 92)? ((rarity >=97)? rareItems[i-1] : uncommonItems[i-1]) : commonItems[i-1]), new Vector3(Random.Range(GameControl.control.screenSizeX1.x, GameControl.control.screenSizeX2.x), GameControl.control.screenSizeY.y, 4.6f), Quaternion.identity) as GameObject;
+			GameObject new_object = Instantiate(((rarity >= 92)? ((rarity >=97)? rareItems[i-1] : uncommonItems[i-1]) : commonItems[i-1]), new Vector3(Random.Range(GameControl.control.screenSizeX1.x, GameControl.control.screenSizeX2.x), GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity) as GameObject;
 			
 			itemStringSpawn = (rarity >= 92)? ((rarity >=97)? rareStrings[i-1] : uncommonStrings[i-1]) : commonStrings[i-1];
 			

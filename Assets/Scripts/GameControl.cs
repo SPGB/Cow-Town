@@ -242,9 +242,7 @@ public class GameControl : MonoBehaviour {
 			
 			isBorn = data.isBorn;
 			
-			if (cowBorn != data.cowBorn) {
-				cowBorn = data.cowBorn;
-			}
+			cowBorn = data.cowBorn;
 			
 			exp = data.exp;
 			money = data.money;

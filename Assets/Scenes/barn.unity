@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30d5d1e8148b8544be32aba0899c5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deleteSaveButton: {fileID: 2800000, guid: 23ea3e1f6d71ef9419e7526dbdd6bac9, type: 3}
 --- !u!1 &155977064
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,6 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30d5d1e8148b8544be32aba0899c5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deleteSaveButton: {fileID: 2800000, guid: 23ea3e1f6d71ef9419e7526dbdd6bac9, type: 3}
 --- !u!114 &394633392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,14 +1292,16 @@ MonoBehaviour:
   menu: {fileID: 2800000, guid: 92082627b0e84b14db2f0004a6caa5df, type: 3}
   closeButton: {fileID: 2800000, guid: 02df828cf45bc5d49a2071d1a8b296a9, type: 3}
   shopButton: {fileID: 2800000, guid: fd2d2b7c23075194eb5c9c6ad4f543ed, type: 3}
-  buyButton: {fileID: 2800000, guid: aeef69dfdfde7564382de02b6dbaa899, type: 3}
-  deleteSaveButton: {fileID: 2800000, guid: 23ea3e1f6d71ef9419e7526dbdd6bac9, type: 3}
+  blankButton: {fileID: 2800000, guid: 1ccd79fa5e5b4eb48bdb9c768a563361, type: 3}
+  emptyTexture: {fileID: 2800000, guid: 47f5e16aaf5119a47817d01ffd82e739, type: 3}
+  switch1: {fileID: 2800000, guid: f7d981fe3f50dd847b4cfd2068711973, type: 3}
+  switch2: {fileID: 2800000, guid: a88818f2020eca6409803f5e1af3bc59, type: 3}
   nullItems: 0
-  items: {fileID: 0}
+  items: {fileID: 453652903}
   item1: {fileID: 0}
   item2: {fileID: 0}
   item3: {fileID: 0}
-  item4: {fileID: 453652903}
+  item4: {fileID: 0}
   strength: 10
   newStrength: 10
   constitution: 10
@@ -2278,7 +2282,7 @@ MonoBehaviour:
   happinessMax: 100
   inventory: []
   trough: {fileID: 1752089083}
-  cow: {fileID: 0}
+  cow: {fileID: 1066411787}
   isBorn: 0
   troughCurExp: 0
   troughMaxExp: 0
