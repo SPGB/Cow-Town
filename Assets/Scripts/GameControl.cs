@@ -75,8 +75,11 @@ public class GameControl : MonoBehaviour {
 		text = new GUIStyle();
 		text.fontSize = 20;
 		
+		Reset();
+		
 		Load();
 		Debug.Log("LOAD ON START");
+		
 		updateTime1 = DateTime.Now;
 		
 		happinessExpected = 0.0f;
@@ -187,6 +190,13 @@ public class GameControl : MonoBehaviour {
 		screenSizeY = Camera.main.ScreenToWorldPoint (new Vector3 (0, Camera.main.pixelHeight + 100, 0));
 	}
 	
+	public void Delete(){
+		PlayerPrefs.DeleteAll();
+		Reset();
+		Save();
+		Load();
+	}
+	
 	public void Save(){
 		BinaryFormatter bf = new BinaryFormatter();
 		FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
@@ -285,11 +295,6 @@ public class GameControl : MonoBehaviour {
 			}
 			
 			if (cow){
-				for (int i = 0; i < 12; i++){
-					if (inventory.Count != 12) inventory.Add("empty\n0\n0\n0\ncommon");
-					else break;
-				}
-				
 				if (!isBorn){
 					cowBorn = DateTime.Now;
 					cow.born = cowBorn;

@@ -41,10 +41,7 @@ public class DisplayGUI : MonoBehaviour {
 			
 			GUI.Label(new Rect(Screen.width - 130, 20, 100, 100), "Delete Save?", GameControl.control.text);
 			if (GUI.Button(new Rect(Screen.width - 100, 45, 90, 30), deleteSaveButton, GUIStyle.none)){
-				PlayerPrefs.DeleteAll();
-				GameControl.control.Reset();
-				GameControl.control.Save();
-				GameControl.control.Load();
+				GameControl.control.Delete();
 			}
 			
 			GUI.EndGroup();

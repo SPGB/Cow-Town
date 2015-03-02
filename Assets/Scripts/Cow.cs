@@ -80,6 +80,11 @@ public class Cow : MonoBehaviour {
 			inv_rarity.Add("common");
 		}
 		
+		for (int i = 0; i < 12; i++){
+			if (inventory.Count != 12) inventory.Add("empty\n0\n0\n0\ncommon");
+			else break;
+		}
+		
 		statMin = 10 + GameControl.control.numberOfCowsBred;
 		statMax = 18 + GameControl.control.numberOfCowsBred;
 		if (!GameControl.control.statsRandomized){
