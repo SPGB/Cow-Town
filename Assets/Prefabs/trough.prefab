@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8883456, y: -2.79999995, z: 4.5999999}
+  m_LocalPosition: {x: 3.80999994, y: -3.63000011, z: 4.5999999}
   m_LocalScale: {x: .5, y: .5, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -160,7 +160,9 @@ MonoBehaviour:
   max_exp: 50
   bar_offset_y: 425
   bar_offset_x: -135
-  bar_height: 32
+  bar_multi: 4.5
+  bar_width: 0
+  bar_height: 24
   foreground_texture: {fileID: 2800000, guid: 75ad5d612eb90f042b22d2e09bf1d805, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:

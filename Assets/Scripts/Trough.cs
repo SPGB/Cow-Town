@@ -14,8 +14,8 @@ public class Trough : MonoBehaviour {
 	public float max_exp = 50.0f;
 	public float bar_offset_y = 425f;
 	public float bar_offset_x = -147f;
-	private float bar_multi = 5.37f;
-	private float bar_width;
+	public float bar_multi = 5.37f;
+	public float bar_width;
 	public float bar_height = 32;
 	public Texture foreground_texture;
 	
@@ -70,8 +70,9 @@ public class Trough : MonoBehaviour {
 
 	void OnGUI () {
 		if (GameControl.control.pause) return;
-		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-		GUI.BeginGroup (new Rect ( pos.x + bar_offset_x, pos.y + bar_offset_y, max_exp * bar_multi,bar_height));
+		Vector3 trough = gameObject.transform.position;
+		Vector3 trans = Camera.main.WorldToScreenPoint(new Vector3(trough.x - 1.555f, trough.y + 6.115f, trough.z));
+		GUI.BeginGroup (new Rect ( trans.x, trans.y, (max_exp * bar_multi), bar_height));
 		GUI.BeginGroup (new Rect ( 0,0, bar_width,bar_height));
 		// Draw the foreground image
 		GUI.DrawTexture (new Rect (0,0, 50f * bar_multi,bar_height), foreground_texture);

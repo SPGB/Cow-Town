@@ -10,7 +10,7 @@ public class ItemCollide : MonoBehaviour {
 		//Debug.Log(col.gameObject.tag);
 		if (col.gameObject.tag == "Cow"){
 			if (transform.position.z > 4.4f){
-				if (GameControl.control.cow.nullItems >= 1){
+				if (GameControl.control.cow.inventory.Contains("empty\n0\n0\n0\ncommon")){
 					GameObject new_popup = (GameObject) Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
 					new_popup.GetComponent<CowExpPopup>().val = "ITEM";
 					
@@ -18,6 +18,7 @@ public class ItemCollide : MonoBehaviour {
 					GameControl.control.cow.inventory.Add(itemString);
 				}
 				Destroy(gameObject);
+				Debug.Log(itemString + " colliding with cow.");
 			}
 		} else if (col.gameObject.tag == "Trough"){
 			if (GameControl.control.trough){
@@ -27,6 +28,7 @@ public class ItemCollide : MonoBehaviour {
 				new_popup.GetComponent<CowExpPopup>().val = "$10";
 				
 				Destroy(gameObject);
+				Debug.Log(itemString + " colliding with trough.");
 			}
 		}
 	}

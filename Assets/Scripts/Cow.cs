@@ -291,12 +291,24 @@ public class Cow : MonoBehaviour {
 					GUI.Label(new Rect(60, 210, 100, 100), "\t\t\t\t\t\t\t\t\t(" + troughMinutes.ToString("F0") + " minutes)", GameControl.control.text);
 				}
 				
-				int addativeStr = int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2]);
-				int addativeCon = int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]);
-				int addativeInt = int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]);
-				GUI.Label(new Rect(60, 240, 100, 100), "Strength:\t\t\t\t" + newStrength.ToString() + "(" + strength.ToString() + ((addativeStr < 0)? "":"+") + (int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2])).ToString() + ")", GameControl.control.text);
-				GUI.Label(new Rect(60, 270, 100, 100), "Constitution:\t\t\t" + newConstitution.ToString() + "(" + constitution.ToString() + ((addativeCon < 0)? "":"+") + (int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2])).ToString() + ")", GameControl.control.text);
-				GUI.Label(new Rect(60, 300, 100, 100), "Intelligence:\t\t\t" + newIntelligence.ToString() + "(" + intelligence.ToString() + ((addativeInt < 0)? "":"+") + (int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2])).ToString() + ")", GameControl.control.text);
+				int addativeStr = (GameControl.control.level >= 5)? int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2]) : 0;
+				int addativeCon = (GameControl.control.level >= 5)? int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]) : 0;
+				int addativeInt = (GameControl.control.level >= 5)? int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]) : 0;
+				if (addativeStr == 0){
+					GUI.Label(new Rect(60, 240, 100, 100), "Strength:\t\t\t\t" + strength.ToString(), GameControl.control.text);
+				} else {
+					GUI.Label(new Rect(60, 240, 100, 100), "Strength:\t\t\t\t" + newStrength.ToString() + "(" + strength.ToString() + ((addativeStr < 0)? "":"+") + (int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2])).ToString() + ")", GameControl.control.text);
+				}
+				if (addativeCon == 0){
+					GUI.Label(new Rect(60, 270, 100, 100), "Constitution:\t\t\t" + constitution.ToString(), GameControl.control.text);
+				} else {
+					GUI.Label(new Rect(60, 270, 100, 100), "Constitution:\t\t\t" + newConstitution.ToString() + "(" + constitution.ToString() + ((addativeCon < 0)? "":"+") + (int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2])).ToString() + ")", GameControl.control.text);
+				}
+				if (addativeInt == 0){
+					GUI.Label(new Rect(60, 300, 100, 100), "Intelligence:\t\t\t" + intelligence.ToString(), GameControl.control.text);
+				} else {
+					GUI.Label(new Rect(60, 300, 100, 100), "Intelligence:\t\t\t" + newIntelligence.ToString() + "(" + intelligence.ToString() + ((addativeInt < 0)? "":"+") + (int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2])).ToString() + ")", GameControl.control.text);
+				}
 			GUI.EndGroup ();
 			
 			GUI.BeginGroup(new Rect (50, 50, width, height));

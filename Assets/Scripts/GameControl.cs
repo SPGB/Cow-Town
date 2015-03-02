@@ -91,6 +91,7 @@ public class GameControl : MonoBehaviour {
 	void Update () {
 		if (!cow) {
 			cow = GameObject.Find("cow").GetComponent<Cow>();
+			cowBorn = DateTime.Now;
 			Load();
 		}
 		if (!trough) {
