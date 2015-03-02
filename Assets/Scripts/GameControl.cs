@@ -75,8 +75,6 @@ public class GameControl : MonoBehaviour {
 		text = new GUIStyle();
 		text.fontSize = 20;
 		
-		Reset();
-		
 		Load();
 		Debug.Log("LOAD ON START");
 		

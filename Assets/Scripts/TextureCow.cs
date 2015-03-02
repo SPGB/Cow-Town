@@ -28,6 +28,7 @@ public class TextureCow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		cowTex = cowTex0;
 		if (GameControl.control.level >= 5.0f){
 			cowTex = cowTex1;
 		}

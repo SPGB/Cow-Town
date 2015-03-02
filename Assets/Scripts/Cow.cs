@@ -30,13 +30,10 @@ public class Cow : MonoBehaviour {
 	public TimeSpan age;
 	
 	public float strength = 10.0f;
-	private float expectedStrength = 9.0f;
 	public float newStrength = 10.0f;
 	public float constitution = 10.0f;
-	private float expectedConstitution = 9.0f;
 	public float newConstitution = 10.0f;
 	public float intelligence = 10.0f;
-	private float expectedIntelligence = 9.0f;
 	public float newIntelligence = 10.0f;
 	
 	private int statMin = 10;
@@ -129,21 +126,15 @@ public class Cow : MonoBehaviour {
 		item4.transform.localPosition = new Vector3(item4.transform.localPosition.x, item4.transform.localPosition.y, -0.2f);
 		
 		if (GameControl.control.level >= 5){
-			if (expectedStrength != newStrength){
-				float addition = int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2]);
-				newStrength = strength + addition;
-				expectedStrength = newStrength;
-			}
-			if (expectedConstitution != newConstitution){
-				float addition = int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]);
-				newConstitution = constitution + addition;
-				expectedConstitution = newConstitution;
-			}
-			if (expectedIntelligence != newIntelligence){
-				float addition = int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]);
-				newIntelligence = intelligence + addition;
-				expectedIntelligence = newIntelligence;
-			}
+			float additionStr = int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2]);
+			newStrength = strength + additionStr;
+			
+			float additionCon = int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]);
+			newConstitution = constitution + additionCon;
+			
+			float additionInt = int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]);
+			newIntelligence = intelligence + additionInt;
+			
 			items.SetActive(true);
 		} else {
 			items.SetActive(false);
@@ -227,21 +218,25 @@ public class Cow : MonoBehaviour {
 								//Texture image = (Texture)Resources.Load(inv_names[i++], typeof(Texture));
 								GUI.DrawTexture(new Rect(0, 0, 50, 50), image);
 								if (inventory[i] != "empty\n0\n0\n0\ncommon"){
-									if (GUI.Button(new Rect(30, 5, 15, 15), closeButton)){
-										inventory.RemoveAt(i);
-										inventory.Add("empty\n0\n0\n0\ncommon");
+									if (GUI.Button(new Rect(30, 5, 15, 15), closeButton, GUIStyle.none)){
+										if (!shop){
+											inventory.RemoveAt(i);
+											inventory.Add("empty\n0\n0\n0\ncommon");
+										}
 									}
 									if (GUI.Button(new Rect(0, 0, 50, 50), emptyTexture, GUIStyle.none)){
-										if (selected1 == -1){
-											if (selected1Pos != new Vector2(x, y) && selected2Pos != new Vector2(x, y)){
-												selected1 = i;
-												selected1Pos = new Vector2(x, y);
-												whichSwitch = UnityEngine.Random.Range(0, 5);
-											}
-										} else if (selected2 != i){
-											if (selected1Pos != new Vector2(x, y) && selected2Pos != new Vector2(x, y)){
-												selected2 = i;
-												selected2Pos = new Vector2(x, y);
+										if (!shop){
+											if (selected1 == -1){
+												if (selected1Pos != new Vector2(x, y) && selected2Pos != new Vector2(x, y)){
+													selected1 = i;
+													selected1Pos = new Vector2(x, y);
+													whichSwitch = UnityEngine.Random.Range(0, 5);
+												}
+											} else if (selected2 != i){
+												if (selected1Pos != new Vector2(x, y) && selected2Pos != new Vector2(x, y)){
+													selected2 = i;
+													selected2Pos = new Vector2(x, y);
+												}
 											}
 										}
 									}

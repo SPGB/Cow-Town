@@ -9,7 +9,7 @@ public class ItemCollide : MonoBehaviour {
 	void OnCollisionStay(Collision col){
 		//Debug.Log(col.gameObject.tag);
 		if (col.gameObject.tag == "Cow"){
-			if (transform.position.z == 4.6f){
+			if (transform.position.z > 4.4f){
 				if (GameControl.control.cow.nullItems >= 1){
 					GameObject new_popup = (GameObject) Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
 					new_popup.GetComponent<CowExpPopup>().val = "ITEM";
