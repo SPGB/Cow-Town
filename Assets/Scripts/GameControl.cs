@@ -58,6 +58,7 @@ public class GameControl : MonoBehaviour {
 	public Vector3 screenSizeY;
 	
 	public GUIStyle text;
+	public GUIStyle stats;
 
 	// Use this for initialization
 	void Awake () {
@@ -74,6 +75,8 @@ public class GameControl : MonoBehaviour {
 		
 		text = new GUIStyle();
 		text.fontSize = 20;
+		stats = new GUIStyle();
+		stats.fontSize = 17;
 		
 		Load();
 		Debug.Log("LOAD ON START");

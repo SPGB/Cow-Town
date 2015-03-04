@@ -10,9 +10,11 @@ public class Cow : MonoBehaviour {
 	public Texture shopButton;
 	public Texture blankButton;
 	public Texture emptyTexture;
+	public Texture statPopup;
 	
 	public Texture switch1;
 	public Texture switch2;
+	public Texture switch3;
 	
 	private bool shop;
 	
@@ -43,7 +45,6 @@ public class Cow : MonoBehaviour {
 	private int selected2 = -1;
 	private Vector2 selected1Pos;
 	private Vector2 selected2Pos;
-	private int whichSwitch = 0;
 	
 	/*
 	public string[] inventory = new string[12];
@@ -230,8 +231,12 @@ public class Cow : MonoBehaviour {
 												if (selected1Pos != new Vector2(x, y) && selected2Pos != new Vector2(x, y)){
 													selected1 = i;
 													selected1Pos = new Vector2(x, y);
-													whichSwitch = UnityEngine.Random.Range(0, 5);
 												}
+											} else if (selected1 == i){
+												selected1 = -1;
+												selected1Pos = new Vector2(-1, -1);
+												selected2 = -1;
+												selected2Pos = new Vector2(-1, -1); 
 											} else if (selected2 != i){
 												if (selected1Pos != new Vector2(x, y) && selected2Pos != new Vector2(x, y)){
 													selected2 = i;
@@ -246,7 +251,7 @@ public class Cow : MonoBehaviour {
 						}
 					}
 				GUI.EndGroup();
-				if (selected1 != -1) GUI.DrawTexture(new Rect(5 + (selected1Pos.x * 50), 305 + (selected1Pos.y * 50), 60, 60), (whichSwitch > 2)? switch1 : switch2);
+				if (selected1 != -1) GUI.DrawTexture(new Rect(5 + (selected1Pos.x * 50), 305 + (selected1Pos.y * 50), 60, 60), (inv_rarity[selected1] == "winter" || inv_rarity[selected1] == "rare")? switch3 : ((inv_rarity[selected1] == "uncommon")? switch2 : switch1));
 			// End both Groups
 			GUI.EndGroup();
 			
@@ -334,6 +339,14 @@ public class Cow : MonoBehaviour {
 				
 				if (GUI.Button(new Rect(20, 10, 90, 30), shopButton, GUIStyle.none)){
 					shop = !shop;
+				}
+			
+				GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+				if (!shop && selected1 != -1){
+					GUI.DrawTexture(new Rect(25 + (selected1Pos.x * 50), 270 + (selected1Pos.y * 50), 70, 70), statPopup);
+					GUI.Label(new Rect(30 + (selected1Pos.x * 50), 275 + (selected1Pos.y * 50), 70, 70), "Str:\t\t" + inv_str[selected1], GameControl.control.stats);
+					GUI.Label(new Rect(30 + (selected1Pos.x * 50), 295 + (selected1Pos.y * 50), 70, 70), "Con:\t" + inv_con[selected1], GameControl.control.stats);
+					GUI.Label(new Rect(30 + (selected1Pos.x * 50), 315 + (selected1Pos.y * 50), 70, 70), "Int:\t\t" + inv_int[selected1], GameControl.control.stats);
 				}
 			GUI.EndGroup();
 		}

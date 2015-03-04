@@ -1338,8 +1338,10 @@ MonoBehaviour:
   shopButton: {fileID: 2800000, guid: fd2d2b7c23075194eb5c9c6ad4f543ed, type: 3}
   blankButton: {fileID: 2800000, guid: 1ccd79fa5e5b4eb48bdb9c768a563361, type: 3}
   emptyTexture: {fileID: 2800000, guid: 47f5e16aaf5119a47817d01ffd82e739, type: 3}
+  statPopup: {fileID: 2800000, guid: 3ced2b6de4c102a43ae4baf48039fa34, type: 3}
   switch1: {fileID: 2800000, guid: f7d981fe3f50dd847b4cfd2068711973, type: 3}
   switch2: {fileID: 2800000, guid: a88818f2020eca6409803f5e1af3bc59, type: 3}
+  switch3: {fileID: 2800000, guid: 2ba7bc52e83ee404c87b202b41d52823, type: 3}
   nullItems: 0
   items: {fileID: 453652903}
   item1: {fileID: 0}
@@ -2298,6 +2300,65 @@ MonoBehaviour:
   screenSizeX2: {x: 0, y: 0, z: 0}
   screenSizeY: {x: 0, y: 0, z: 0}
   text:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  stats:
     m_Name: 
     m_Normal:
       m_Background: {fileID: 0}
