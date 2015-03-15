@@ -129,7 +129,7 @@ public class GameControl : MonoBehaviour {
 				Application.Quit();
 			}
 		}
-		if (Input.GetKey(KeyCode.Menu)){
+		if (Input.GetKeyUp(KeyCode.Menu)){
 			if (Application.loadedLevelName == "barn"){
 				Save();
 				pause = !pause;

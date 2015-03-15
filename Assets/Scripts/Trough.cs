@@ -40,6 +40,7 @@ public class Trough : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		transform.position = new Vector3(GameControl.control.troughPos, transform.position.y, transform.position.z);
 		if (transform.position.x < GameControl.control.screenSizeX1.x + dist_from_edge){
 			Vector3 temp = new Vector3(GameControl.control.screenSizeX1.x + dist_from_edge, transform.position.y, transform.position.z);
 			transform.position = temp;
@@ -55,8 +56,6 @@ public class Trough : MonoBehaviour {
 		wheel3.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
 		
 		bar_width = (50f * bar_multi) * (GameControl.control.troughExp / GameControl.control.troughMaxExp);
-		
-		transform.position = new Vector3(GameControl.control.troughPos, transform.position.y, transform.position.z);
 	}
 	
 	void OnMouseDrag () {
