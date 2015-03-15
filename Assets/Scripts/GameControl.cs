@@ -19,24 +19,31 @@ public class GameControl : MonoBehaviour {
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
 	public float level = 1.0f;
+	public float troughExp = 0.0f;
+	public float troughMaxExp = 50.0f;
 	
 	public float happiness = 0.0f;
 	public float happinessExpected = 0.0f;
 	
-	public float cowStrength = 10.0f;
-	public float cowConstitution = 10.0f;
 	public float happinessLose = 1.0f;
-	public float cowIntelligence = 10.0f;
 	public float happinessMax = 100.0f;
 	public List<string> inventory = new List<string>();
+	
+	public float strength = 10.0f;
+	public float newStrength = 10.0f;
+	public float constitution = 10.0f;
+	public float newConstitution = 10.0f;
+	public float intelligence = 10.0f;
+	public float newIntelligence = 10.0f;
+	
+	private int statMin = 10;
+	private int statMax = 18;
 
 	public Trough trough;
 	public Cow cow;
 	public DateTime cowBorn = DateTime.Now;
 	public TimeSpan cowAge;
 	public bool isBorn = false;
-	public float troughCurExp = 0.0f;
-	public float troughMaxExp = 50.0f;
 	public float troughPos;
 	
 	public float totalHay = 0.0f;
@@ -76,10 +83,6 @@ public class GameControl : MonoBehaviour {
 		text = new GUIStyle();
 		text.fontSize = 20;
 		stats = new GUIStyle();
-		stats.fontSize = 17;
-		
-		Load();
-		Debug.Log("LOAD ON START");
 		
 		updateTime1 = DateTime.Now;
 		
@@ -89,17 +92,26 @@ public class GameControl : MonoBehaviour {
 		screenSizeX1 = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		screenSizeX2 = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
 		screenSizeY = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight + 100, 0));
+		
+		statMin = 10 + numberOfCowsBred;
+		statMax = 18 + numberOfCowsBred;
+		if (!statsRandomized){
+			randomizeStats(statMin, statMax, statMin, statMax, statMin, statMax);
+			statsRandomized = true;
+		}
 	}
 	
 	void Update () {
-		if (!cow) {
+		if (!cow && Application.loadedLevelName == "barn") {
 			cow = GameObject.Find("cow").GetComponent<Cow>();
 			cowBorn = DateTime.Now;
 			Load();
+			Debug.Log("LOAD ON COW LOAD");
 		}
-		if (!trough) {
+		if (!trough && Application.loadedLevelName == "barn") {
 			trough = GameObject.Find("trough").GetComponent<Trough>();
 			Load();
+			Debug.Log("LOAD ON TROUGH LOAD");
 		}
 		if (!pushNoti) pushNoti = GetComponent<PushNotificationsAndroid>();
 		
@@ -110,23 +122,27 @@ public class GameControl : MonoBehaviour {
 		}
 	
 		if (Input.GetKey(KeyCode.Escape)){
-			Save();
 			if (Application.loadedLevelName == "barn"){
+				Save();
 				Application.LoadLevel("title");
 			} else {
 				Application.Quit();
 			}
 		}
 		if (Input.GetKey(KeyCode.Menu)){
-			Save();
-			pause = !pause;
+			if (Application.loadedLevelName == "barn"){
+				Save();
+				pause = !pause;
+			}
 		}
 
 		updateTime2 = DateTime.Now;
 		updateTimeSpan = updateTime2 - updateTime1;
 		if ((int)updateTimeSpan.TotalMinutes >= 1){
-			Save();
-			Debug.Log("SAVE ON UPDATE");
+			if (Application.loadedLevelName == "barn"){
+				Save();
+				Debug.Log("SAVE ON UPDATE");
+			}
 			updateTime1 = DateTime.Now;
 		}
 		/*
@@ -148,43 +164,89 @@ public class GameControl : MonoBehaviour {
 		}
 		
 		if (cow) {
-			if (cow.newConstitution <= 27){
-				happinessLose = 1.0f - (cow.newConstitution / 30);
-			} else if (!(cow.newConstitution <= 27)) {
+		
+			if (GameControl.control.level >= 5){
+				float additionStr = int.Parse(cow.inv_str[0]) + int.Parse(cow.inv_str[1]) + int.Parse(cow.inv_str[2]);
+				newStrength = strength + additionStr;
+				
+				float additionCon = int.Parse(cow.inv_con[0]) + int.Parse(cow.inv_con[1]) + int.Parse(cow.inv_con[2]);
+				newConstitution = constitution + additionCon;
+				
+				float additionInt = int.Parse(cow.inv_int[0]) + int.Parse(cow.inv_int[1]) + int.Parse(cow.inv_int[2]);
+				newIntelligence = intelligence + additionInt;
+				
+				cow.items.SetActive(true);
+			} else {
+				cow.items.SetActive(false);
+			}
+		
+			if (newConstitution <= 27){
+				happinessLose = 1.0f - (newConstitution / 30);
+			} else if (!(newConstitution <= 27)) {
 				happinessLose = 0.1f;
 			}
 			
-			happinessMax = 100.0f + (Mathf.Floor(cow.newIntelligence / 2));
+			happinessMax = 100.0f + (Mathf.Floor(newIntelligence / 2));
 			
-			cowBorn = cow.born;
-			inventory = cow.inventory;
-			cowStrength = cow.strength;
-			cowConstitution = cow.constitution;
-			cowIntelligence = cow.intelligence;
-		}
-		
-		if (trough){
-			troughCurExp = trough.get_exp();
-			troughMaxExp = trough.get_max_exp();
-			troughPos = trough.get_xpos();
+			DateTime now = DateTime.Now;
+			cowAge = now - cowBorn;
+			
+			for (int c = 0; c < 12; c++){
+				if (inventory[c] == "empty\n0\n0\n0\ncommon"){
+					inventory.RemoveAt(c);
+					inventory.Add("empty\n0\n0\n0\ncommon");
+				}
+			}
 		}
 	}
 	
 	void OnDestroy () {
-		Save();
-		Debug.Log("SAVE ON DESTROY");
+		if (Application.loadedLevelName == "barn"){
+			Save();
+			Debug.Log("SAVE ON DESTROY");
+		}
 	}
 	
 	#if !(UNITY_STANDALONE || UNITY_EDITOR)
 	void OnApplicationPause (bool paused) {
 		if (paused){
-			pushNoti.scheduleLocalNotification("Your cow is hungry!", (int)(5 * (happiness / (1 - (cowConstitution / 30)))));
-			pushNoti.scheduleLocalNotification("Your trough is empty!", (int)(60 * (troughCurExp * 2)));
+			pushNoti.scheduleLocalNotification("Your cow is hungry!", (int)(5 * (happiness / (1 - (constitution / 30)))));
+			pushNoti.scheduleLocalNotification("Your trough is empty!", (int)(60 * (troughExp * 2)));
 		} else {
 			pushNoti.clearLocalNotifications();
 		}
 	}
+	void OnApplicationFocus (bool focused) {
+		if (!focused && Application.loadedLevelName == "barn"){
+			Save();
+			Debug.Log("SAVE ON APP FOCUS");
+		} else {
+			if (Application.loadedLevelName == "barn"){
+				Load();
+				Debug.Log("LOAD ON APP FOCUS");
+			}
+		}
+	}
+	
+	void OnApplicationQuit(){
+		if (Application.loadedLevelName == "barn"){
+			Save();
+			Debug.Log("SAVE ON APP QUIT");
+		}
+	}
 	#endif
+	
+	public void randomizeStats(int strMin, int strMax, int conMin, int conMax, int intMin, int intMax){
+		strength = float.Parse(UnityEngine.Random.Range(strMin, strMax).ToString("F1"));
+		newStrength = strength;
+		//Debug.Log("Str: " + GameControl.control.cowStrength);
+		constitution = float.Parse(UnityEngine.Random.Range(conMin, conMax).ToString("F1"));
+		newConstitution = constitution;
+		//Debug.Log("Con: " + GameControl.control.cowConstitution);
+		intelligence = float.Parse(UnityEngine.Random.Range(intMin, intMax).ToString("F1"));
+		newIntelligence = intelligence;
+		//Debug.Log("Int: " + GameControl.control.cowIntelligence);
+	}
 
 	public void update_camera() {
 		screenSizeX1 = Camera.main.ScreenToWorldPoint (new Vector3 (50, 0, 0));
@@ -214,7 +276,7 @@ public class GameControl : MonoBehaviour {
 		
 		data.exp = exp;
 
-		data.troughCurExp = troughCurExp;
+		data.troughCurExp = troughExp;
 		data.troughMaxExp = troughMaxExp;
 		data.expExpected = expExpected;
 		data.level = level;
@@ -222,9 +284,9 @@ public class GameControl : MonoBehaviour {
 		data.happiness = happiness;
 		data.happinessExpected = happinessExpected;
 		
-		data.cowStrength = cowStrength;
-		data.cowConstitution = cowConstitution;
-		data.cowIntelligence = cowIntelligence;
+		data.cowStrength = strength;
+		data.cowConstitution = constitution;
+		data.cowIntelligence = intelligence;
 		
 		data.totalHay = totalHay;
 		data.totalSpecial = totalSpecial;
@@ -265,9 +327,9 @@ public class GameControl : MonoBehaviour {
 			happiness = data.happiness;
 			happinessExpected = data.happinessExpected;
 			
-			cowStrength = data.cowStrength;
-			cowConstitution = data.cowConstitution;
-			cowIntelligence = data.cowIntelligence;
+			strength = data.cowStrength;
+			constitution = data.cowConstitution;
+			intelligence = data.cowIntelligence;
 			
 			totalHay = data.totalHay;
 			totalSpecial = data.totalSpecial;
@@ -277,15 +339,16 @@ public class GameControl : MonoBehaviour {
 			
 			inventory = data.inventory;
 			
+			troughExp = data.troughCurExp;
+			troughMaxExp = data.troughMaxExp;
+			troughPos = data.troughPos;
+			
 			DateTime loadTime = DateTime.Now;
 			TimeSpan interval = loadTime - data.saveTime;
 			int hayUsed = ((int)interval.TotalMinutes) / 2;
 
 			if (trough) {
-				trough.set_xpos(data.troughPos);
-				trough.set_max_exp(data.troughMaxExp);
-				trough.set_exp(data.troughCurExp);
-				float current_exp = trough.get_exp();
+				float current_exp = data.troughCurExp;
 				for (int i = 0; i < hayUsed; i++){
 					if (current_exp == 0){
 						break;
@@ -293,7 +356,7 @@ public class GameControl : MonoBehaviour {
 					exp++;
 					current_exp--;
 				}
-				trough.set_exp(current_exp);
+				troughExp = current_exp;
 			}
 			
 			if (cow){
@@ -301,13 +364,6 @@ public class GameControl : MonoBehaviour {
 					cowBorn = DateTime.Now;
 					cow.born = cowBorn;
 					isBorn = true;
-					Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
-				} else {
-					cow.born = cowBorn;
-					cow.strength = cowStrength;
-					cow.constitution = cowConstitution;
-					cow.intelligence = cowIntelligence;
-					cow.inventory = inventory;
 					Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
 				}
 			}
@@ -329,11 +385,11 @@ public class GameControl : MonoBehaviour {
 		happiness = 0.0f;
 		happinessExpected = 0.0f;
 		
-		cowStrength = 10.0f;
-		cowConstitution = 10.0f;
-		cowIntelligence = 10.0f;
+		strength = 10.0f;
+		constitution = 10.0f;
+		intelligence = 10.0f;
 		
-		troughCurExp = 0.0f;
+		troughExp = 0.0f;
 		troughMaxExp = 50.0f;
 		
 		totalHay = 0.0f;

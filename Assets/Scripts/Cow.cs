@@ -31,16 +31,6 @@ public class Cow : MonoBehaviour {
 	public DateTime now;
 	public TimeSpan age;
 	
-	public float strength = 10.0f;
-	public float newStrength = 10.0f;
-	public float constitution = 10.0f;
-	public float newConstitution = 10.0f;
-	public float intelligence = 10.0f;
-	public float newIntelligence = 10.0f;
-	
-	private int statMin = 10;
-	private int statMax = 18;
-	
 	private int selected1 = -1;
 	private int selected2 = -1;
 	private Vector2 selected1Pos;
@@ -55,7 +45,7 @@ public class Cow : MonoBehaviour {
 	public string[] inv_rarity = new string[12];
 	**/
 	
-	public List<string> inventory = new List<string>();
+	//public List<string> inventory = new List<string>();
 	public List<string> inv_names = new List<string>();
 	public List<string> inv_int = new List<string>();
 	public List<string> inv_str = new List<string>();
@@ -79,15 +69,8 @@ public class Cow : MonoBehaviour {
 		}
 		
 		for (int i = 0; i < 12; i++){
-			if (inventory.Count != 12) inventory.Add("empty\n0\n0\n0\ncommon");
+			if (GameControl.control.inventory.Count != 12) GameControl.control.inventory.Add("empty\n0\n0\n0\ncommon");
 			else break;
-		}
-		
-		statMin = 10 + GameControl.control.numberOfCowsBred;
-		statMax = 18 + GameControl.control.numberOfCowsBred;
-		if (!GameControl.control.statsRandomized){
-			randomizeStats(statMin, statMax, statMin, statMax, statMin, statMax);
-			GameControl.control.statsRandomized = true;
 		}
 		
 		selected1 = -1;
@@ -96,20 +79,9 @@ public class Cow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		now = DateTime.Now;
-		age = now - born;
-		GameControl.control.cowAge = age;
-		GameControl.control.inventory = inventory;
 		
-		for (int c = 0; c < 12; c++){
-			if (inventory[c] == "empty\n0\n0\n0\ncommon"){
-				inventory.RemoveAt(c);
-				inventory.Add("empty\n0\n0\n0\ncommon");
-			}
-		}
-		
-		for (int i = 0; i < inventory.Count; i++){
-			string[] split = inventory[i].Split();
+		for (int i = 0; i < GameControl.control.inventory.Count; i++){
+			string[] split = GameControl.control.inventory[i].Split();
 			inv_names[i] = split[0].ToString();
 			inv_int[i] = split[1].ToString();
 			inv_str[i] = split[2].ToString();
@@ -125,21 +97,6 @@ public class Cow : MonoBehaviour {
 		item3.transform.localPosition = new Vector3(item3.transform.localPosition.x, item3.transform.localPosition.y, -0.15f);
 		item4 = (GameObject)Resources.Load("items/prefabs/" + inv_names[3], typeof(GameObject));
 		item4.transform.localPosition = new Vector3(item4.transform.localPosition.x, item4.transform.localPosition.y, -0.2f);
-		
-		if (GameControl.control.level >= 5){
-			float additionStr = int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2]);
-			newStrength = strength + additionStr;
-			
-			float additionCon = int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]);
-			newConstitution = constitution + additionCon;
-			
-			float additionInt = int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]);
-			newIntelligence = intelligence + additionInt;
-			
-			items.SetActive(true);
-		} else {
-			items.SetActive(false);
-		}
 		
 		items.transform.GetChild(0).localPosition = item1.transform.localPosition;
 		items.transform.GetChild(0).localScale = item1.transform.localScale;
@@ -158,7 +115,7 @@ public class Cow : MonoBehaviour {
 		items.transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = item4.GetComponent<SpriteRenderer>().sprite;
 		
 		nullItems = 0;
-		foreach (string item in inventory){
+		foreach (string item in GameControl.control.inventory){
 			if (item == "empty\n0\n0\n0\ncommon") nullItems++;
 		}
 		
@@ -172,31 +129,18 @@ public class Cow : MonoBehaviour {
 	}
 	
 	public void switchItem(int itemInt1, int itemInt2){
-		string switch1 = inventory[itemInt1];
-		string switch2 = inventory[itemInt2];
-		inventory[itemInt1] = switch2;
-		inventory[itemInt2] = switch1;
-	}
-	
-	public void randomizeStats(int strMin, int strMax, int conMin, int conMax, int intMin, int intMax){
-		strength = float.Parse(UnityEngine.Random.Range(strMin, strMax).ToString("F1"));
-		newStrength = strength;
-		//Debug.Log("Str: " + GameControl.control.cowStrength);
-		constitution = float.Parse(UnityEngine.Random.Range(conMin, conMax).ToString("F1"));
-		newConstitution = constitution;
-		//Debug.Log("Con: " + GameControl.control.cowConstitution);
-		intelligence = float.Parse(UnityEngine.Random.Range(intMin, intMax).ToString("F1"));
-		newIntelligence = intelligence;
-		//Debug.Log("Int: " + GameControl.control.cowIntelligence);
+		string switch1 = GameControl.control.inventory[itemInt1];
+		string switch2 = GameControl.control.inventory[itemInt2];
+		GameControl.control.inventory[itemInt1] = switch2;
+		GameControl.control.inventory[itemInt2] = switch1;
 	}
 	
 	void OnMouseDown () {
 		if (!GameControl.control.pause){
 			GameControl.control.pause = true;
 			GameControl.control.Save();
+			Debug.Log("SAVING ON COW CLICK");
 		}
-		
-		Debug.Log("Inventory Display Size: " + (inventory.Count - nullItems).ToString() + ", actual inventory size: " + inventory.Count.ToString());
 	}
 	
 	void OnGUI () {
@@ -209,7 +153,7 @@ public class Cow : MonoBehaviour {
 			GUI.BeginGroup(new Rect (50, 50, width, height)); // left, top, width, height
 				// Draw the background image
 				GUI.DrawTexture(new Rect (0, 0, width, height), menu);
-				GUI.Label(new Rect(10, 280, 100, 100), "Inventory:\t\t\t\t" + (inventory.Count - nullItems), GameControl.control.text);
+				GUI.Label(new Rect(10, 280, 100, 100), "Inventory:\t\t\t\t" + (GameControl.control.inventory.Count - nullItems), GameControl.control.text);
 				GUI.BeginGroup(new Rect(10, 310, 200, 150));
 					int i = 0;
 					for (int y = 0; y < 3; y++){
@@ -218,11 +162,11 @@ public class Cow : MonoBehaviour {
 								Texture image = (Texture)Resources.Load("items/textures/" + inv_names[i], typeof(Texture));
 								//Texture image = (Texture)Resources.Load(inv_names[i++], typeof(Texture));
 								GUI.DrawTexture(new Rect(0, 0, 50, 50), image);
-								if (inventory[i] != "empty\n0\n0\n0\ncommon"){
+								if (GameControl.control.inventory[i] != "empty\n0\n0\n0\ncommon"){
 									if (GUI.Button(new Rect(30, 5, 15, 15), closeButton, GUIStyle.none)){
 										if (!shop){
-											inventory.RemoveAt(i);
-											inventory.Add("empty\n0\n0\n0\ncommon");
+											GameControl.control.inventory.RemoveAt(i);
+											GameControl.control.inventory.Add("empty\n0\n0\n0\ncommon");
 										}
 									}
 									if (GUI.Button(new Rect(0, 0, 50, 50), emptyTexture, GUIStyle.none)){
@@ -257,7 +201,9 @@ public class Cow : MonoBehaviour {
 			
 			GUI.BeginGroup(new Rect (0, 0, Screen.width, Screen.height)); // left, top, width, height
 				bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
-				Trough trough_obj = GameControl.control.trough;
+				//Trough trough_obj = GameControl.control.trough;
+				float troughExp = GameControl.control.troughExp;
+				float troughMaxExp = GameControl.control.troughMaxExp;
 				
 				if (GameControl.control.happiness < 0.1f){
 					GUI.Label(new Rect(60, 110, 100, 100), "Happiness:", GameControl.control.text);
@@ -276,23 +222,23 @@ public class Cow : MonoBehaviour {
 				
 				GUI.Label(new Rect(60, 165, 100, 100), "Experience:\t\t\t" + GameControl.control.exp.ToString(), GameControl.control.text);
 				
-				if (trough_obj.get_exp() >= 30.0f){
-					int troughHours = (int)Mathf.Floor((trough_obj.get_exp() * 2) / 60);
-					int troughMinutes = (int)((trough_obj.get_exp() * 2) - (60 * troughHours));
+				if (troughExp >= 30.0f){
+					int troughHours = (int)Mathf.Floor((troughExp * 2) / 60);
+					int troughMinutes = (int)((troughExp * 2) - (60 * troughHours));
 					if (troughMinutes > 0){
 						GUI.Label(new Rect(60, 200, 100, 100), "Trough:", GameControl.control.text);
-						GUI.Label(new Rect(60, 180, 100, 100), "\t\t\t\t\t\t\t\t\t" + trough_obj.get_exp().ToString() + " / " + trough_obj.get_max_exp().ToString(), GameControl.control.text);
+						GUI.Label(new Rect(60, 180, 100, 100), "\t\t\t\t\t\t\t\t\t" + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.text);
 						GUI.Label(new Rect(60, 200, 100, 100), "\t\t\t\t\t\t\t\t\t(" + troughHours.ToString("F0") + " hours and", GameControl.control.text);
 						GUI.Label(new Rect(60, 220, 100, 100), "\t\t\t\t\t\t\t\t\t" + troughMinutes.ToString("F0") + " minutes)", GameControl.control.text);
 					} else {
 						GUI.Label(new Rect(60, 200, 100, 100), "Trough:", GameControl.control.text);
-						GUI.Label(new Rect(60, 190, 100, 100), "\t\t\t\t\t\t\t\t\t" + trough_obj.get_exp().ToString() + " / " + trough_obj.get_max_exp().ToString(), GameControl.control.text);
+						GUI.Label(new Rect(60, 190, 100, 100), "\t\t\t\t\t\t\t\t\t" + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.text);
 						GUI.Label(new Rect(60, 210, 100, 100), "\t\t\t\t\t\t\t\t\t(" + troughHours.ToString("F0") + " hours)", GameControl.control.text);
 					}
 				} else {
-					int troughMinutes = (int)(trough_obj.get_exp() * 2);
+					int troughMinutes = (int)(troughExp * 2);
 					GUI.Label(new Rect(60, 200, 100, 100), "Trough:", GameControl.control.text);
-					GUI.Label(new Rect(60, 190, 100, 100), "\t\t\t\t\t\t\t\t\t" + trough_obj.get_exp().ToString() + " / " + trough_obj.get_max_exp().ToString(), GameControl.control.text);
+					GUI.Label(new Rect(60, 190, 100, 100), "\t\t\t\t\t\t\t\t\t" + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.text);
 					GUI.Label(new Rect(60, 210, 100, 100), "\t\t\t\t\t\t\t\t\t(" + troughMinutes.ToString("F0") + " minutes)", GameControl.control.text);
 				}
 				
@@ -300,19 +246,19 @@ public class Cow : MonoBehaviour {
 				int addativeCon = (GameControl.control.level >= 5)? int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]) : 0;
 				int addativeInt = (GameControl.control.level >= 5)? int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]) : 0;
 				if (addativeStr == 0){
-					GUI.Label(new Rect(60, 240, 100, 100), "Strength:\t\t\t\t" + strength.ToString(), GameControl.control.text);
+					GUI.Label(new Rect(60, 240, 100, 100), "Strength:\t\t\t\t" + GameControl.control.strength.ToString(), GameControl.control.text);
 				} else {
-					GUI.Label(new Rect(60, 240, 100, 100), "Strength:\t\t\t\t" + newStrength.ToString() + "(" + strength.ToString() + ((addativeStr < 0)? "":"+") + (int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2])).ToString() + ")", GameControl.control.text);
+					GUI.Label(new Rect(60, 240, 100, 100), "Strength:\t\t\t\t" + GameControl.control.newStrength.ToString() + "(" + GameControl.control.strength.ToString() + ((addativeStr < 0)? "":"+") + (int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2])).ToString() + ")", GameControl.control.text);
 				}
 				if (addativeCon == 0){
-					GUI.Label(new Rect(60, 270, 100, 100), "Constitution:\t\t\t" + constitution.ToString(), GameControl.control.text);
+					GUI.Label(new Rect(60, 270, 100, 100), "Constitution:\t\t\t" + GameControl.control.constitution.ToString(), GameControl.control.text);
 				} else {
-					GUI.Label(new Rect(60, 270, 100, 100), "Constitution:\t\t\t" + newConstitution.ToString() + "(" + constitution.ToString() + ((addativeCon < 0)? "":"+") + (int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2])).ToString() + ")", GameControl.control.text);
+					GUI.Label(new Rect(60, 270, 100, 100), "Constitution:\t\t\t" + GameControl.control.newConstitution.ToString() + "(" + GameControl.control.constitution.ToString() + ((addativeCon < 0)? "":"+") + (int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2])).ToString() + ")", GameControl.control.text);
 				}
 				if (addativeInt == 0){
-					GUI.Label(new Rect(60, 300, 100, 100), "Intelligence:\t\t\t" + intelligence.ToString(), GameControl.control.text);
+					GUI.Label(new Rect(60, 300, 100, 100), "Intelligence:\t\t\t" + GameControl.control.intelligence.ToString(), GameControl.control.text);
 				} else {
-					GUI.Label(new Rect(60, 300, 100, 100), "Intelligence:\t\t\t" + newIntelligence.ToString() + "(" + intelligence.ToString() + ((addativeInt < 0)? "":"+") + (int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2])).ToString() + ")", GameControl.control.text);
+					GUI.Label(new Rect(60, 300, 100, 100), "Intelligence:\t\t\t" + GameControl.control.newIntelligence.ToString() + "(" + GameControl.control.intelligence.ToString() + ((addativeInt < 0)? "":"+") + (int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2])).ToString() + ")", GameControl.control.text);
 				}
 			GUI.EndGroup ();
 			
@@ -326,7 +272,7 @@ public class Cow : MonoBehaviour {
 					GUI.Label(new Rect(15, 60, 100, 100), "Trough Max +25, $500", GameControl.control.text); // Trough upgrade
 					if (GUI.Button(new Rect(10, 55, 215, 30), emptyTexture, GUIStyle.none)){ // Trough upgrade
 						if (GameControl.control.money > 500){
-							GameControl.control.trough.set_max_exp(GameControl.control.trough.get_max_exp() + 25);
+							GameControl.control.troughMaxExp += 25.0f;
 							GameControl.control.money -= 500;
 						}
 					}
@@ -345,7 +291,7 @@ public class Cow : MonoBehaviour {
 				if (!shop && selected1 != -1){
 					GUI.DrawTexture(new Rect(25 + (selected1Pos.x * 50), 270 + (selected1Pos.y * 50), 70, 70), statPopup);
 					GUI.Label(new Rect(30 + (selected1Pos.x * 50), 275 + (selected1Pos.y * 50), 70, 70), "Str:\t\t" + inv_str[selected1], GameControl.control.stats);
-					GUI.Label(new Rect(30 + (selected1Pos.x * 50), 295 + (selected1Pos.y * 50), 70, 70), "Con:\t" + inv_con[selected1], GameControl.control.stats);
+					GUI.Label(new Rect(30 + (selected1Pos.x * 50), 295 + (selected1Pos.y * 50), 70, 70), "Con:\t\t" + inv_con[selected1], GameControl.control.stats);
 					GUI.Label(new Rect(30 + (selected1Pos.x * 50), 315 + (selected1Pos.y * 50), 70, 70), "Int:\t\t" + inv_int[selected1], GameControl.control.stats);
 				}
 			GUI.EndGroup();

@@ -11,14 +11,16 @@ public class Cloud : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 temp = transform.position;
-		if (direction_right) {
-			temp.x += Random.Range(0.0001f, 0.001f);
-		} else {
-			temp.x -= Random.Range(0.0001f, 0.001f);
+		if (!GameControl.control.pause){
+			Vector3 temp = transform.position;
+			if (direction_right) {
+				temp.x += Random.Range(0.0001f, 0.001f);
+			} else {
+				temp.x -= Random.Range(0.0001f, 0.001f);
+			}
+			
+			transform.position = temp;
 		}
-
-		transform.position = temp;
 	}
 
 	void OnBecameInvisible () {

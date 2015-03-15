@@ -9,7 +9,7 @@ public class Exp : MonoBehaviour { //experience bar for cow
 	public Texture background_texture; //the backing
 	public Texture foreground_texture; //the blue bar
 
-	private float position_x = 283; //pos from bottom
+//	private float position_x = 283; //pos from bottom
 	public float barMulti; //the % progress into the level
 
 	void Start () {

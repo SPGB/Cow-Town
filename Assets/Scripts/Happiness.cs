@@ -16,7 +16,7 @@ public class Happiness : MonoBehaviour {
 
 	public Texture background_texture; //the backing
 	public Texture foreground_texture; //the blue bar
-	private float position_x = 272.8f; //pos from bottom
+//	private float position_x = 272.8f; //pos from bottom
 
 	// Use this for initialization
 	void Start () {

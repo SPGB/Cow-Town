@@ -366,23 +366,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pause: 0
   version: 0.01A
+  popup: {fileID: 100000, guid: 59a81cc1fb535af449edcdf6e0e9e260, type: 2}
   money: 0
   exp: 0
   expExpected: 0
   level: 1
+  troughExp: 0
+  troughMaxExp: 50
   happiness: 0
   happinessExpected: 0
-  cowStrength: 10
-  cowConstitution: 10
   happinessLose: 1
-  cowIntelligence: 10
   happinessMax: 100
   inventory: []
+  strength: 10
+  newStrength: 10
+  constitution: 10
+  newConstitution: 10
+  intelligence: 10
+  newIntelligence: 10
   trough: {fileID: 0}
   cow: {fileID: 0}
   isBorn: 0
-  troughCurExp: 0
-  troughMaxExp: 0
   troughPos: 0
   totalHay: 0
   totalSpecial: 0
@@ -393,6 +397,65 @@ MonoBehaviour:
   screenSizeX2: {x: 0, y: 0, z: 0}
   screenSizeY: {x: 0, y: 0, z: 0}
   text:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  stats:
     m_Name: 
     m_Normal:
       m_Background: {fileID: 0}
@@ -538,7 +601,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menu: {fileID: 2800000, guid: 92082627b0e84b14db2f0004a6caa5df, type: 3}
   button_play: {fileID: 2800000, guid: bd76b1e4d558a5b49a68418dd68a4e6f, type: 3}
-  rock: {fileID: 2800000, guid: 71feef3b3fc953c4b81a96a8eb417b81, type: 3}
+  button_exit: {fileID: 2800000, guid: 63bfa6db5a85bc04d90d627ec2e0109d, type: 3}
+  button_delete: {fileID: 2800000, guid: 23ea3e1f6d71ef9419e7526dbdd6bac9, type: 3}
 --- !u!1 &1693336024
 GameObject:
   m_ObjectHideFlags: 0

@@ -188,8 +188,6 @@ public class SpawnItems : MonoBehaviour {
 			
 			itemStringSpawn = (rarity >= 92)? ((rarity >=97)? rareStrings[i-1] : uncommonStrings[i-1]) : commonStrings[i-1];
 			
-			Debug.Log("Spawning item: " + itemStringSpawn);
-			
 			new_object.AddComponent<BoxCollider>();
 			new_object.AddComponent<Rigidbody>();
 			new_object.rigidbody.drag = 7;

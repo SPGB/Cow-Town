@@ -5,7 +5,8 @@ public class TitleScreen : MonoBehaviour {
 
 	public Texture menu;
 	public Texture button_play;
-	public Texture rock;
+	public Texture button_exit;
+	public Texture button_delete;
 
 	// Use this for initialization
 	void Start () {
@@ -30,13 +31,13 @@ public class TitleScreen : MonoBehaviour {
 		//GUI.DrawTexture(new Rect((width / 2) - 10, 0, 20, height), menu);
 		//GUI.DrawTexture(new Rect(0, (height / 2) - 10, width, 20), menu);
 		//GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-		if (GUI.Button(new Rect((width / 2) - (button_play.width / 2), (height / 2) - (button_play.height / 2) - 100, button_play.width, button_play.height), button_play, GUIStyle.none)){
+		if (GUI.Button(new Rect((width / 2) - (button_play.width / 2), (height / 4) - (button_play.height / 2), button_play.width, button_play.height), button_play, GUIStyle.none)){
 			startGame();
 		}
-		if (GUI.Button(new Rect((width / 2) - (rock.width / 2) - 50, (height / 2) - (rock.height / 2) + 100, rock.width, rock.height), rock, GUIStyle.none)){
-			endGame();
+		if (GUI.Button(new Rect((width / 2) - (button_delete.width / 2), ((height / 4) + (height / 4)) - (button_delete.height / 2), button_delete.width, button_delete.height), button_delete, GUIStyle.none)){
+			GameControl.control.Delete();
 		}
-		if (GUI.Button(new Rect((width / 2) - (rock.width / 2) - 50, (height / 2) - (rock.height / 2) + (100 + 28), width, rock.height), "\t\t\t\t\t\tEXIT", GameControl.control.text)){
+		if (GUI.Button(new Rect((width / 2) - (button_exit.width / 2), ((height / 4) + (height / 2)) - (button_exit.height / 2), button_exit.width, button_exit.height), button_exit, GUIStyle.none)){
 			endGame();
 		}
 		// End both Groups
@@ -45,6 +46,9 @@ public class TitleScreen : MonoBehaviour {
 	
 	public void startGame(){
 		Application.LoadLevel("barn");
+		Debug.Log("LOAD ON TITLE");
+		GameControl.control.trough = GameObject.Find("trough").GetComponent<Trough>();
+		GameControl.control.cow = GameObject.Find("cow").GetComponent<Cow>();
 		GameControl.control.Load();
 		GameControl.control.pause = false;
 	}

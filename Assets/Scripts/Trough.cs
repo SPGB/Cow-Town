@@ -10,8 +10,8 @@ public class Trough : MonoBehaviour {
 	private Vector3 mousePos;
 	
 	private float amount;
-	public float exp = 0f;
-	public float max_exp = 50.0f;
+//	public float exp = 0f;
+//	public float max_exp = 50.0f;
 	public float bar_offset_y = 425f;
 	public float bar_offset_x = -147f;
 	public float bar_multi = 5.37f;
@@ -23,24 +23,23 @@ public class Trough : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		GameControl.control.trough = this;
+		
+		GameControl.control.Load();
+		
 		wheel1 = GameObject.Find("wheel1");
 		wheel2 = GameObject.Find("wheel2");
 		wheel3 = GameObject.Find("wheel3");
 
-		if (!GameControl.control.trough) {
-			GameControl.control.trough = this;
-			GameControl.control.Load();
-			Debug.Log("setting trough");
-		}
+		//if (!GameControl.control.trough) {
+		//	GameControl.control.trough = this;
+		//	GameControl.control.Load(true, false);
+		//	Debug.Log("setting trough");
+		//}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (!GameControl.control.trough) {
-			GameControl.control.trough = this;
-			Debug.Log("setting trough");
-		}
-	
 		if (transform.position.x < GameControl.control.screenSizeX1.x + dist_from_edge){
 			Vector3 temp = new Vector3(GameControl.control.screenSizeX1.x + dist_from_edge, transform.position.y, transform.position.z);
 			transform.position = temp;
@@ -55,13 +54,15 @@ public class Trough : MonoBehaviour {
 		wheel2.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
 		wheel3.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
 		
-		bar_width = (50f * bar_multi) * (exp / max_exp);
+		bar_width = (50f * bar_multi) * (GameControl.control.troughExp / GameControl.control.troughMaxExp);
+		
+		transform.position = new Vector3(GameControl.control.troughPos, transform.position.y, transform.position.z);
 	}
 	
 	void OnMouseDrag () {
 		mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		amount = transform.position.x - mousePos.x;
-		transform.position = new Vector3(mousePos.x, transform.position.y, transform.position.z);
+		GameControl.control.troughPos = mousePos.x;
 	}
 	
 	void OnMouseUp () {
@@ -72,7 +73,7 @@ public class Trough : MonoBehaviour {
 		if (GameControl.control.pause) return;
 		Vector3 trough = gameObject.transform.position;
 		Vector3 trans = Camera.main.WorldToScreenPoint(new Vector3(trough.x - 1.555f, trough.y + 6.115f, trough.z));
-		GUI.BeginGroup (new Rect ( trans.x, trans.y, (max_exp * bar_multi), bar_height));
+		GUI.BeginGroup (new Rect ( trans.x, trans.y, (GameControl.control.troughMaxExp * bar_multi), bar_height));
 		GUI.BeginGroup (new Rect ( 0,0, bar_width,bar_height));
 		// Draw the foreground image
 		GUI.DrawTexture (new Rect (0,0, 50f * bar_multi,bar_height), foreground_texture);
@@ -80,6 +81,7 @@ public class Trough : MonoBehaviour {
 		GUI.EndGroup ();
 		GUI.EndGroup ();
 	}
+	/**
 	public void set_exp(float new_exp) {
 		exp = new_exp;
 	}
@@ -92,12 +94,5 @@ public class Trough : MonoBehaviour {
 	public float get_max_exp() {
 		return max_exp;
 	}
-	
-	public void set_xpos(float x){
-		Vector3 temp = new Vector3(x, transform.position.y, transform.position.z);
-		transform.position = temp;
-	}
-	public float get_xpos(){
-		return transform.position.x;
-	}
+	**/
 }
