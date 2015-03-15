@@ -141,7 +141,8 @@ public class GameControl : MonoBehaviour {
 		if ((int)updateTimeSpan.TotalMinutes >= 1){
 			if (Application.loadedLevelName == "barn"){
 				Save();
-				Debug.Log("SAVE ON UPDATE");
+				Load();
+				Debug.Log("SAVE/LOAD ON UPDATE");
 			}
 			updateTime1 = DateTime.Now;
 		}
@@ -227,6 +228,7 @@ public class GameControl : MonoBehaviour {
 			}
 		}
 	}
+	#endif
 	
 	void OnApplicationQuit(){
 		if (Application.loadedLevelName == "barn"){
@@ -234,7 +236,6 @@ public class GameControl : MonoBehaviour {
 			Debug.Log("SAVE ON APP QUIT");
 		}
 	}
-	#endif
 	
 	public void randomizeStats(int strMin, int strMax, int conMin, int conMax, int intMin, int intMax){
 		strength = float.Parse(UnityEngine.Random.Range(strMin, strMax).ToString("F1"));
@@ -339,7 +340,6 @@ public class GameControl : MonoBehaviour {
 			
 			inventory = data.inventory;
 			
-			troughExp = data.troughCurExp;
 			troughMaxExp = data.troughMaxExp;
 			troughPos = data.troughPos;
 			
@@ -347,26 +347,21 @@ public class GameControl : MonoBehaviour {
 			TimeSpan interval = loadTime - data.saveTime;
 			int hayUsed = ((int)interval.TotalMinutes) / 2;
 
-			if (trough) {
-				float current_exp = data.troughCurExp;
-				for (int i = 0; i < hayUsed; i++){
-					if (current_exp == 0){
-						break;
-					}
-					exp++;
-					current_exp--;
+			float current_exp = data.troughCurExp;
+			for (int i = 0; i < hayUsed; i++){
+				if (current_exp == 0){
+					break;
 				}
-				troughExp = current_exp;
+				exp++;
+				current_exp--;
 			}
+			troughExp = current_exp;
 			
-			if (cow){
-				if (!isBorn){
-					cowBorn = DateTime.Now;
-					cow.born = cowBorn;
-					isBorn = true;
-					Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
-				}
+			if (!data.isBorn){
+				cowBorn = DateTime.Now;
+				isBorn = true;
 			}
+			Debug.Log("Cow born at: " + cowBorn.Hour + ":" + cowBorn.Minute + ":" + cowBorn.Second + " on " + cowBorn.Day + "/" + cowBorn.Month + "/" + cowBorn.Year);
 		}
 	}
 	
