@@ -15,6 +15,9 @@
 *Support for multiple screen resolutions between 480x854 and 1025x765.*
 
 ###Downloads
+
+These downloads are extremely early alpha and may break. If any major issues occur, please document them in the Issues section.
+
 * [Windows/Mac OS/Linux](https://www.dropbox.com/sh/h5x3t5yrt79aha2/AAAKZBIGWw1A3ccQEBpwdMC4a?dl=0 "Folder containing Cow Town.exe and DataFolder")
 * [Android](https://www.dropbox.com/s/siffogk77ugmnh6/Cow_Town.apk?dl=0 "APK File")
 
