@@ -638,6 +638,7 @@ MonoBehaviour:
   button_play: {fileID: 2800000, guid: bd76b1e4d558a5b49a68418dd68a4e6f, type: 3}
   button_exit: {fileID: 2800000, guid: 63bfa6db5a85bc04d90d627ec2e0109d, type: 3}
   button_delete: {fileID: 2800000, guid: 23ea3e1f6d71ef9419e7526dbdd6bac9, type: 3}
+  logo: {fileID: 2800000, guid: d39d15e994d8784448d3369055697288, type: 3}
 --- !u!1 &1693336024
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,6 +874,7 @@ MonoBehaviour:
   button_play: {fileID: 2800000, guid: bd76b1e4d558a5b49a68418dd68a4e6f, type: 3}
   button_exit: {fileID: 2800000, guid: 63bfa6db5a85bc04d90d627ec2e0109d, type: 3}
   button_delete: {fileID: 2800000, guid: 23ea3e1f6d71ef9419e7526dbdd6bac9, type: 3}
+  logo: {fileID: 0}
 --- !u!224 &2135292109
 RectTransform:
   m_ObjectHideFlags: 0

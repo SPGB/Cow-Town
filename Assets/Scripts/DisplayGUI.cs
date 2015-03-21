@@ -41,7 +41,7 @@ public class DisplayGUI : MonoBehaviour {
 
 		if (!GameControl.control.pause) {
 			GUI.BeginGroup(new Rect (0, 0, Screen.width, Screen.height)); // left, top, width, height
-			GUI.Label(new Rect(10, 20, 100, 100), "Cow Town - v" + GameControl.control.version, GameControl.control.text);
+			GUI.Label(new Rect(10, 20, 100, 100), "v" + GameControl.control.version, GameControl.control.text);
 			GUI.Label(new Rect(10, 40, 100, 100), "Lv. " + Mathf.Floor(GameControl.control.level).ToString(), GameControl.control.text);
 			#if !UNITY_EDITOR
 			GUI.Label(new Rect(10, 60, 100, 100), "Age. " + GameControl.control.cowAge.TotalDays.ToString("F0") + "." + ((GameControl.control.cowAge.Hours * 10) / 24).ToString("F0") + " days", GameControl.control.text);

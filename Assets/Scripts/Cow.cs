@@ -150,13 +150,13 @@ public class Cow : MonoBehaviour {
 		GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(rx, ry, 1));
 		*/
 
-		if (GameControl.control.pause){
-			GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.9f);
-			float width = Screen.width - 100;
-			float height = Screen.height - 100;
+		if (GameControl.control && GameControl.control.pause){
+			GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+			float width = Screen.width;
+			float height = Screen.height;
 			// Create one Group to contain both images
 			// Adjust the first 2 coordinates to place it somewhere else on-screen
-			GUI.BeginGroup(new Rect (50, 50, width, height)); // left, top, width, height
+			GUI.BeginGroup(new Rect (0, 0, width, height)); // left, top, width, height
 				// Draw the background image
 				GUI.DrawTexture(new Rect (0, 0, width, height), menu);
 				GUI.Label(new Rect(10, 280, 100, 100), "Inventory:", GameControl.control.text);
@@ -277,7 +277,7 @@ public class Cow : MonoBehaviour {
 				}
 			GUI.EndGroup ();
 			
-			GUI.BeginGroup(new Rect (50, 50, width, height));
+			GUI.BeginGroup(new Rect (0, 0, width, height));
 				if (shop){
 					GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.95f);
 					GUI.DrawTexture(new Rect(0, 0, width, height), menu);
