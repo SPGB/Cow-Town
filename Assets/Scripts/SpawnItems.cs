@@ -190,8 +190,8 @@ public class SpawnItems : MonoBehaviour {
 			
 			new_object.AddComponent<BoxCollider>();
 			new_object.AddComponent<Rigidbody>();
-			new_object.rigidbody.drag = 7;
-			new_object.rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+			new_object.GetComponent<Rigidbody>().drag = 7;
+			new_object.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 			new_object.AddComponent<ItemCollide>();
 			new_object.GetComponent<ItemCollide>().popup = GameControl.control.popup;
 			new_object.GetComponent<ItemCollide>().itemString = itemStringSpawn;

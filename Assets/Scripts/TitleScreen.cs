@@ -19,6 +19,11 @@ public class TitleScreen : MonoBehaviour {
 	}
 	
 	void OnGUI () {
+
+		float rx = (float) Screen.width / GameControl.control.native_width;
+		float ry = (float) Screen.height / GameControl.control.native_height;
+		GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(rx, ry, 1));
+
 		GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.9f);
 		float width = Screen.width - 100;
 		float height = Screen.height - 100;

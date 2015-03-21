@@ -33,6 +33,11 @@ public class DisplayGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnGUI () {
+		
+		float rx = (float) Screen.width / GameControl.control.native_width;
+		float ry = (float) Screen.height / GameControl.control.native_height;
+		GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(rx, ry, 1));
+
 		if (!GameControl.control.pause) {
 			GUI.BeginGroup(new Rect (0, 0, Screen.width, Screen.height)); // left, top, width, height
 			GUI.Label(new Rect(10, 20, 100, 100), "Cow Town - v" + GameControl.control.version, GameControl.control.text);

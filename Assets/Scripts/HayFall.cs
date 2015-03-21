@@ -24,7 +24,7 @@ public class HayFall : MonoBehaviour {
 					Destroy(gameObject);
 				}
 			}
-			if (rigidbody.drag > 0.05f)	rigidbody.drag = rigidbody.drag - 0.025f;
+			if (GetComponent<Rigidbody>().drag > 0.05f)	GetComponent<Rigidbody>().drag = GetComponent<Rigidbody>().drag - 0.025f;
 		}
 	}
 }

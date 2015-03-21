@@ -12,6 +12,9 @@ public class GameControl : MonoBehaviour {
 	
 	public bool pause;
 	public String version = "0.01A";
+
+	public float native_width = 399.0f;
+	public float native_height = 638.0f;
 	
 	public GameObject popup;
 	
@@ -92,6 +95,8 @@ public class GameControl : MonoBehaviour {
 		screenSizeX1 = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		screenSizeX2 = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
 		screenSizeY = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight + 100, 0));
+
+		Debug.Log("Screen Size: X: " + Screen.width + ", Y: " + Screen.height);
 		
 		statMin = 10 + numberOfCowsBred;
 		statMax = 18 + numberOfCowsBred;
@@ -102,6 +107,8 @@ public class GameControl : MonoBehaviour {
 	}
 	
 	void Update () {
+		update_camera ();
+
 		if (!cow && Application.loadedLevelName == "barn") {
 			cow = GameObject.Find("cow").GetComponent<Cow>();
 			cowBorn = DateTime.Now;
