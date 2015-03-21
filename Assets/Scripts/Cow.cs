@@ -144,10 +144,11 @@ public class Cow : MonoBehaviour {
 	}
 	
 	void OnGUI () {
-
+		/**
 		float rx = Screen.width / GameControl.control.native_width;
 		float ry = Screen.height / GameControl.control.native_height;
 		GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(rx, ry, 1));
+		*/
 
 		if (GameControl.control.pause){
 			GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.9f);
