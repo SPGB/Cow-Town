@@ -9,6 +9,8 @@ public class TitleScreen : MonoBehaviour {
 	public Texture button_delete;
 	public Texture logo; 
 
+	public float dip = 110.0f; // Spacing between the middle of the screen and the top of the play button.
+
 	// Use this for initialization
 	void Start () {
 		GameControl.control.pause = true;
@@ -39,13 +41,13 @@ public class TitleScreen : MonoBehaviour {
 		//GUI.DrawTexture(new Rect((width / 2) - 10, 0, 20, height), menu);
 		//GUI.DrawTexture(new Rect(0, (height / 2) - 10, width, 20), menu);
 		//GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-		if (GUI.Button(new Rect((width / 2) - (button_play.width / 2), (height / 2) + 25 + - (button_play.height / 2), button_play.width, button_play.height), button_play, GUIStyle.none)){
+		if (GUI.Button(new Rect((width / 2) - (button_play.width / 2), ((height / 2) + dip) - (button_play.height + 10) - (button_play.height / 2), button_play.width, button_play.height), button_play, GUIStyle.none)){
 			startGame();
 		}
-		if (GUI.Button(new Rect((width / 2) - (button_delete.width / 2), (height / 2) + 40 + button_delete.height - (button_delete.height / 2), button_delete.width, button_delete.height), button_delete, GUIStyle.none)){
+		if (GUI.Button(new Rect((width / 2) - (button_delete.width / 2), ((height / 2) + dip) - (button_delete.height / 2), button_delete.width, button_delete.height), button_delete, GUIStyle.none)){
 			GameControl.control.Delete();
 		}
-		if (GUI.Button(new Rect((width / 2) - (button_exit.width / 2), ((height / 4) + 20 + (height / 2)) - (button_exit.height / 2), button_exit.width, button_exit.height), button_exit, GUIStyle.none)){
+		if (GUI.Button(new Rect((width / 2) - (button_exit.width / 2), ((height / 2) + dip) + (button_exit.height + 10) - (button_exit.height / 2), button_exit.width, button_exit.height), button_exit, GUIStyle.none)){
 			endGame();
 		}
 		// End both Groups

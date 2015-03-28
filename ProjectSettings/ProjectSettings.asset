@@ -257,7 +257,8 @@ PlayerSettings:
   psp2InfoBarColor: 0
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    7: 
   metroPackageName: New Unity Project
   metroPackageLogo: 
   metroPackageLogo140: 
@@ -308,7 +309,7 @@ PlayerSettings:
   metroPhoneSplashScreenImage: 
   metroPhoneSplashScreenImage140: 
   metroPhoneSplashScreenImage240: 
-  metroTileShortName: 
+  metroTileShortName: Cow Town
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0

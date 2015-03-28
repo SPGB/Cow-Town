@@ -144,6 +144,9 @@ public class Cow : MonoBehaviour {
 	}
 	
 	void OnGUI () {
+		if (GUI.skin.customStyles.Length > 0) {
+			GUI.skin.customStyles[0].onActive.textColor = Color.white;
+		}
 		/**
 		float rx = Screen.width / GameControl.control.native_width;
 		float ry = Screen.height / GameControl.control.native_height;
@@ -159,8 +162,8 @@ public class Cow : MonoBehaviour {
 			GUI.BeginGroup(new Rect (0, 0, width, height)); // left, top, width, height
 				// Draw the background image
 				GUI.DrawTexture(new Rect (0, 0, width, height), menu);
-				GUI.Label(new Rect(10, 280, 100, 100), "Inventory:", GameControl.control.text);
-				GUI.Label(new Rect(10, 280, 100, 100), "\t    " + (GameControl.control.inventory.Count - nullItems), GameControl.control.text);
+				GUI.Label(new Rect(10, 280, 100, 100), "Inventory:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 280, 100, 100), "\t\t " + (GameControl.control.inventory.Count - nullItems), GameControl.control.cowText);
 				GUI.BeginGroup(new Rect(10, 310, 200, 150));
 					int i = 0;
 					for (int y = 0; y < 3; y++){
@@ -213,67 +216,67 @@ public class Cow : MonoBehaviour {
 				float troughMaxExp = GameControl.control.troughMaxExp;
 				
 				if (GameControl.control.happiness < 0.1f){
-					GUI.Label(new Rect(60, 110, 100, 100), "Happiness:", GameControl.control.text);
-					GUI.Label(new Rect(60, 110, 100, 100), "\t    " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.text);
+					GUI.Label(new Rect(10, 50, 100, 100), "Happiness:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 50, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
 				} else if (hapDif){
-					GUI.Label(new Rect(60, 110, 100, 100), "Happiness:", GameControl.control.text);
-					GUI.Label(new Rect(60, 100, 100, 100), "\t    " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.text);
-					GUI.Label(new Rect(60, 120, 100, 100), "\t    (-" + GameControl.control.happiness.ToString("F1") + "/5s)", GameControl.control.text);
+					GUI.Label(new Rect(10, 50, 100, 100), "Happiness:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 40, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
+					GUI.Label(new Rect(10, 60, 100, 100), "\t\t (-" + GameControl.control.happiness.ToString("F1") + "/5s)", GameControl.control.cowText);
 				} else {
-					GUI.Label(new Rect(60, 110, 100, 100), "Happiness:", GameControl.control.text);
-					GUI.Label(new Rect(60, 100, 100, 100), "\t    " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.text);
-					GUI.Label(new Rect(60, 120, 100, 100), "\t    (-" + GameControl.control.happinessLose.ToString("F1") + "/5s)", GameControl.control.text);
+					GUI.Label(new Rect(10, 50, 100, 100), "Happiness:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 40, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
+					GUI.Label(new Rect(10, 60, 100, 100), "\t\t (-" + GameControl.control.happinessLose.ToString("F1") + "/5s)", GameControl.control.cowText);
 				}
 				
-				GUI.Label(new Rect(60, 145, 100, 100), "Money:", GameControl.control.text);
-				GUI.Label(new Rect(60, 145, 100, 100), "\t    $" + GameControl.control.money, GameControl.control.text);
+				GUI.Label(new Rect(10, 85, 100, 100), "Money:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 85, 100, 100), "\t\t $" + GameControl.control.money, GameControl.control.cowText);
 				
-				GUI.Label(new Rect(60, 165, 100, 100), "Experience:", GameControl.control.text);
-				GUI.Label(new Rect(60, 165, 100, 100), "\t    " + GameControl.control.exp.ToString(), GameControl.control.text);
+				GUI.Label(new Rect(10, 105, 100, 100), "Experience:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 105, 100, 100), "\t\t " + GameControl.control.exp.ToString(), GameControl.control.cowText);
 				
 				if (troughExp >= 30.0f){
 					int troughHours = (int)Mathf.Floor((troughExp * 2) / 60);
 					int troughMinutes = (int)((troughExp * 2) - (60 * troughHours));
 					if (troughMinutes > 0){
-						GUI.Label(new Rect(60, 200, 100, 100), "Trough:", GameControl.control.text);
-						GUI.Label(new Rect(60, 180, 100, 100), "\t    " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.text);
-						GUI.Label(new Rect(60, 200, 100, 100), "\t    (" + troughHours.ToString("F0") + " hours and", GameControl.control.text);
-						GUI.Label(new Rect(60, 220, 100, 100), "\t    " + troughMinutes.ToString("F0") + " minutes)", GameControl.control.text);
+						GUI.Label(new Rect(10, 140, 100, 100), "Trough:", GameControl.control.text);
+						GUI.Label(new Rect(10, 120, 100, 100), "\t\t " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.cowText);
+						GUI.Label(new Rect(10, 140, 100, 100), "\t\t (" + troughHours.ToString("F0") + " hours and", GameControl.control.cowText);
+						GUI.Label(new Rect(10, 160, 100, 100), "\t\t " + troughMinutes.ToString("F0") + " minutes)", GameControl.control.cowText);
 					} else {
-						GUI.Label(new Rect(60, 200, 100, 100), "Trough:", GameControl.control.text);
-						GUI.Label(new Rect(60, 190, 100, 100), "\t    " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.text);
-						GUI.Label(new Rect(60, 210, 100, 100), "\t    (" + troughHours.ToString("F0") + " hours)", GameControl.control.text);
+						GUI.Label(new Rect(10, 140, 100, 100), "Trough:", GameControl.control.text);
+						GUI.Label(new Rect(10, 130, 100, 100), "\t\t " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.cowText);
+						GUI.Label(new Rect(10, 150, 100, 100), "\t\t (" + troughHours.ToString("F0") + " hours)", GameControl.control.cowText);
 					}
 				} else {
 					int troughMinutes = (int)(troughExp * 2);
-					GUI.Label(new Rect(60, 200, 100, 100), "Trough:", GameControl.control.text);
-					GUI.Label(new Rect(60, 190, 100, 100), "\t    " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.text);
-					GUI.Label(new Rect(60, 210, 100, 100), "\t    (" + troughMinutes.ToString("F0") + " minutes)", GameControl.control.text);
+					GUI.Label(new Rect(10, 140, 100, 100), "Trough:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 130, 100, 100), "\t\t " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.cowText);
+					GUI.Label(new Rect(10, 150, 100, 100), "\t\t (" + troughMinutes.ToString("F0") + " minutes)", GameControl.control.cowText);
 				}
 				
 				int addativeStr = (GameControl.control.level >= 5)? int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2]) : 0;
 				int addativeCon = (GameControl.control.level >= 5)? int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]) : 0;
 				int addativeInt = (GameControl.control.level >= 5)? int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]) : 0;
 				if (addativeStr == 0){
-					GUI.Label(new Rect(60, 240, 100, 100), "Strength:", GameControl.control.text);
-					GUI.Label(new Rect(60, 240, 100, 100), "\t    " + GameControl.control.strength.ToString(), GameControl.control.text);
+					GUI.Label(new Rect(10, 180, 100, 100), "Strength:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 180, 100, 100), "\t\t " + GameControl.control.strength.ToString(), GameControl.control.cowText);
 				} else {
-					GUI.Label(new Rect(60, 240, 100, 100), "Strength:", GameControl.control.text);
-					GUI.Label(new Rect(60, 240, 100, 100), "\t    " + GameControl.control.newStrength.ToString() + "(" + GameControl.control.strength.ToString() + ((addativeStr < 0)? "":"+") + (int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2])).ToString() + ")", GameControl.control.text);
+					GUI.Label(new Rect(10, 180, 100, 100), "Strength:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 180, 100, 100), "\t\t " + GameControl.control.newStrength.ToString() + "(" + GameControl.control.strength.ToString() + ((addativeStr < 0)? "":"+") + (int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2])).ToString() + ")", GameControl.control.cowText);
 				}
 				if (addativeCon == 0){
-					GUI.Label(new Rect(60, 270, 100, 100), "Constitution:", GameControl.control.text);
-					GUI.Label(new Rect(60, 270, 100, 100), "\t    " + GameControl.control.constitution.ToString(), GameControl.control.text);
+					GUI.Label(new Rect(10, 210, 100, 100), "Constitution:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 210, 100, 100), "\t\t " + GameControl.control.constitution.ToString(), GameControl.control.cowText);
 				} else {
-					GUI.Label(new Rect(60, 270, 100, 100), "Constitution:", GameControl.control.text);
-					GUI.Label(new Rect(60, 270, 100, 100), "\t    " + GameControl.control.newConstitution.ToString() + "(" + GameControl.control.constitution.ToString() + ((addativeCon < 0)? "":"+") + (int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2])).ToString() + ")", GameControl.control.text);
+					GUI.Label(new Rect(10, 210, 100, 100), "Constitution:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 210, 100, 100), "\t\t " + GameControl.control.newConstitution.ToString() + "(" + GameControl.control.constitution.ToString() + ((addativeCon < 0)? "":"+") + (int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2])).ToString() + ")", GameControl.control.cowText);
 				}
 				if (addativeInt == 0){
-					GUI.Label(new Rect(60, 300, 100, 100), "Intelligence:", GameControl.control.text);
-					GUI.Label(new Rect(60, 300, 100, 100), "\t    " + GameControl.control.intelligence.ToString(), GameControl.control.text);
+					GUI.Label(new Rect(10, 240, 100, 100), "Intelligence:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 240, 100, 100), "\t\t " + GameControl.control.intelligence.ToString(), GameControl.control.cowText);
 				} else {
-					GUI.Label(new Rect(60, 300, 100, 100), "Intelligence:", GameControl.control.text);
-					GUI.Label(new Rect(60, 300, 100, 100), "\t    " + GameControl.control.newIntelligence.ToString() + "(" + GameControl.control.intelligence.ToString() + ((addativeInt < 0)? "":"+") + (int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2])).ToString() + ")", GameControl.control.text);
+					GUI.Label(new Rect(10, 240, 100, 100), "Intelligence:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 240, 100, 100), "\t\t " + GameControl.control.newIntelligence.ToString() + "(" + GameControl.control.intelligence.ToString() + ((addativeInt < 0)? "":"+") + (int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2])).ToString() + ")", GameControl.control.cowText);
 				}
 			GUI.EndGroup ();
 			
@@ -281,7 +284,7 @@ public class Cow : MonoBehaviour {
 				if (shop){
 					GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.95f);
 					GUI.DrawTexture(new Rect(0, 0, width, height), menu);
-					GUI.Label(new Rect(120, 15, 100, 100), "Money: $" + GameControl.control.money, GameControl.control.text);
+					GUI.Label(new Rect(120, 15, 100, 100), "Money: $" + GameControl.control.money, GameControl.control.cowText);
 					
 					GUI.DrawTexture(new Rect(10, 55, 215, 30), blankButton); // Trough upgrade
 					GUI.Label(new Rect(15, 60, 100, 100), "Trough Max +25, $500", GameControl.control.text); // Trough upgrade

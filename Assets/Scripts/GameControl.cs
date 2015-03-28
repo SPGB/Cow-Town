@@ -69,6 +69,7 @@ public class GameControl : MonoBehaviour {
 	
 	public GUIStyle text;
 	public GUIStyle stats;
+	public GUIStyle cowText;
 
 	// Use this for initialization
 	void Awake () {
@@ -85,7 +86,13 @@ public class GameControl : MonoBehaviour {
 		
 		text = new GUIStyle();
 		text.fontSize = 20;
+		text.normal.textColor = Color.black;
+
 		stats = new GUIStyle();
+
+		cowText = new GUIStyle();
+		cowText.fontSize = 20;
+		cowText.normal.textColor = Color.white;
 		
 		updateTime1 = DateTime.Now;
 		
