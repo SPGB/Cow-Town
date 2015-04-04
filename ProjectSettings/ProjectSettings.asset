@@ -5,7 +5,7 @@ PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
   AndroidProfiler: 0
-  defaultScreenOrientation: 4
+  defaultScreenOrientation: 0
   targetDevice: 2
   targetGlesGraphics: 1
   targetIOSGraphics: -1
@@ -75,13 +75,13 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: ca.dspc.cowtown
-  bundleVersion: 0.01
+  bundleVersion: 0.02
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   productGUID: 6de94a33e04b6334c87e6fcaba52f55b
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -121,8 +121,8 @@ PlayerSettings:
   iOSLaunchScreenCustomXibPath: 
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: C:/Users/Avow/Documents/cow town/user.keystore
+  AndroidKeyaliasName: cow town
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
@@ -134,7 +134,7 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: 6d94177b40ebe764c9b8b9db62ec4504, type: 3}
+    - m_Icon: {fileID: 2800000, guid: fca21ef12a35635438adfd50ba78fca7, type: 3}
       m_Size: 128
   m_BuildTargetBatching:
   - m_BuildTarget: Android
@@ -258,6 +258,7 @@ PlayerSettings:
   psmSplashimage: {fileID: 0}
   spritePackerPolicy: 
   scriptingDefineSymbols:
+    4: 
     7: 
   metroPackageName: New Unity Project
   metroPackageLogo: 
