@@ -30,7 +30,7 @@ public class Exp : MonoBehaviour { //experience bar for cow
 		// Adjust the first 2 coordinates to place it somewhere else on-screen
 		Vector3 cow = GameControl.control.cow.transform.position;
 		Vector3 trans = Camera.main.WorldToScreenPoint(new Vector3(cow.x, cow.y + 2.7f, cow.z));
-		GUI.BeginGroup (new Rect ( trans.x - (expBarMaxLength / 2), trans.y, expBarMaxLength, 10));
+		GUI.BeginGroup (new Rect ((trans.x - (expBarMaxLength / 2)), trans.y, expBarMaxLength * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti));
 		// Draw the background image
 		GUI.DrawTexture (new Rect (0,0, expBarMaxLength,10), background_texture);
 		// Create a second Group which will be clipped

@@ -71,6 +71,9 @@ public class GameControl : MonoBehaviour {
 	public GUIStyle stats;
 	public GUIStyle cowText;
 
+	public float templateHeight = 640;
+	public float screenMulti;
+
 	// Use this for initialization
 	void Awake () {
 		if (control == null){
@@ -89,6 +92,7 @@ public class GameControl : MonoBehaviour {
 		text.normal.textColor = Color.black;
 
 		stats = new GUIStyle();
+		stats.fontSize = 16;
 
 		cowText = new GUIStyle();
 		cowText.fontSize = 20;
@@ -111,9 +115,20 @@ public class GameControl : MonoBehaviour {
 			randomizeStats(statMin, statMax, statMin, statMax, statMin, statMax);
 			statsRandomized = true;
 		}
+
 	}
 	
 	void Update () {
+		screenMulti = (Screen.height / templateHeight);
+		Debug.Log(screenMulti);
+
+		float textScale = 20 * screenMulti;
+		float statScale = 16 * screenMulti;
+
+		text.fontSize = (int)textScale;
+		stats.fontSize = (int)statScale;
+		cowText.fontSize = (int)textScale;
+
 		update_camera ();
 
 		if (!cow && Application.loadedLevelName == "barn") {

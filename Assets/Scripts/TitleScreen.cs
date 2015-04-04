@@ -7,7 +7,7 @@ public class TitleScreen : MonoBehaviour {
 	public Texture button_play;
 	public Texture button_exit;
 	public Texture button_delete;
-	public Texture logo; 
+	public Texture logo;
 
 	public float dip = 110.0f; // Spacing between the middle of the screen and the top of the play button.
 
@@ -29,27 +29,26 @@ public class TitleScreen : MonoBehaviour {
 		*/
 
 		GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-		float width = Screen.width;
-		float height = Screen.height;
+		float xPos = Screen.width;
+		float yPos = Screen.height;
+
 		// Create one Group to contain both images
 		// Adjust the first 2 coordinates to place it somewhere else on-screen
-		GUI.BeginGroup(new Rect (0, 0, width, height)); // left, top, width, height
+		GUI.BeginGroup(new Rect (0, 0, xPos, yPos)); // left, top, width, height
 		// Draw the background image
-		GUI.DrawTexture(new Rect (0, 0, width, height), menu);
-		GUI.DrawTexture(new Rect ( (width / 2) - 125, 0, 250, 250), logo);
+		GUI.DrawTexture(new Rect (0, 0, xPos, yPos), menu);
+		GUI.DrawTexture(new Rect ( (xPos / 2) - 125, 0, 250, 250), logo);
 		//GUI.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
 		//GUI.DrawTexture(new Rect((width / 2) - 10, 0, 20, height), menu);
 		//GUI.DrawTexture(new Rect(0, (height / 2) - 10, width, 20), menu);
 		//GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-		if (GUI.Button(new Rect((width / 2) - (button_play.width / 2), ((height / 2) + dip) - (button_play.height + 10) - (button_play.height / 2), button_play.width, button_play.height), button_play, GUIStyle.none)){
+		if (GUI.Button(new Rect((xPos / 2) - ((button_play.width * GameControl.control.screenMulti) / 2), ((yPos / 2) + (dip * GameControl.control.screenMulti)) - ((button_play.height * GameControl.control.screenMulti) + 10) - ((button_play.height * GameControl.control.screenMulti) / 2), button_play.width * GameControl.control.screenMulti, button_play.height * GameControl.control.screenMulti), button_play, GUIStyle.none)){
 			startGame();
 		}
-		if (GUI.Button(new Rect((width / 2) - (button_delete.width / 2), ((height / 2) + dip) - (button_delete.height / 2), button_delete.width, button_delete.height), button_delete, GUIStyle.none)){
-			GameControl.control.Delete();
-		}
-		if (GUI.Button(new Rect((width / 2) - (button_exit.width / 2), ((height / 2) + dip) + (button_exit.height + 10) - (button_exit.height / 2), button_exit.width, button_exit.height), button_exit, GUIStyle.none)){
+		if (GUI.Button(new Rect((xPos / 2) - ((button_exit.width * GameControl.control.screenMulti) / 2), ((yPos / 2) + (dip * GameControl.control.screenMulti)) + ((button_exit.height * GameControl.control.screenMulti) + 10) - ((button_exit.height * GameControl.control.screenMulti) / 2), button_exit.width * GameControl.control.screenMulti, button_exit.height * GameControl.control.screenMulti), button_exit, GUIStyle.none)){
 			endGame();
 		}
+
 		// End both Groups
 		GUI.EndGroup ();
 	}

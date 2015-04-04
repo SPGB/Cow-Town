@@ -41,15 +41,15 @@ public class DisplayGUI : MonoBehaviour {
 
 		if (!GameControl.control.pause) {
 			GUI.BeginGroup(new Rect (0, 0, Screen.width, Screen.height)); // left, top, width, height
-			GUI.Label(new Rect(10, 20, 100, 100), "v" + GameControl.control.version, GameControl.control.text);
-			GUI.Label(new Rect(10, 40, 100, 100), "Lv. " + Mathf.Floor(GameControl.control.level).ToString(), GameControl.control.text);
+			GUI.Label(new Rect(10, (20 * GameControl.control.screenMulti), 100, 100), "v" + GameControl.control.version, GameControl.control.text);
+			GUI.Label(new Rect(10, (40 * GameControl.control.screenMulti), 100, 100), "Lv. " + Mathf.Floor(GameControl.control.level).ToString(), GameControl.control.text);
 			#if !UNITY_EDITOR
-			GUI.Label(new Rect(10, 60, 100, 100), "Age. " + GameControl.control.cowAge.TotalDays.ToString("F0") + "." + ((GameControl.control.cowAge.Hours * 10) / 24).ToString("F0") + " days", GameControl.control.text);
+			GUI.Label(new Rect(10, (60 * GameControl.control.screenMulti), 100, 100), "Age. " + GameControl.control.cowAge.TotalDays.ToString("F0") + "." + ((GameControl.control.cowAge.Hours * 10) / 24).ToString("F0") + " days", GameControl.control.text);
 			#else
-			GUI.Label(new Rect(10, 60, 100, 100), "Age. " + GameControl.control.cowAge.TotalDays.ToString("F0") + "." + ((GameControl.control.cowAge.Hours * 10) / 24).ToString("F0") + ((GameControl.control.cowAge.Minutes * 10) / 60).ToString("F0") + " days", GameControl.control.text);
+			GUI.Label(new Rect(10, (60 * GameControl.control.screenMulti), 100, 100), "Age. " + GameControl.control.cowAge.TotalDays.ToString("F0") + "." + ((GameControl.control.cowAge.Hours * 10) / 24).ToString("F0") + ((GameControl.control.cowAge.Minutes * 10) / 60).ToString("F0") + " days", GameControl.control.text);
 			#endif
-			GUI.Label(new Rect(Screen.width - 130, 20, 100, 100), "Delete Save?", GameControl.control.text);
-			if (GUI.Button(new Rect(Screen.width - 100, 45, 90, 30), deleteSaveButton, GUIStyle.none)){
+			GUI.Label(new Rect(Screen.width - (130 * GameControl.control.screenMulti), (20 * GameControl.control.screenMulti), 100, 100), "Delete Save?", GameControl.control.text);
+			if (GUI.Button(new Rect(Screen.width - (100 * GameControl.control.screenMulti), (45 * GameControl.control.screenMulti), (90 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), deleteSaveButton, GUIStyle.none)){
 				GameControl.control.Delete();
 			}
 			
