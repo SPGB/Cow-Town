@@ -14,9 +14,9 @@ public class Cloud : MonoBehaviour {
 		if (!GameControl.control.pause){
 			Vector3 temp = transform.position;
 			if (direction_right) {
-				temp.x += Random.Range(0.0001f, 0.001f);
+				temp.x += Random.Range(0.0001f, 0.005f);
 			} else {
-				temp.x -= Random.Range(0.0001f, 0.001f);
+				temp.x -= Random.Range(0.0001f, 0.005f);
 			}
 			
 			transform.position = temp;
