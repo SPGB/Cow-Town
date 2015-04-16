@@ -46,12 +46,12 @@ public class Happiness : MonoBehaviour {
 			// Adjust the first 2 coordinates to place it somewhere else on-screen
 			Vector3 cow = GameControl.control.cow.transform.position;
 			Vector3 trans = Camera.main.WorldToScreenPoint(new Vector3(cow.x, cow.y + 2.8f, cow.z));
-			GUI.BeginGroup (new Rect ((trans.x - (hapBarMaxLength / 2)), trans.y, hapBarMaxLength * GameControl.control.screenMulti,10 * GameControl.control.screenMulti));
+			GUI.BeginGroup (new Rect ((trans.x - ((hapBarMaxLength * GameControl.control.screenMulti) / 2)), trans.y, hapBarMaxLength * GameControl.control.screenMulti,10 * GameControl.control.screenMulti));
 				// Draw the background image
 				GUI.DrawTexture (new Rect (0,0, hapBarMaxLength,10), background_texture);
 				// Create a second Group which will be clipped
 				// We want to clip the image and not scale it, which is why we need the second Group
-				GUI.BeginGroup (new Rect (0,0, hapBarLength, 10));
+				GUI.BeginGroup (new Rect (0,0, hapBarLength * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti));
 					// Draw the foreground image
 					GUI.DrawTexture (new Rect (0,0,hapBarLength,10), foreground_texture);
 				// End both Groups

@@ -8,7 +8,8 @@ public class Cow : MonoBehaviour {
 	public Texture menu;
 	public Texture closeButton;
 	public Texture shopButton;
-	public Texture blankButton;
+	public Texture blankShopButton;
+	public Texture blankBasicButton;
 	public Texture emptyTexture;
 	public Texture statPopup;
 	
@@ -162,9 +163,12 @@ public class Cow : MonoBehaviour {
 			GUI.BeginGroup(new Rect (0, 0, width, height)); // left, top, width, height
 				// Draw the background image
 				GUI.DrawTexture(new Rect (0, 0, width, height), menu);
-				GUI.Label(new Rect(10, (280 * GameControl.control.screenMulti), 100, 100), "Inventory:", GameControl.control.cowText);
-				GUI.Label(new Rect(10, (280 * GameControl.control.screenMulti), 100, 100), "\t\t " + (GameControl.control.inventory.Count - nullItems), GameControl.control.cowText);
-				GUI.BeginGroup(new Rect(10, (310 * GameControl.control.screenMulti), (200 * GameControl.control.screenMulti), (150 * GameControl.control.screenMulti)));
+			GUI.EndGroup();
+
+			GUI.BeginGroup(new Rect(0, 0, width, height));
+				GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 290 * GameControl.control.screenMulti, 245 * GameControl.control.screenMulti, 225 * GameControl.control.screenMulti), blankBasicButton);
+				GUI.Label(new Rect(35 * GameControl.control.screenMulti, (310 * GameControl.control.screenMulti), 100, 100), "Inventory: " + (GameControl.control.inventory.Count - nullItems), GameControl.control.cowText);
+				GUI.BeginGroup(new Rect(35 * GameControl.control.screenMulti, (335 * GameControl.control.screenMulti), (200 * GameControl.control.screenMulti), (150 * GameControl.control.screenMulti)));
 					int i = 0;
 					for (int y = 0; y < 3; y++){
 						for (int x = 0; x < 4; x++){
@@ -205,7 +209,7 @@ public class Cow : MonoBehaviour {
 						}
 					}
 				GUI.EndGroup();
-				if (selected1 != -1) GUI.DrawTexture(new Rect((5 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (305 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti), (inv_rarity[selected1] == "winter" || inv_rarity[selected1] == "rare")? switch3 : ((inv_rarity[selected1] == "uncommon")? switch2 : switch1));
+				if (selected1 != -1) GUI.DrawTexture(new Rect((30 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (330 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti), (inv_rarity[selected1] == "winter" || inv_rarity[selected1] == "rare")? switch3 : ((inv_rarity[selected1] == "uncommon")? switch2 : switch1));
 			// End both Groups
 			GUI.EndGroup();
 			
@@ -286,7 +290,7 @@ public class Cow : MonoBehaviour {
 					GUI.DrawTexture(new Rect(0, 0, width, height), menu);
 					GUI.Label(new Rect(120 * GameControl.control.screenMulti, 15 * GameControl.control.screenMulti, 100, 100), "Money: $" + GameControl.control.money, GameControl.control.cowText);
 					
-					GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, (215 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankButton); // Trough upgrade
+					GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, (215 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankShopButton); // Trough upgrade
 					GUI.Label(new Rect(15 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 100, 100), "Trough Max +25, $500", GameControl.control.text); // Trough upgrade
 					if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, 215 * GameControl.control.screenMulti, 30 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){ // Trough upgrade
 						if (GameControl.control.money > 500){
@@ -301,19 +305,19 @@ public class Cow : MonoBehaviour {
 					shop = false;
 				}
 				
-				if (GUI.Button(new Rect(20 * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, (90 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), shopButton, GUIStyle.none)){
+				if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, ((GameControl.control.buttonSize.x / 2) * GameControl.control.screenMulti), ((GameControl.control.buttonSize.y / 2) * GameControl.control.screenMulti)), shopButton, GUIStyle.none)){
 					shop = !shop;
 				}
 			
 				GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 				if (!shop && selected1 != -1){
-					GUI.DrawTexture(new Rect((25 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (270 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), statPopup);
-					GUI.Label(new Rect((30 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (275 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Str:", GameControl.control.stats);
-					GUI.Label(new Rect((30 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (275 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_str[selected1], GameControl.control.stats);
-					GUI.Label(new Rect((30 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (295 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Con:", GameControl.control.stats);
-					GUI.Label(new Rect((30 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (295 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_con[selected1], GameControl.control.stats);
-					GUI.Label(new Rect((30 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (315 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Int:", GameControl.control.stats);
-					GUI.Label(new Rect((30 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (315 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_int[selected1], GameControl.control.stats);
+					GUI.DrawTexture(new Rect((45 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (290 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), statPopup);
+					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (295 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Str:", GameControl.control.stats);
+					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (295 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_str[selected1], GameControl.control.stats);
+					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (315 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Con:", GameControl.control.stats);
+					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (315 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_con[selected1], GameControl.control.stats);
+					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (335 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Int:", GameControl.control.stats);
+					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (335 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_int[selected1], GameControl.control.stats);
 				}
 			GUI.EndGroup();
 		}

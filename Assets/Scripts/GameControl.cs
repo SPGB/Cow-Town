@@ -71,6 +71,7 @@ public class GameControl : MonoBehaviour {
 	public GUIStyle stats;
 	public GUIStyle cowText;
 
+	public Vector2 buttonSize = new Vector2(128, 64);
 	public float templateHeight = 640;
 	public float screenMulti;
 

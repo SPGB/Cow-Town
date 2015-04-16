@@ -19,6 +19,10 @@ public class CowExpPopup : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		float textScale = 20 * GameControl.control.screenMulti;
+		style.fontSize = (int)textScale;
+
 		if (die >= 60){
 			Destroy(gameObject);
 		}
@@ -28,14 +32,14 @@ public class CowExpPopup : MonoBehaviour {
 	}
 	void OnGUI () {
 		Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-		GUI.BeginGroup (new Rect (pos.x + offset_x, pos.y + offset_y, 50, 50)); // left, top, width, height
+		GUI.BeginGroup (new Rect (pos.x + offset_x, pos.y + offset_y, 50 * GameControl.control.screenMulti, 50 * GameControl.control.screenMulti)); // left, top, width, height
 		
-		GUI.DrawTexture(new Rect(0, 0, 50, 50), tex);
+		GUI.DrawTexture(new Rect(0, 0, 50 * GameControl.control.screenMulti, 50 * GameControl.control.screenMulti), tex);
 
-		DrawOutline(new Rect (7, 15, 100, 100), val, 2, style);
+		DrawOutline(new Rect (7 * GameControl.control.screenMulti, 15 * GameControl.control.screenMulti, 100 * GameControl.control.screenMulti, 100 * GameControl.control.screenMulti), val, 2, style);
 
 		style.normal.textColor = new Color(255,255,255,1);
-		GUI.Label (new Rect (7, 15, 100, 100), val, style);
+		GUI.Label (new Rect (7 * GameControl.control.screenMulti, 15 * GameControl.control.screenMulti, 100 * GameControl.control.screenMulti, 100 * GameControl.control.screenMulti), val, style);
 		GUI.EndGroup ();
 	}
 

@@ -37,15 +37,15 @@ public class TitleScreen : MonoBehaviour {
 		GUI.BeginGroup(new Rect (0, 0, xPos, yPos)); // left, top, width, height
 		// Draw the background image
 		GUI.DrawTexture(new Rect (0, 0, xPos, yPos), menu);
-		GUI.DrawTexture(new Rect ( (xPos / 2) - 125, 0, 250, 250), logo);
+		GUI.DrawTexture(new Rect ((xPos / 2) - (125 * GameControl.control.screenMulti), 0 * GameControl.control.screenMulti, 300 * GameControl.control.screenMulti, 300 * GameControl.control.screenMulti), logo);
 		//GUI.color = new Color(0.0f, 0.0f, 0.0f, 1.0f);
 		//GUI.DrawTexture(new Rect((width / 2) - 10, 0, 20, height), menu);
 		//GUI.DrawTexture(new Rect(0, (height / 2) - 10, width, 20), menu);
 		//GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-		if (GUI.Button(new Rect((xPos / 2) - ((button_play.width * GameControl.control.screenMulti) / 2), ((yPos / 2) + (dip * GameControl.control.screenMulti)) - ((button_play.height * GameControl.control.screenMulti) + 10) - ((button_play.height * GameControl.control.screenMulti) / 2), button_play.width * GameControl.control.screenMulti, button_play.height * GameControl.control.screenMulti), button_play, GUIStyle.none)){
+		if (GUI.Button(new Rect((xPos / 2) - ((GameControl.control.buttonSize.x * GameControl.control.screenMulti) / 2), ((yPos / 2) + (dip * GameControl.control.screenMulti)) - ((GameControl.control.buttonSize.y * GameControl.control.screenMulti) + 10) - ((GameControl.control.buttonSize.y * GameControl.control.screenMulti) / 2), GameControl.control.buttonSize.x * GameControl.control.screenMulti, GameControl.control.buttonSize.y * GameControl.control.screenMulti), button_play, GUIStyle.none)){
 			startGame();
 		}
-		if (GUI.Button(new Rect((xPos / 2) - ((button_exit.width * GameControl.control.screenMulti) / 2), ((yPos / 2) + (dip * GameControl.control.screenMulti)) + ((button_exit.height * GameControl.control.screenMulti) + 10) - ((button_exit.height * GameControl.control.screenMulti) / 2), button_exit.width * GameControl.control.screenMulti, button_exit.height * GameControl.control.screenMulti), button_exit, GUIStyle.none)){
+		if (GUI.Button(new Rect((xPos / 2) - ((GameControl.control.buttonSize.x * GameControl.control.screenMulti) / 2), ((yPos / 2) + (dip * GameControl.control.screenMulti)) + ((GameControl.control.buttonSize.y * GameControl.control.screenMulti) + 10) - ((GameControl.control.buttonSize.y * GameControl.control.screenMulti) / 2), GameControl.control.buttonSize.x * GameControl.control.screenMulti, GameControl.control.buttonSize.y * GameControl.control.screenMulti), button_exit, GUIStyle.none)){
 			endGame();
 		}
 

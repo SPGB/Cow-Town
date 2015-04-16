@@ -73,7 +73,7 @@ public class Trough : MonoBehaviour {
 		Vector3 trough = gameObject.transform.position;
 		Vector3 trans = Camera.main.WorldToScreenPoint(new Vector3(trough.x - 1.555f, trough.y + 6.115f, trough.z));
 		GUI.BeginGroup (new Rect (trans.x, trans.y, (GameControl.control.troughMaxExp * bar_multi) * GameControl.control.screenMulti, bar_height * GameControl.control.screenMulti));
-		GUI.BeginGroup (new Rect ( 0,0, bar_width,bar_height));
+		GUI.BeginGroup (new Rect ( 0,0, bar_width * GameControl.control.screenMulti, bar_height * GameControl.control.screenMulti));
 		// Draw the foreground image
 		GUI.DrawTexture (new Rect (0,0, 50f * bar_multi,bar_height), foreground_texture);
 		// End both Groups
