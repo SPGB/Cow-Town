@@ -219,21 +219,20 @@ public class Cow : MonoBehaviour {
 				float troughExp = GameControl.control.troughExp;
 				float troughMaxExp = GameControl.control.troughMaxExp;
 				
+				GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), "Betty", GameControl.control.cowText);
+
 				if (GameControl.control.happiness < 0.1f){
-					GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
+					GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
 				} else if (hapDif){
-					GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 40 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
-					GUI.Label(new Rect(10, 60 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happiness.ToString("F1") + "/5s)", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 70 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
+					GUI.Label(new Rect(10, 90 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happiness.ToString("F1") + "/5s)", GameControl.control.cowText);
 				} else {
-					GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 40 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
-					GUI.Label(new Rect(10, 60 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happinessLose.ToString("F1") + "/5s)", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 70 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
+					GUI.Label(new Rect(10, 90 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happinessLose.ToString("F1") + "/5s)", GameControl.control.cowText);
 				}
-				
-				GUI.Label(new Rect(10, 85 * GameControl.control.screenMulti, 100, 100), "Money:", GameControl.control.cowText);
-				GUI.Label(new Rect(10, 85 * GameControl.control.screenMulti, 100, 100), "\t\t $" + GameControl.control.money, GameControl.control.cowText);
 				
 				GUI.Label(new Rect(10, 105 * GameControl.control.screenMulti, 100, 100), "Experience:", GameControl.control.cowText);
 				GUI.Label(new Rect(10, 105 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.exp.ToString(), GameControl.control.cowText);
