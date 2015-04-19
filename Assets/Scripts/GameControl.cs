@@ -121,7 +121,7 @@ public class GameControl : MonoBehaviour {
 	
 	void Update () {
 		screenMulti = (Screen.height / templateHeight);
-		Debug.Log(screenMulti);
+		//Debug.Log(screenMulti);
 
 		float textScale = 20 * screenMulti;
 		float statScale = 16 * screenMulti;
