@@ -18,6 +18,7 @@ public class HayCollide : MonoBehaviour {
 				new_popup.GetComponent<CowExpPopup>().val = ( (happiness_mod > 0)? "+" : "") + happiness_mod.ToString();
 
 				Destroy(gameObject);
+				GameControl.control.draggingItem = false;
 				
 				if (happiness_mod < 0) return;
 				

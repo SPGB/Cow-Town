@@ -16,6 +16,7 @@ public class CoinCollide : MonoBehaviour {
 				new_popup.GetComponent<CowExpPopup>().val = " $1";
 				
 				Destroy(gameObject);
+				GameControl.control.draggingItem = false;
 			}
 			
 		}

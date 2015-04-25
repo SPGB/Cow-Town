@@ -1273,6 +1273,7 @@ MonoBehaviour:
   menu: {fileID: 2800000, guid: 92082627b0e84b14db2f0004a6caa5df, type: 3}
   closeButton: {fileID: 2800000, guid: 02df828cf45bc5d49a2071d1a8b296a9, type: 3}
   shopButton: {fileID: 2800000, guid: fd2d2b7c23075194eb5c9c6ad4f543ed, type: 3}
+  moneyBackground: {fileID: 2800000, guid: f997c4452d66ee04cbceb50271b70e7d, type: 3}
   blankShopButton: {fileID: 2800000, guid: f69b547c3a21543489570ddfd6cc9649, type: 3}
   blankBasicButton: {fileID: 2800000, guid: dc203691b48a86e4b9560285b4a83041, type: 3}
   emptyTexture: {fileID: 2800000, guid: 47f5e16aaf5119a47817d01ffd82e739, type: 3}
@@ -2103,6 +2104,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2008925017}
   - 114: {fileID: 2008925016}
+  - 65: {fileID: 2008925018}
   m_Layer: 0
   m_Name: gameControl
   m_TagString: Untagged
@@ -2123,6 +2125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pause: 0
   version: 0.01A
+  titleScreen: 1
   native_width: 399
   native_height: 638
   popup: {fileID: 100000, guid: 59a81cc1fb535af449edcdf6e0e9e260, type: 2}
@@ -2335,6 +2338,13 @@ MonoBehaviour:
   buttonSize: {x: 128, y: 64}
   templateHeight: 640
   screenMulti: 0
+  draggingItem: 0
+  shopDragged: 0
+  statDragged: 0
+  shopOffset: 0
+  statOffset: 0
+  dragStart: 0
+  dragDifference: 0
 --- !u!4 &2008925017
 Transform:
   m_ObjectHideFlags: 0
@@ -2342,11 +2352,23 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2008925015}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .15134716, y: -.0374476314, z: 13.5407448}
+  m_LocalPosition: {x: 0, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!65 &2008925018
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2008925015}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 20, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2068146060
 GameObject:
   m_ObjectHideFlags: 0

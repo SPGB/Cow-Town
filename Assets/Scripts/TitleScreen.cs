@@ -75,6 +75,7 @@ public class TitleScreen : MonoBehaviour {
 		GameControl.control.cow = GameObject.Find("cow").GetComponent<Cow>();
 		GameControl.control.Load();
 		GameControl.control.pause = false;
+		GameControl.control.titleScreen = false;
 	}
 	
 	public void endGame(){

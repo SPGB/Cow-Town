@@ -8,6 +8,7 @@ public class Cow : MonoBehaviour {
 	public Texture menu;
 	public Texture closeButton;
 	public Texture shopButton;
+	public Texture moneyBackground;
 	public Texture blankShopButton;
 	public Texture blankBasicButton;
 	public Texture emptyTexture;
@@ -17,7 +18,7 @@ public class Cow : MonoBehaviour {
 	public Texture switch2;
 	public Texture switch3;
 	
-	private bool shop;
+//	private bool shop;
 	
 	public int nullItems;
 	
@@ -136,15 +137,19 @@ public class Cow : MonoBehaviour {
 		GameControl.control.inventory[itemInt2] = switch1;
 	}
 	
-	void OnMouseDown () {
-		if (!GameControl.control.pause){
-			GameControl.control.pause = true;
-			GameControl.control.Save();
-			Debug.Log("SAVING ON COW CLICK");
-		}
-	}
+	//void OnMouseDown () {
+	//	if (!GameControl.control.pause){
+	//		GameControl.control.pause = true;
+	//		GameControl.control.Save();
+	//		Debug.Log("SAVING ON COW CLICK");
+	//	}
+	//}
 	
 	void OnGUI () {
+
+		float shopOffset = GameControl.control.shopOffset;
+		float statOffset = GameControl.control.statOffset;
+
 		if (GUI.skin.customStyles.Length > 0) {
 			GUI.skin.customStyles[0].onActive.textColor = Color.white;
 		}
@@ -154,171 +159,181 @@ public class Cow : MonoBehaviour {
 		GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(rx, ry, 1));
 		*/
 
-		if (GameControl.control && GameControl.control.pause){
-			GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-			float width = Screen.width;
-			float height = Screen.height;
-			// Create one Group to contain both images
-			// Adjust the first 2 coordinates to place it somewhere else on-screen
-			GUI.BeginGroup(new Rect (0, 0, width, height)); // left, top, width, height
-				// Draw the background image
-				GUI.DrawTexture(new Rect (0, 0, width, height), menu);
-			GUI.EndGroup();
+		GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+		float width = Screen.width;
+		float height = Screen.height;
+		// Create one Group to contain both images
+		// Adjust the first 2 coordinates to place it somewhere else on-screen
+		
+		// Draw the background image for shop
+		GUI.BeginGroup(new Rect (shopOffset, 0, width, height)); // left, top, width, height
+			GUI.DrawTexture(new Rect (0, 0, width, height), menu);
+		GUI.EndGroup();
 
-			GUI.BeginGroup(new Rect(0, 0, width, height));
-				GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 290 * GameControl.control.screenMulti, 245 * GameControl.control.screenMulti, 225 * GameControl.control.screenMulti), blankBasicButton);
-				GUI.Label(new Rect(35 * GameControl.control.screenMulti, (310 * GameControl.control.screenMulti), 100, 100), "Inventory: " + (GameControl.control.inventory.Count - nullItems), GameControl.control.cowText);
-				GUI.BeginGroup(new Rect(35 * GameControl.control.screenMulti, (335 * GameControl.control.screenMulti), (200 * GameControl.control.screenMulti), (150 * GameControl.control.screenMulti)));
-					int i = 0;
-					for (int y = 0; y < 3; y++){
-						for (int x = 0; x < 4; x++){
-							GUI.BeginGroup(new Rect(0 + ((x * 50) * GameControl.control.screenMulti), 0 + ((y * 50) * GameControl.control.screenMulti), (50 * GameControl.control.screenMulti), (50 * GameControl.control.screenMulti)));
-								Texture image = (Texture)Resources.Load("items/textures/" + inv_names[i], typeof(Texture));
-								//Texture image = (Texture)Resources.Load(inv_names[i++], typeof(Texture));
-								GUI.DrawTexture(new Rect(0, 0, 50 * GameControl.control.screenMulti, 50 * GameControl.control.screenMulti), image);
-								if (GameControl.control.inventory[i] != "empty\n0\n0\n0\ncommon"){
-									if (GUI.Button(new Rect(30 * GameControl.control.screenMulti, 5 * GameControl.control.screenMulti, 15 * GameControl.control.screenMulti, 15 * GameControl.control.screenMulti), closeButton, GUIStyle.none)){
-										if (!shop){
-											GameControl.control.inventory.RemoveAt(i);
-											GameControl.control.inventory.Add("empty\n0\n0\n0\ncommon");
+		// Draw the background image for stats
+		GUI.BeginGroup(new Rect (statOffset, 0, width, height)); // left, top, width, height
+			GUI.DrawTexture(new Rect (0, 0, width, height), menu);
+		GUI.EndGroup();
+
+		// Inventory stuff
+		GUI.BeginGroup(new Rect(statOffset, 0, width, height));
+			GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 290 * GameControl.control.screenMulti, 245 * GameControl.control.screenMulti, 225 * GameControl.control.screenMulti), blankBasicButton);
+			GUI.Label(new Rect(35 * GameControl.control.screenMulti, (310 * GameControl.control.screenMulti), 100, 100), "Inventory: " + (GameControl.control.inventory.Count - nullItems), GameControl.control.cowText);
+			GUI.BeginGroup(new Rect(35 * GameControl.control.screenMulti, (335 * GameControl.control.screenMulti), (200 * GameControl.control.screenMulti), (150 * GameControl.control.screenMulti)));
+				int i = 0;
+				for (int y = 0; y < 3; y++){
+					for (int x = 0; x < 4; x++){
+						GUI.BeginGroup(new Rect(0 + ((x * 50) * GameControl.control.screenMulti), 0 + ((y * 50) * GameControl.control.screenMulti), (50 * GameControl.control.screenMulti), (50 * GameControl.control.screenMulti)));
+							Texture image = (Texture)Resources.Load("items/textures/" + inv_names[i], typeof(Texture));
+							//Texture image = (Texture)Resources.Load(inv_names[i++], typeof(Texture));
+							GUI.DrawTexture(new Rect(0, 0, 50 * GameControl.control.screenMulti, 50 * GameControl.control.screenMulti), image);
+							if (GameControl.control.inventory[i] != "empty\n0\n0\n0\ncommon"){
+								if (GUI.Button(new Rect(30 * GameControl.control.screenMulti, 5 * GameControl.control.screenMulti, 15 * GameControl.control.screenMulti, 15 * GameControl.control.screenMulti), closeButton, GUIStyle.none)){
+									GameControl.control.inventory.RemoveAt(i);
+									GameControl.control.inventory.Add("empty\n0\n0\n0\ncommon");
+								}
+								if (GUI.Button(new Rect(0, 0, 50 * GameControl.control.screenMulti, 50 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){
+									if (selected1 == -1){
+										if (selected1Pos != new Vector2(x, y) && selected2Pos != new Vector2(x, y)){
+											selected1 = i;
+											selected1Pos = new Vector2(x, y);
 										}
-									}
-									if (GUI.Button(new Rect(0, 0, 50 * GameControl.control.screenMulti, 50 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){
-										if (!shop){
-											if (selected1 == -1){
-												if (selected1Pos != new Vector2(x, y) && selected2Pos != new Vector2(x, y)){
-													selected1 = i;
-													selected1Pos = new Vector2(x, y);
-												}
-											} else if (selected1 == i){
-												selected1 = -1;
-												selected1Pos = new Vector2(-1, -1);
-												selected2 = -1;
-												selected2Pos = new Vector2(-1, -1); 
-											} else if (selected2 != i){
-												if (selected1Pos != new Vector2(x, y) && selected2Pos != new Vector2(x, y)){
-													selected2 = i;
-													selected2Pos = new Vector2(x, y);
-												}
-											}
+									} else if (selected1 == i){
+										selected1 = -1;
+										selected1Pos = new Vector2(-1, -1);
+										selected2 = -1;
+										selected2Pos = new Vector2(-1, -1); 
+									} else if (selected2 != i){
+										if (selected1Pos != new Vector2(x, y) && selected2Pos != new Vector2(x, y)){
+											selected2 = i;
+											selected2Pos = new Vector2(x, y);
 										}
 									}
 								}
-							GUI.EndGroup();
-							i++;
-						}
+							}
+						GUI.EndGroup();
+						i++;
 					}
-				GUI.EndGroup();
-				if (selected1 != -1) GUI.DrawTexture(new Rect((30 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (330 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti), (inv_rarity[selected1] == "winter" || inv_rarity[selected1] == "rare")? switch3 : ((inv_rarity[selected1] == "uncommon")? switch2 : switch1));
-			// End both Groups
+				}
 			GUI.EndGroup();
-			
-			GUI.BeginGroup(new Rect (0, 0, Screen.width, Screen.height)); // left, top, width, height
-				bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
-				//Trough trough_obj = GameControl.control.trough;
-				float troughExp = GameControl.control.troughExp;
-				float troughMaxExp = GameControl.control.troughMaxExp;
-				
-				GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), "Betty", GameControl.control.cowText);
+			if (selected1 != -1) GUI.DrawTexture(new Rect((30 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (330 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti), (inv_rarity[selected1] == "winter" || inv_rarity[selected1] == "rare")? switch3 : ((inv_rarity[selected1] == "uncommon")? switch2 : switch1));
+		// End both Groups
+		GUI.EndGroup();
 
-				if (GameControl.control.happiness < 0.1f){
-					GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
-				} else if (hapDif){
-					GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 70 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
-					GUI.Label(new Rect(10, 90 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happiness.ToString("F1") + "/5s)", GameControl.control.cowText);
+		// Stat stuff
+		GUI.BeginGroup(new Rect (statOffset, 0, Screen.width, Screen.height)); // left, top, width, height
+			bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
+			//Trough trough_obj = GameControl.control.trough;
+			float troughExp = GameControl.control.troughExp;
+			float troughMaxExp = GameControl.control.troughMaxExp;
+			
+			GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), "Betty", GameControl.control.cowText);
+
+			if (GameControl.control.happiness < 0.1f){
+				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
+			} else if (hapDif){
+				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 70 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
+				GUI.Label(new Rect(10, 90 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happiness.ToString("F1") + "/5s)", GameControl.control.cowText);
+			} else {
+				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 70 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
+				GUI.Label(new Rect(10, 90 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happinessLose.ToString("F1") + "/5s)", GameControl.control.cowText);
+			}
+			
+			GUI.Label(new Rect(10, 105 * GameControl.control.screenMulti, 100, 100), "Experience:", GameControl.control.cowText);
+			GUI.Label(new Rect(10, 105 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.exp.ToString(), GameControl.control.cowText);
+			
+			if (troughExp >= 30.0f){
+				int troughHours = (int)Mathf.Floor((troughExp * 2) / 60);
+				int troughMinutes = (int)((troughExp * 2) - (60 * troughHours));
+				if (troughMinutes > 0){
+					GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "Trough:", GameControl.control.text);
+					GUI.Label(new Rect(10, 120 * GameControl.control.screenMulti, 100, 100), "\t\t " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.cowText);
+					GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "\t\t (" + troughHours.ToString("F0") + " hours and", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 160 * GameControl.control.screenMulti, 100, 100), "\t\t " + troughMinutes.ToString("F0") + " minutes)", GameControl.control.cowText);
 				} else {
-					GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 70 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
-					GUI.Label(new Rect(10, 90 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happinessLose.ToString("F1") + "/5s)", GameControl.control.cowText);
-				}
-				
-				GUI.Label(new Rect(10, 105 * GameControl.control.screenMulti, 100, 100), "Experience:", GameControl.control.cowText);
-				GUI.Label(new Rect(10, 105 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.exp.ToString(), GameControl.control.cowText);
-				
-				if (troughExp >= 30.0f){
-					int troughHours = (int)Mathf.Floor((troughExp * 2) / 60);
-					int troughMinutes = (int)((troughExp * 2) - (60 * troughHours));
-					if (troughMinutes > 0){
-						GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "Trough:", GameControl.control.text);
-						GUI.Label(new Rect(10, 120 * GameControl.control.screenMulti, 100, 100), "\t\t " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.cowText);
-						GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "\t\t (" + troughHours.ToString("F0") + " hours and", GameControl.control.cowText);
-						GUI.Label(new Rect(10, 160 * GameControl.control.screenMulti, 100, 100), "\t\t " + troughMinutes.ToString("F0") + " minutes)", GameControl.control.cowText);
-					} else {
-						GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "Trough:", GameControl.control.text);
-						GUI.Label(new Rect(10, 130 * GameControl.control.screenMulti, 100, 100), "\t\t " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.cowText);
-						GUI.Label(new Rect(10, 150 * GameControl.control.screenMulti, 100, 100), "\t\t (" + troughHours.ToString("F0") + " hours)", GameControl.control.cowText);
-					}
-				} else {
-					int troughMinutes = (int)(troughExp * 2);
-					GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "Trough:", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "Trough:", GameControl.control.text);
 					GUI.Label(new Rect(10, 130 * GameControl.control.screenMulti, 100, 100), "\t\t " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.cowText);
-					GUI.Label(new Rect(10, 150 * GameControl.control.screenMulti, 100, 100), "\t\t (" + troughMinutes.ToString("F0") + " minutes)", GameControl.control.cowText);
+					GUI.Label(new Rect(10, 150 * GameControl.control.screenMulti, 100, 100), "\t\t (" + troughHours.ToString("F0") + " hours)", GameControl.control.cowText);
 				}
-				
-				int addativeStr = (GameControl.control.level >= 5)? int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2]) : 0;
-				int addativeCon = (GameControl.control.level >= 5)? int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]) : 0;
-				int addativeInt = (GameControl.control.level >= 5)? int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]) : 0;
-				if (addativeStr == 0){
-					GUI.Label(new Rect(10, 180 * GameControl.control.screenMulti, 100, 100), "Strength:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 180 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.strength.ToString(), GameControl.control.cowText);
-				} else {
-					GUI.Label(new Rect(10, 180 * GameControl.control.screenMulti, 100, 100), "Strength:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 180 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.newStrength.ToString() + "(" + GameControl.control.strength.ToString() + ((addativeStr < 0)? "":"+") + (int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2])).ToString() + ")", GameControl.control.cowText);
-				}
-				if (addativeCon == 0){
-					GUI.Label(new Rect(10, 210 * GameControl.control.screenMulti, 100, 100), "Constitution:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 210 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.constitution.ToString(), GameControl.control.cowText);
-				} else {
-					GUI.Label(new Rect(10, 210 * GameControl.control.screenMulti, 100, 100), "Constitution:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 210 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.newConstitution.ToString() + "(" + GameControl.control.constitution.ToString() + ((addativeCon < 0)? "":"+") + (int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2])).ToString() + ")", GameControl.control.cowText);
-				}
-				if (addativeInt == 0){
-					GUI.Label(new Rect(10, 240 * GameControl.control.screenMulti, 100, 100), "Intelligence:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 240 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.intelligence.ToString(), GameControl.control.cowText);
-				} else {
-					GUI.Label(new Rect(10, 240 * GameControl.control.screenMulti, 100, 100), "Intelligence:", GameControl.control.cowText);
-					GUI.Label(new Rect(10, 240 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.newIntelligence.ToString() + "(" + GameControl.control.intelligence.ToString() + ((addativeInt < 0)? "":"+") + (int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2])).ToString() + ")", GameControl.control.cowText);
-				}
-			GUI.EndGroup ();
+			} else {
+				int troughMinutes = (int)(troughExp * 2);
+				GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "Trough:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 130 * GameControl.control.screenMulti, 100, 100), "\t\t " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.cowText);
+				GUI.Label(new Rect(10, 150 * GameControl.control.screenMulti, 100, 100), "\t\t (" + troughMinutes.ToString("F0") + " minutes)", GameControl.control.cowText);
+			}
 			
-			GUI.BeginGroup(new Rect (0, 0, width, height));
-				if (shop){
-					GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.95f);
-					GUI.DrawTexture(new Rect(0, 0, width, height), menu);
-					GUI.Label(new Rect(120 * GameControl.control.screenMulti, 15 * GameControl.control.screenMulti, 100, 100), "Money: $" + GameControl.control.money, GameControl.control.cowText);
-					
-					GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, (215 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankShopButton); // Trough upgrade
-					GUI.Label(new Rect(15 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 100, 100), "Trough Max +25, $500", GameControl.control.text); // Trough upgrade
-					if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, 215 * GameControl.control.screenMulti, 30 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){ // Trough upgrade
-						if (GameControl.control.money > 500){
-							GameControl.control.troughMaxExp += 25.0f;
-							GameControl.control.money -= 500;
-						}
-					}
-				}
-				
-				if (GUI.Button(new Rect(width - (50 * GameControl.control.screenMulti), 10 * GameControl.control.screenMulti, (30 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), closeButton, GUIStyle.none)){
-					GameControl.control.pause = false;
-					shop = false;
-				}
-				
-				if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, ((GameControl.control.buttonSize.x / 2) * GameControl.control.screenMulti), ((GameControl.control.buttonSize.y / 2) * GameControl.control.screenMulti)), shopButton, GUIStyle.none)){
-					shop = !shop;
-				}
+			int addativeStr = (GameControl.control.level >= 5)? int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2]) : 0;
+			int addativeCon = (GameControl.control.level >= 5)? int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]) : 0;
+			int addativeInt = (GameControl.control.level >= 5)? int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]) : 0;
+			if (addativeStr == 0){
+				GUI.Label(new Rect(10, 180 * GameControl.control.screenMulti, 100, 100), "Strength:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 180 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.strength.ToString(), GameControl.control.cowText);
+			} else {
+				GUI.Label(new Rect(10, 180 * GameControl.control.screenMulti, 100, 100), "Strength:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 180 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.newStrength.ToString() + "(" + GameControl.control.strength.ToString() + ((addativeStr < 0)? "":"+") + (int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2])).ToString() + ")", GameControl.control.cowText);
+			}
+			if (addativeCon == 0){
+				GUI.Label(new Rect(10, 210 * GameControl.control.screenMulti, 100, 100), "Constitution:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 210 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.constitution.ToString(), GameControl.control.cowText);
+			} else {
+				GUI.Label(new Rect(10, 210 * GameControl.control.screenMulti, 100, 100), "Constitution:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 210 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.newConstitution.ToString() + "(" + GameControl.control.constitution.ToString() + ((addativeCon < 0)? "":"+") + (int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2])).ToString() + ")", GameControl.control.cowText);
+			}
+			if (addativeInt == 0){
+				GUI.Label(new Rect(10, 240 * GameControl.control.screenMulti, 100, 100), "Intelligence:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 240 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.intelligence.ToString(), GameControl.control.cowText);
+			} else {
+				GUI.Label(new Rect(10, 240 * GameControl.control.screenMulti, 100, 100), "Intelligence:", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 240 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.newIntelligence.ToString() + "(" + GameControl.control.intelligence.ToString() + ((addativeInt < 0)? "":"+") + (int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2])).ToString() + ")", GameControl.control.cowText);
+			}
+		
+			//if (GUI.Button(new Rect(width - (50 * GameControl.control.screenMulti), 10 * GameControl.control.screenMulti, (30 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), closeButton, GUIStyle.none)){
+			//	GameControl.control.pause = false;
+			//	shop = false;
+			//}
+		GUI.EndGroup ();
+
+		// Shop stuff
+		GUI.BeginGroup(new Rect (shopOffset, 0, width, height));
+			GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.95f);
+			GUI.DrawTexture(new Rect(0, 0, width, height), menu);
+			GUI.DrawTexture(new Rect((width - 100) * GameControl.control.screenMulti, 5 * GameControl.control.screenMulti, 90, 45), moneyBackground);
+			GUI.Label(new Rect((width - 70) * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, 100, 100), "" + GameControl.control.money, GameControl.control.cowText);
 			
-				GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-				if (!shop && selected1 != -1){
-					GUI.DrawTexture(new Rect((45 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (290 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), statPopup);
-					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (295 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Str:", GameControl.control.stats);
-					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (295 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_str[selected1], GameControl.control.stats);
-					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (315 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Con:", GameControl.control.stats);
-					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (315 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_con[selected1], GameControl.control.stats);
-					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (335 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Int:", GameControl.control.stats);
-					GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (335 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_int[selected1], GameControl.control.stats);
+			GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, (215 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankShopButton); // Trough upgrade
+			GUI.Label(new Rect(15 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 100, 100), "Trough Max +25, $500", GameControl.control.text); // Trough upgrade
+			if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, 215 * GameControl.control.screenMulti, 30 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){ // Trough upgrade
+				if (GameControl.control.money > 500){
+					GameControl.control.troughMaxExp += 25.0f;
+					GameControl.control.money -= 500;
 				}
-			GUI.EndGroup();
-		}
+			}
+			
+			//if (GUI.Button(new Rect(width - (50 * GameControl.control.screenMulti), 10 * GameControl.control.screenMulti, (30 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), closeButton, GUIStyle.none)){
+			//	GameControl.control.pause = false;
+			//	shop = false;
+			//}
+			
+			//if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, ((GameControl.control.buttonSize.x / 2) * GameControl.control.screenMulti), ((GameControl.control.buttonSize.y / 2) * GameControl.control.screenMulti)), shopButton, GUIStyle.none)){
+			//	shop = !shop;
+			//}
+		GUI.EndGroup();
+
+		// Item popups
+		GUI.BeginGroup(new Rect(statOffset, 0, width, height));
+			GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+			if (selected1 != -1){
+				GUI.DrawTexture(new Rect((45 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (290 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), statPopup);
+				GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (295 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Str:", GameControl.control.stats);
+				GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (295 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_str[selected1], GameControl.control.stats);
+				GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (315 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Con:", GameControl.control.stats);
+				GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (315 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_con[selected1], GameControl.control.stats);
+				GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (335 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Int:", GameControl.control.stats);
+				GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (335 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_int[selected1], GameControl.control.stats);
+			}
+		GUI.EndGroup();
 	}
 }

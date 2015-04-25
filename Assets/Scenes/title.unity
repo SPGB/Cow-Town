@@ -375,6 +375,7 @@ GameObject:
   - 4: {fileID: 1160128688}
   - 114: {fileID: 1160128687}
   - 114: {fileID: 1160128689}
+  - 65: {fileID: 1160128690}
   m_Layer: 0
   m_Name: gameControl
   m_TagString: Untagged
@@ -604,8 +605,16 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  buttonSize: {x: 128, y: 64}
   templateHeight: 640
   screenMulti: 0
+  draggingItem: 0
+  shopDragged: 0
+  statDragged: 0
+  shopOffset: 0
+  statOffset: 0
+  dragStart: 0
+  dragDifference: 0
 --- !u!4 &1160128688
 Transform:
   m_ObjectHideFlags: 0
@@ -613,7 +622,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1160128686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .15134716, y: -.037447691, z: 13.5407448}
+  m_LocalPosition: {x: 0, y: 0, z: 6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -629,6 +638,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e1b967e66940841a6db1c939008c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1160128690
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160128686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20, y: 20, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1261214144
 GameObject:
   m_ObjectHideFlags: 0

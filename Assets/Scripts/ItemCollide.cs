@@ -18,6 +18,7 @@ public class ItemCollide : MonoBehaviour {
 					GameControl.control.inventory.Add(itemString);
 				}
 				Destroy(gameObject);
+				GameControl.control.draggingItem = false;
 			}
 		} else if (col.gameObject.tag == "Trough"){
 			if (GameControl.control.trough){

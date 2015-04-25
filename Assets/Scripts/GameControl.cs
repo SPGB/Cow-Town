@@ -12,6 +12,7 @@ public class GameControl : MonoBehaviour {
 	
 	public bool pause;
 	public String version = "0.01A";
+	public bool titleScreen = true;
 
 	public float native_width = 399.0f;
 	public float native_height = 638.0f;
@@ -74,6 +75,16 @@ public class GameControl : MonoBehaviour {
 	public Vector2 buttonSize = new Vector2(128, 64);
 	public float templateHeight = 640;
 	public float screenMulti;
+	
+	public bool draggingItem = false;
+	public bool shopDragged = false;
+	public bool statDragged = false;
+	public float shopOffset;
+	public float statOffset;
+	public float dragStart = 0;
+	public float dragDifference = 0;
+	
+	private float runonce = 0;
 
 	// Use this for initialization
 	void Awake () {
@@ -117,6 +128,9 @@ public class GameControl : MonoBehaviour {
 			statsRandomized = true;
 		}
 
+		statOffset = Screen.width;
+		shopOffset = 0 - Screen.width;
+
 	}
 	
 	void Update () {
@@ -147,8 +161,10 @@ public class GameControl : MonoBehaviour {
 		
 		if (pause){
 			Time.timeScale = 0.0f;
+			gameObject.transform.position = new Vector3(0.0f, 0.0f, 3.0f);
 		} else {
 			Time.timeScale = 1.0f;
+			gameObject.transform.position = new Vector3(0.0f, 0.0f, 6.0f);
 		}
 	
 		if (Input.GetKey(KeyCode.Escape)){
@@ -228,7 +244,119 @@ public class GameControl : MonoBehaviour {
 					inventory.Add("empty\n0\n0\n0\ncommon");
 				}
 			}
+
+			if (Application.loadedLevelName == "title") titleScreen = true;
+			else titleScreen = false;
+
+			if (statOffset < 0) {
+				statOffset = 0;
+				shopOffset = 0 - (Screen.width * 2);
+			} else if (statOffset > Screen.width * 2){
+				statOffset = Screen.width * 2;
+				shopOffset = 0;
+			}
+			if (shopOffset > 0) {
+				shopOffset = 0;
+				statOffset = Screen.width * 2;
+			} else if (shopOffset < 0 - (Screen.width * 2)){
+				shopOffset = 0 - (Screen.width * 2);
+				statOffset = 0;
+			}
 		}
+	}
+
+	void OnMouseDrag(){
+
+		if (runonce > 0){
+			runonce = 1;
+		} else {
+			dragStart = Input.mousePosition.x;
+		}
+		runonce++;
+
+		// Stats = dragging left
+		// Shop = dragging right
+
+		if (!draggingItem && !titleScreen) {
+			pause = true;
+			dragDifference = Input.mousePosition.x - dragStart;
+
+			if (statDragged){
+				if (dragDifference < -1) {
+					dragDifference = 0;
+				}
+
+				statOffset = 0 + dragDifference;
+				shopOffset = (0 - (Screen.width * 2)) + dragDifference;
+
+			} else if (shopDragged){
+				if (dragDifference > 1) {
+					dragDifference = 0;
+				}
+
+				statOffset = (Screen.width * 2) + dragDifference;
+				shopOffset = 0 + dragDifference;
+
+			} else {
+				statOffset = Screen.width + dragDifference;
+				shopOffset = (0 - Screen.width) + dragDifference;
+			}
+		}
+	}
+
+	void OnMouseUp(){
+
+		// Stats = dragging left
+		// Shop = dragging right
+
+		if (statDragged) {
+			if (statOffset > Screen.width / 2) {
+				statOffset = Screen.width;
+				shopOffset = 0 - Screen.width;
+				statDragged = false;
+				pause = false;
+			} else {
+				statOffset = 0;
+				shopOffset = 0 - (Screen.width * 2);
+				pause = true;
+			}
+		} else if (shopDragged) {
+			if (shopOffset < 0 - (Screen.width / 2)) {
+				statOffset = Screen.width;
+				shopOffset = 0 - Screen.width;
+				shopDragged = false;
+				pause = false;
+			} else {
+				statOffset = Screen.width * 2;
+				shopOffset = 0;
+				pause = true;
+			}
+		} else {
+			if (shopOffset > 0 - (Screen.width / 2)) {
+				statOffset = Screen.width * 2;
+				shopOffset = 0;
+				shopDragged = true;
+				Save();
+				pause = true;
+			} else if (statOffset < Screen.width / 2) {
+				statOffset = 0;
+				shopOffset = 0 - (Screen.width * 2);
+				statDragged = true;
+				Save();
+				pause = true;
+			} else {
+				statOffset = Screen.width;
+				shopOffset = 0 - Screen.width;
+				statDragged = false;
+				shopDragged = false;
+				pause = false;
+			}
+		}
+
+		dragDifference = 0;
+		dragStart = 0;
+		
+		runonce = 0;
 	}
 	
 	void OnDestroy () {

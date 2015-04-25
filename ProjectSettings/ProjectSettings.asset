@@ -121,7 +121,7 @@ PlayerSettings:
   iOSLaunchScreenCustomXibPath: 
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
-  AndroidKeystoreName: C:/Users/Avow/Documents/cow town/user2.keystore
+  AndroidKeystoreName: C:/Users/Jordan/Documents/GitRepo/CowTown/user2.keystore
   AndroidKeyaliasName: cow town
   AndroidTVCompatibility: 1
   AndroidIsGame: 1

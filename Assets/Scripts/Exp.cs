@@ -17,7 +17,6 @@ public class Exp : MonoBehaviour { //experience bar for cow
 	}
 
 	void Update () {
-
 		GameControl.control.level = (100 * (GameControl.control.exp / (GameControl.control.exp + 1000)));
 		barMulti = GameControl.control.level - (Mathf.Floor(GameControl.control.level));
 		expBarLength = expBarMaxLength * barMulti;
