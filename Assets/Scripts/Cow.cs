@@ -290,14 +290,6 @@ public class Cow : MonoBehaviour {
 				}
 			}
 			
-			//if (GUI.Button(new Rect(width - (50 * GameControl.control.screenMulti), 10 * GameControl.control.screenMulti, (30 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), closeButton, GUIStyle.none)){
-			//	GameControl.control.pause = false;
-			//	shop = false;
-			//}
-			
-			//if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, ((GameControl.control.buttonSize.x / 2) * GameControl.control.screenMulti), ((GameControl.control.buttonSize.y / 2) * GameControl.control.screenMulti)), shopButton, GUIStyle.none)){
-			//	shop = !shop;
-			//}
 		GUI.EndGroup();
 
 		// Item popups

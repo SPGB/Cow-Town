@@ -192,14 +192,7 @@ public class GameControl : MonoBehaviour {
 			}
 			updateTime1 = DateTime.Now;
 		}
-		/*
-			if (troughCurExp > troughMaxExp){
-				troughCurExp = troughMaxExp;
-			}
-			if (troughCurExp < 0.0f){
-				troughCurExp = 0.0f;
-			}
-		*/
+	
 		if (happiness > happinessMax){
 			happiness = happinessMax;
 		}
@@ -274,9 +267,6 @@ public class GameControl : MonoBehaviour {
 		}
 		runonce++;
 
-		// Stats = dragging left
-		// Shop = dragging right
-
 		if (!draggingItem && !titleScreen) {
 			pause = true;
 			dragDifference = Input.mousePosition.x - dragStart;
@@ -305,9 +295,6 @@ public class GameControl : MonoBehaviour {
 	}
 
 	void OnMouseUp(){
-
-		// Stats = dragging left
-		// Shop = dragging right
 
 		if (statDragged) {
 			if (statOffset > Screen.width / 2) {
