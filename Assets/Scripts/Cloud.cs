@@ -4,19 +4,19 @@ using System.Collections;
 public class Cloud : MonoBehaviour {
 	public bool direction_right = true;
 
-	// Use this for initialization
+	private float range_min = 0.0001f;
+	private float range_max = 0.005f;
 	void Start () {
 	
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		if (!GameControl.control.pause){
 			Vector3 temp = transform.position;
 			if (direction_right) {
-				temp.x += Random.Range(0.0001f, 0.005f);
+				temp.x += Random.Range(range_min, range_max);
 			} else {
-				temp.x -= Random.Range(0.0001f, 0.005f);
+				temp.x -= Random.Range(range_min, range_max);
 			}
 			
 			transform.position = temp;

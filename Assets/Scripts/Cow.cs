@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class Cow : MonoBehaviour {
 
+	//textures
 	public Texture menu;
 	public Texture closeButton;
 	public Texture shopButton;
@@ -18,12 +19,11 @@ public class Cow : MonoBehaviour {
 	public Texture switch2;
 	public Texture switch3;
 	
-//	private bool shop;
 	
 	public int nullItems;
 	
+	//game objects
 	public GameObject items;
-	
 	public GameObject item1;
 	public GameObject item2;
 	public GameObject item3;
@@ -38,23 +38,14 @@ public class Cow : MonoBehaviour {
 	private Vector2 selected1Pos;
 	private Vector2 selected2Pos;
 	
-	/*
-	public string[] inventory = new string[12];
-	public string[] inv_names = new string[12];
-	public string[] inv_int = new string[12];
-	public string[] inv_str = new string[12];
-	public string[] inv_con = new string[12];
-	public string[] inv_rarity = new string[12];
-	**/
-	
-	//public List<string> inventory = new List<string>();
+	//list
 	public List<string> inv_names = new List<string>();
 	public List<string> inv_int = new List<string>();
 	public List<string> inv_str = new List<string>();
 	public List<string> inv_con = new List<string>();
 	public List<string> inv_rarity = new List<string>();
 	
-	// Use this for initialization
+
 	void Start () {
 		GameControl.control.cow = this;
 		
@@ -79,10 +70,10 @@ public class Cow : MonoBehaviour {
 		selected2 = -1;
 	}
 	
-	// Update is called once per frame
+
 	void Update () {
 		
-		for (int i = 0; i < GameControl.control.inventory.Count; i++){
+		for (int i = 0; i < GameControl.control.inventory.Count; i++){ //draw inventory
 			string[] split = GameControl.control.inventory[i].Split();
 			inv_names[i] = split[0].ToString();
 			inv_int[i] = split[1].ToString();
@@ -91,6 +82,7 @@ public class Cow : MonoBehaviour {
 			inv_rarity[i] = split[4].ToString();
 		}
 		
+
 		item1 = (GameObject)Resources.Load("items/prefabs/" + inv_names[0], typeof(GameObject));
 		item1.transform.localPosition = new Vector3(item1.transform.localPosition.x, item1.transform.localPosition.y, -0.05f);
 		item2 = (GameObject)Resources.Load("items/prefabs/" + inv_names[1], typeof(GameObject));
@@ -137,13 +129,6 @@ public class Cow : MonoBehaviour {
 		GameControl.control.inventory[itemInt2] = switch1;
 	}
 	
-	//void OnMouseDown () {
-	//	if (!GameControl.control.pause){
-	//		GameControl.control.pause = true;
-	//		GameControl.control.Save();
-	//		Debug.Log("SAVING ON COW CLICK");
-	//	}
-	//}
 	
 	void OnGUI () {
 
@@ -153,17 +138,10 @@ public class Cow : MonoBehaviour {
 		if (GUI.skin.customStyles.Length > 0) {
 			GUI.skin.customStyles[0].onActive.textColor = Color.white;
 		}
-		/**
-		float rx = Screen.width / GameControl.control.native_width;
-		float ry = Screen.height / GameControl.control.native_height;
-		GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(rx, ry, 1));
-		*/
 
 		GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 		float width = Screen.width;
 		float height = Screen.height;
-		// Create one Group to contain both images
-		// Adjust the first 2 coordinates to place it somewhere else on-screen
 		
 		// Draw the background image for shop
 		GUI.BeginGroup(new Rect (shopOffset, 0, width, height)); // left, top, width, height
@@ -220,7 +198,7 @@ public class Cow : MonoBehaviour {
 		// End both Groups
 		GUI.EndGroup();
 
-		// Stat stuff
+		// Stats
 		GUI.BeginGroup(new Rect (statOffset, 0, Screen.width, Screen.height)); // left, top, width, height
 			bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
 			//Trough trough_obj = GameControl.control.trough;
