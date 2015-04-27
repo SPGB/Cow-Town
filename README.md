@@ -1,5 +1,6 @@
 # Cow-Town
-*IN DEVELOPMENT*
+
+![Screenshot](https://s3-us-west-2.amazonaws.com/samgb.com/cow+town+screenshot1.png)
 
 ###Features
 * Cow levels, the cow levels up when a certain amount of exp is reached, the required amount raises every level.
