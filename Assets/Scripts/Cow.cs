@@ -128,14 +128,6 @@ public class Cow : MonoBehaviour {
 		GameControl.control.inventory[itemInt1] = switch2;
 		GameControl.control.inventory[itemInt2] = switch1;
 	}
-
-	void OnMouseDrag () {
-		GameObject.Find ("gameControl").transform.position = new Vector3 (0.0f, 0.0f, 1.0f);
-	}
-
-	void OnMouseUp () {
-		GameObject.Find ("gameControl").transform.position = new Vector3 (0.0f, 0.0f, 6.0f);
-	}
 	
 	
 	void OnGUI () {
@@ -146,7 +138,7 @@ public class Cow : MonoBehaviour {
 		if (GUI.skin.customStyles.Length > 0) {
 			GUI.skin.customStyles[0].onActive.textColor = Color.white;
 		}
-		
+
 		GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 		float width = Screen.width;
 		float height = Screen.height;
@@ -286,8 +278,8 @@ public class Cow : MonoBehaviour {
 		GUI.BeginGroup(new Rect (shopOffset, 0, width, height));
 			GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.95f);
 			GUI.DrawTexture(new Rect(0, 0, width, height), menu);
-//			GUI.DrawTexture(new Rect((width - 100) * GameControl.control.screenMulti, 5 * GameControl.control.screenMulti, 90, 45), moneyBackground);
-//			GUI.Label(new Rect((width - 70) * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, 100, 100), "" + GameControl.control.money, GameControl.control.cowText);
+			GUI.DrawTexture(new Rect((width - 100) * GameControl.control.screenMulti, 5 * GameControl.control.screenMulti, 90, 45), moneyBackground);
+			GUI.Label(new Rect((width - 70) * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, 100, 100), "" + GameControl.control.money, GameControl.control.cowText);
 			
 			GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, (215 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankShopButton); // Trough upgrade
 			GUI.Label(new Rect(15 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 100, 100), "Trough Max +25, $500", GameControl.control.text); // Trough upgrade

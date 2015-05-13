@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30d5d1e8148b8544be32aba0899c5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyBackground: {fileID: 0}
+  deleteSaveButton: {fileID: 2800000, guid: 23ea3e1f6d71ef9419e7526dbdd6bac9, type: 3}
 --- !u!1 &155977064
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30d5d1e8148b8544be32aba0899c5b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyBackground: {fileID: 2800000, guid: f997c4452d66ee04cbceb50271b70e7d, type: 3}
+  deleteSaveButton: {fileID: 2800000, guid: 23ea3e1f6d71ef9419e7526dbdd6bac9, type: 3}
 --- !u!114 &394633392
 MonoBehaviour:
   m_ObjectHideFlags: 0
