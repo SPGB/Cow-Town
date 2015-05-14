@@ -396,6 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pause: 0
   version: 0.01A
+  titleScreen: 1
   native_width: 800
   native_height: 1280
   popup: {fileID: 100000, guid: 59a81cc1fb535af449edcdf6e0e9e260, type: 2}
@@ -593,7 +594,7 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 0}
-    m_FontSize: 0
+    m_FontSize: 30
     m_FontStyle: 0
     m_Alignment: 0
     m_WordWrap: 0
