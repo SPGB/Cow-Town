@@ -28,10 +28,13 @@ public class TitleScreen : MonoBehaviour {
 		GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(rx, ry, 1));
 		*/
 
-		GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+		GUI.color = new Color (1.0f, 1.0f, 1.0f, 1.0f);
 		float xPos = Screen.width;
 		float yPos = Screen.height;
-		float button_pos_y = (yPos / 2) + ((GameControl.control.buttonSize.y * GameControl.control.screenMulti) + 10) - ((GameControl.control.buttonSize.y * GameControl.control.screenMulti) / 2);
+		float button_pos_y = 0;
+		if (GameControl.control) {
+			button_pos_y = (yPos / 2) + ((GameControl.control.buttonSize.y * GameControl.control.screenMulti) + 10) - ((GameControl.control.buttonSize.y * GameControl.control.screenMulti) / 2);
+		}
 		// Create one Group to contain both images
 		// Adjust the first 2 coordinates to place it somewhere else on-screen
 		GUI.BeginGroup(new Rect (0, 0, xPos, yPos)); // left, top, width, height
