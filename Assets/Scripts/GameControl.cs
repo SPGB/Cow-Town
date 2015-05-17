@@ -279,10 +279,17 @@ public class GameControl : MonoBehaviour {
 		runonce++;
 
 		if (!draggingItem && !titleScreen) {
-			pause = true;
-			dragDifference = Input.mousePosition.x - dragStart;
+			if (!statDragged && !shopDragged){
+				if (dragStart <= 0 + (Screen.width / 10) || dragStart >= Screen.width - (Screen.width / 10)){
+					pause = true;
+					dragDifference = Input.mousePosition.x - dragStart;
+				}
+			}
 
 			if (statDragged){
+				pause = true;
+				dragDifference = Input.mousePosition.x - dragStart;
+
 				if (dragDifference < -1) {
 					dragDifference = 0;
 				}
@@ -291,6 +298,9 @@ public class GameControl : MonoBehaviour {
 				shopOffset = (0 - (Screen.width * 2)) + dragDifference;
 
 			} else if (shopDragged){
+				pause = true;
+				dragDifference = Input.mousePosition.x - dragStart;
+
 				if (dragDifference > 1) {
 					dragDifference = 0;
 				}
