@@ -9,9 +9,7 @@ public class HayCollide : MonoBehaviour {
 
 	void OnCollisionStay(Collision col){
 		//Debug.Log(col.gameObject.tag);
-		if (col.gameObject.tag == "Cow"){
-			if (transform.position.z == 4.6f){
-			
+		if (GameControl.control.draggingItem && col.gameObject.tag == "Cow"){
 				GameControl.control.happiness += happiness_mod;
 				
 				GameObject new_popup = (GameObject) Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
@@ -26,22 +24,23 @@ public class HayCollide : MonoBehaviour {
 				if (hayValue == 5){
 					GameControl.control.totalSpecial++;
 				}
+		}
+		if (col.gameObject.tag == "Trough"){
+			int hay_real_value = 0;
+			if (hayValue < 0 || GameControl.control.troughExp <= (GameControl.control.troughMaxExp - hayValue)){
+				hay_real_value = hayValue;
 			}
-			
-		} else if (col.gameObject.tag == "Trough"){
-			if (happiness_mod > 0 && GameControl.control.trough){
-				if (GameControl.control.troughExp <= (GameControl.control.troughMaxExp - hayValue)){
-					GameControl.control.troughExp += hayValue;
-					GameControl.control.totalHay++;
-					if (hayValue == 5){ GameControl.control.totalSpecial++; }
+			GameControl.control.troughExp += hay_real_value;
+			GameControl.control.happiness += happiness_mod;
 
-					GameObject new_popup = (GameObject) Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
-					new_popup.GetComponent<CowExpPopup>().val = ( (happiness_mod > 0)? "+" : "") + happiness_mod.ToString();
-				}
-				Destroy(gameObject);
+			if (happiness_mod > 0 && GameControl.control.happiness >= GameControl.control.happinessMax) {
+				GameControl.control.totalHay++;
 			}
+			if (hayValue == 5){ GameControl.control.totalSpecial++; }
 
-
+			GameObject new_popup = (GameObject) Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
+			new_popup.GetComponent<CowExpPopup>().val = ( (happiness_mod > 0)? "+" : "") + happiness_mod.ToString();
+			Destroy(gameObject);
 		}
 	}
 	

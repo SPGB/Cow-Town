@@ -23,11 +23,8 @@ public class SpawnHay : MonoBehaviour {
 		bool is_coin = Random.Range(0, 5) < 2;
 		GameObject new_object = (is_rock)? prefab_rock : ((is_coin)? prefab_coin : prefab_hay);
 
-		if (!is_rock) {
-			Instantiate (new_object, new Vector3 (Random.Range (GameControl.control.screenSizeX1.x, GameControl.control.screenSizeX2.x), GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity);
-		} else {
-			Instantiate (new_object, new Vector3 (Random.Range (GameControl.control.screenSizeX1.x, GameControl.control.screenSizeX2.x), GameControl.control.screenSizeY.y, 4.6f), Quaternion.identity);
-		}
+		Instantiate (new_object, new Vector3 (Random.Range (GameControl.control.screenSizeX1.x + 20, GameControl.control.screenSizeX2.x - 20), GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity);
+
 
 		//We've spawned, so now we could start another spawn     
 		is_spawning = false;

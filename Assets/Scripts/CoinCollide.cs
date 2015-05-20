@@ -6,9 +6,7 @@ public class CoinCollide : MonoBehaviour {
 	
 	void OnCollisionStay(Collision col){
 
-		if (col.gameObject.tag == "Cow"){
-			if (transform.position.z == 4.6f){
-				
+		if (col.gameObject.tag == "Cow" || col.gameObject.tag == "Trough"){
 				GameControl.control.money++;
 				
 				GameObject new_popup = (GameObject) Instantiate(popup, new Vector3(transform.position.x, transform.position.y, 4.5f), Quaternion.identity);
@@ -16,8 +14,6 @@ public class CoinCollide : MonoBehaviour {
 				
 				Destroy(gameObject);
 				GameControl.control.draggingItem = false;
-			}
-			
 		}
 	}
 }

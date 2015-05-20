@@ -318,7 +318,7 @@ public class GameControl : MonoBehaviour {
 	void OnMouseUp(){
 
 		if (statDragged) {
-			if (statOffset > Screen.width / 4) {
+			if (statOffset > Screen.width / 8) {
 				statOffset = Screen.width;
 				shopOffset = 0 - Screen.width;
 				statDragged = false;
@@ -329,7 +329,7 @@ public class GameControl : MonoBehaviour {
 				pause = true;
 			}
 		} else if (shopDragged) {
-			if (shopOffset < 0 - (Screen.width / 4)) {
+			if (shopOffset < 0 - (Screen.width / 8)) {
 				statOffset = Screen.width;
 				shopOffset = 0 - Screen.width;
 				shopDragged = false;
@@ -340,13 +340,13 @@ public class GameControl : MonoBehaviour {
 				pause = true;
 			}
 		} else {
-			if (shopOffset > 0 - (Screen.width / 2) - (Screen.width / 4)) {
+			if (shopOffset > 0 - (Screen.width / 2) - (Screen.width / 8)) {
 				statOffset = Screen.width * 2;
 				shopOffset = 0;
 				shopDragged = true;
 				Save();
 				pause = true;
-			} else if (statOffset < (Screen.width / 2) + (Screen.width / 4)) {
+			} else if (statOffset < (Screen.width / 2) + (Screen.width / 8)) {
 				statOffset = 0;
 				shopOffset = 0 - (Screen.width * 2);
 				statDragged = true;

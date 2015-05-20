@@ -12,11 +12,11 @@ public class Trough : MonoBehaviour {
 	private float amount;
 //	public float exp = 0f;
 //	public float max_exp = 50.0f;
-	public float bar_offset_y = 434f;
-	public float bar_offset_x = 112f;
+	public float bar_offset_y = 490f;
+	public float bar_offset_x = 74f;
 	public float bar_multi = 4.8f;
 	public float bar_width;
-	public float bar_height = 28;
+	public float bar_height = 20;
 	public Texture foreground_texture;
 	
 	private float dist_from_edge = 1.0f;
