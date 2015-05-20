@@ -71,6 +71,11 @@ public class GameControl : MonoBehaviour {
 	public GUIStyle text;
 	public GUIStyle stats;
 	public GUIStyle cowText;
+	public GUIStyle moneyText;
+
+	public float textMulti = 20;
+	public float statTextMulti = 16;
+	public float moneyTextMulti = 28;
 
 	public Vector2 buttonSize = new Vector2(128, 64);
 	public float templateHeight = 640;
@@ -109,6 +114,10 @@ public class GameControl : MonoBehaviour {
 		cowText = new GUIStyle();
 		cowText.fontSize = 20;
 		cowText.normal.textColor = Color.white;
+
+		moneyText = new GUIStyle();
+		moneyText.fontSize = 28;
+		moneyText.normal.textColor = Color.white;
 		
 		updateTime1 = DateTime.Now;
 		
@@ -137,12 +146,14 @@ public class GameControl : MonoBehaviour {
 		screenMulti = (Screen.height / templateHeight);
 		//Debug.Log(screenMulti);
 
+		float moneyTextScale = 28 * screenMulti;
 		float textScale = 20 * screenMulti;
 		float statScale = 16 * screenMulti;
 
 		text.fontSize = (int)textScale;
 		stats.fontSize = (int)statScale;
 		cowText.fontSize = (int)textScale;
+		moneyText.fontSize = (int)moneyTextScale;
 
 		update_camera ();
 
@@ -268,10 +279,17 @@ public class GameControl : MonoBehaviour {
 		runonce++;
 
 		if (!draggingItem && !titleScreen) {
-			pause = true;
-			dragDifference = Input.mousePosition.x - dragStart;
+			if (!statDragged && !shopDragged){
+				if (dragStart <= 0 + (Screen.width / 10) || dragStart >= Screen.width - (Screen.width / 10)){
+					pause = true;
+					dragDifference = Input.mousePosition.x - dragStart;
+				}
+			}
 
 			if (statDragged){
+				pause = true;
+				dragDifference = Input.mousePosition.x - dragStart;
+
 				if (dragDifference < -1) {
 					dragDifference = 0;
 				}
@@ -280,6 +298,9 @@ public class GameControl : MonoBehaviour {
 				shopOffset = (0 - (Screen.width * 2)) + dragDifference;
 
 			} else if (shopDragged){
+				pause = true;
+				dragDifference = Input.mousePosition.x - dragStart;
+
 				if (dragDifference > 1) {
 					dragDifference = 0;
 				}

@@ -26,7 +26,7 @@ public class CowExpPopup : MonoBehaviour {
 		if (die >= 60){
 			Destroy(gameObject);
 		}
-		Vector3 temp = new Vector3(0f,-0.02f,0);
+		Vector3 temp = new Vector3(0f,-0.05f,0);
 		transform.position += temp; 
 		die++;
 	}

@@ -213,10 +213,7 @@ public class Cow : MonoBehaviour {
 			float troughExp = GameControl.control.troughExp;
 			float troughMaxExp = GameControl.control.troughMaxExp;
 			
-			GameControl.control.cowText.fontSize = 28;
-			GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), "Betty", GameControl.control.cowText);
-			GameControl.control.cowText.fontSize = 16;
-			GameControl.control.cowText.fontStyle = FontStyle.Normal;
+			GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), "Betty", GameControl.control.moneyText);
 
 			if (GameControl.control.happiness < 0.1f){
 				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
@@ -238,12 +235,12 @@ public class Cow : MonoBehaviour {
 				int troughHours = (int)Mathf.Floor((troughExp * 2) / 60);
 				int troughMinutes = (int)((troughExp * 2) - (60 * troughHours));
 				if (troughMinutes > 0){
-					GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "Trough:", GameControl.control.text);
+					GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "Trough:", GameControl.control.cowText);
 					GUI.Label(new Rect(10, 120 * GameControl.control.screenMulti, 100, 100), "\t\t " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.cowText);
 					GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "\t\t (" + troughHours.ToString("F0") + " hours and", GameControl.control.cowText);
 					GUI.Label(new Rect(10, 160 * GameControl.control.screenMulti, 100, 100), "\t\t " + troughMinutes.ToString("F0") + " minutes)", GameControl.control.cowText);
 				} else {
-					GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "Trough:", GameControl.control.text);
+					GUI.Label(new Rect(10, 140 * GameControl.control.screenMulti, 100, 100), "Trough:", GameControl.control.cowText);
 					GUI.Label(new Rect(10, 130 * GameControl.control.screenMulti, 100, 100), "\t\t " + troughExp.ToString() + " / " + troughMaxExp.ToString(), GameControl.control.cowText);
 					GUI.Label(new Rect(10, 150 * GameControl.control.screenMulti, 100, 100), "\t\t (" + troughHours.ToString("F0") + " hours)", GameControl.control.cowText);
 				}

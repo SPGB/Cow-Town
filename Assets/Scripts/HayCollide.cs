@@ -30,7 +30,7 @@ public class HayCollide : MonoBehaviour {
 			
 		} else if (col.gameObject.tag == "Trough"){
 			if (happiness_mod > 0 && GameControl.control.trough){
-				if (GameControl.control.troughExp < (GameControl.control.troughMaxExp - hayValue)){
+				if (GameControl.control.troughExp <= (GameControl.control.troughMaxExp - hayValue)){
 					GameControl.control.troughExp += hayValue;
 					GameControl.control.totalHay++;
 					if (hayValue == 5){ GameControl.control.totalSpecial++; }

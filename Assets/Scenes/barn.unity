@@ -543,12 +543,8 @@ MonoBehaviour:
   prefab_hay: {fileID: 100000, guid: 78023d171ece2b4408b5272b96d88d1f, type: 2}
   prefab_rock: {fileID: 149734, guid: fa0c53c5e4a69f14a83db8f4cac631c7, type: 2}
   prefab_coin: {fileID: 100000, guid: 3fdff71ba10508f4794c87cfdb5b5302, type: 2}
-  chanceRange: {x: 0, y: 100, z: 50}
-  chanceX: 0
-  chanceY: 0
-  chance: 0
-  happen: 0
-  regulatorCap: 2
+  minTime: 1
+  maxTime: 5
 --- !u!114 &394633393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,12 +559,8 @@ MonoBehaviour:
   prefab_hay: {fileID: 149734, guid: fa0c53c5e4a69f14a83db8f4cac631c7, type: 2}
   prefab_rock: {fileID: 100000, guid: 78023d171ece2b4408b5272b96d88d1f, type: 2}
   prefab_coin: {fileID: 100000, guid: 3fdff71ba10508f4794c87cfdb5b5302, type: 2}
-  chanceRange: {x: 0, y: 5000, z: 2500}
-  chanceX: 0
-  chanceY: 0
-  chance: 0
-  happen: 0
-  regulatorCap: 4
+  minTime: 1
+  maxTime: 5
 --- !u!212 &394633394
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2335,6 +2327,68 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  moneyText:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  textMulti: 20
+  statTextMulti: 16
+  moneyTextMulti: 28
   buttonSize: {x: 128, y: 64}
   templateHeight: 640
   screenMulti: 0
