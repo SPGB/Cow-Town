@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +29,10 @@ public class Cow : MonoBehaviour {
 	public GameObject item2;
 	public GameObject item3;
 	public GameObject item4;
-	
+
+	//text
+	public GameObject floatText;
+
 	public DateTime born;
 	public DateTime now;
 	public TimeSpan age;
@@ -313,5 +317,31 @@ public class Cow : MonoBehaviour {
 				GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (335 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_int[selected1], GameControl.control.stats);
 			}
 		GUI.EndGroup();
+	}
+
+	public void feed(int amount) {
+		GameControl.control.happiness += amount;
+		GameObject temp = initFloatText(amount.ToString ());
+		temp.GetComponent<Animator>().SetTrigger("hit");
+	}
+	public void award(string text) {
+		GameObject temp = initFloatText(text);
+		temp.GetComponent<Animator>().SetTrigger("award");
+	}
+	GameObject initFloatText(string text) {
+		Debug.Log("New hit: " + text);
+		GameObject temp = Instantiate (floatText) as GameObject;
+		temp.SetActive (true);
+
+		RectTransform tempRect = temp.GetComponent<RectTransform>();
+		temp.transform.SetParent(transform.FindChild("Canvas"));
+		tempRect.transform.localPosition = floatText.transform.localPosition;
+		tempRect.transform.localScale = floatText.transform.localScale;
+
+		temp.GetComponent<Text>().text = text;
+
+
+		Destroy (temp.gameObject, 1);
+		return temp;
 	}
 }

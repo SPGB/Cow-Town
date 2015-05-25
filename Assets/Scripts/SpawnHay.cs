@@ -8,8 +8,8 @@ public class SpawnHay : MonoBehaviour {
 	public GameObject prefab_coin;
 
 	bool is_spawning = false;
-	public float minTime = 1.0f;
-	public float maxTime = 5.0f;
+	private float minTime = 1.0f;
+	private float maxTime = 3.0f;
 	void Start () {
 		Debug.Log("Screen to World: X: " + GameControl.control.screenSizeX1.x + " / " + GameControl.control.screenSizeX2.x + " | Y: " + GameControl.control.screenSizeY.y);
 	}

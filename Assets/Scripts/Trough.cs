@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Trough : MonoBehaviour {
@@ -6,20 +7,13 @@ public class Trough : MonoBehaviour {
 	private GameObject wheel1;
 	private GameObject wheel2;
 	private GameObject wheel3;
-	
+	public GameObject bar;
 	private Vector3 mousePos;
 	
 	private float amount;
-//	public float exp = 0f;
-//	public float max_exp = 50.0f;
-	public float bar_offset_y = 490f;
-	public float bar_offset_x = 74f;
-	public float bar_multi = 4.8f;
-	public float bar_width;
-	public float bar_height = 20;
 	public Texture foreground_texture;
 	
-	private float dist_from_edge = 1.0f;
+	private float dist_from_edge = -1.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -54,8 +48,8 @@ public class Trough : MonoBehaviour {
 		wheel1.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
 		wheel2.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
 		wheel3.transform.Rotate(0.0f, 0.0f, amount * 50, Space.Self);
-		
-		bar_width = (50f * bar_multi) * (GameControl.control.troughExp / GameControl.control.troughMaxExp);
+
+		bar.GetComponent<Image>().fillAmount = GameControl.control.troughExp / GameControl.control.troughMaxExp;
 	}
 	
 	void OnMouseDrag () {
@@ -67,31 +61,4 @@ public class Trough : MonoBehaviour {
 	void OnMouseUp () {
 		amount = 0.0f;
 	} 
-
-	void OnGUI () {
-		if (GameControl.control.pause) return;
-		Vector3 trough = gameObject.transform.position;
-		Vector3 trans = Camera.main.WorldToScreenPoint(new Vector3(trough.x, trough.y, trough.z));
-		GUI.BeginGroup (new Rect (trans.x - (bar_offset_x * GameControl.control.screenMulti), trans.y + (bar_offset_y * GameControl.control.screenMulti), (GameControl.control.troughMaxExp * bar_multi) * GameControl.control.screenMulti, bar_height * GameControl.control.screenMulti));
-		GUI.BeginGroup (new Rect (0,0, bar_width * GameControl.control.screenMulti, bar_height * GameControl.control.screenMulti));
-		// Draw the foreground image
-		GUI.DrawTexture (new Rect (0,0, (50f * bar_multi), bar_height), foreground_texture);
-		// End both Groups
-		GUI.EndGroup ();
-		GUI.EndGroup ();
-	}
-	/**
-	public void set_exp(float new_exp) {
-		exp = new_exp;
-	}
-	public float get_exp() {
-		return exp;
-	}
-	public void set_max_exp(float new_max_exp){
-		max_exp = new_max_exp;
-	}
-	public float get_max_exp() {
-		return max_exp;
-	}
-	**/
 }
