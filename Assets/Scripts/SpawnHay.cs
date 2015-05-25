@@ -8,8 +8,8 @@ public class SpawnHay : MonoBehaviour {
 	public GameObject prefab_coin;
 
 	bool is_spawning = false;
-	private float minTime = 1.0f;
-	private float maxTime = 3.0f;
+	private float minTime = 2.0f;
+	private float maxTime = 4.0f;
 	void Start () {
 		Debug.Log("Screen to World: X: " + GameControl.control.screenSizeX1.x + " / " + GameControl.control.screenSizeX2.x + " | Y: " + GameControl.control.screenSizeY.y);
 	}
@@ -23,10 +23,11 @@ public class SpawnHay : MonoBehaviour {
 		bool is_coin = Random.Range(0, 5) < 2;
 		GameObject new_object = (is_rock)? prefab_rock : ((is_coin)? prefab_coin : prefab_hay);
 
-		Instantiate (new_object, new Vector3 (Random.Range (GameControl.control.screenSizeX1.x + 20, GameControl.control.screenSizeX2.x - 20), GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity);
+		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
+		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
+		int pos_x = Random.Range ( (int) min_x.x, (int) max_x.x);
+		Instantiate (new_object, new Vector3 (pos_x, GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity);
 
-
-		//We've spawned, so now we could start another spawn     
 		is_spawning = false;
 	}
 

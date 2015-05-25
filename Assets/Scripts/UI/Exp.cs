@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Exp : MonoBehaviour { //experience bar for cow
@@ -17,24 +18,6 @@ public class Exp : MonoBehaviour { //experience bar for cow
 
 	void Update () {
 		GameControl.control.level = (100 * (GameControl.control.exp / (GameControl.control.exp + 1000)));
-		barMulti = GameControl.control.level - (Mathf.Floor(GameControl.control.level));
-		expBarLength = expBarMaxLength * barMulti;
-	}
-
-	void OnGUI () {
-		if (GameControl.control.pause) return;
-
-		GUI.BeginGroup (new Rect (transform.localPosition.x, transform.localPosition.y, expBarMaxLength * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti));
-		GUI.DrawTexture (new Rect (0,0, expBarMaxLength,10), background_texture); // Draw the background image
-		//Foreground
-		GUI.BeginGroup (new Rect (0,0, expBarLength * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti));
-		GUI.DrawTexture (new Rect (0,0, expBarLength, 10), foreground_texture);
-		GUI.EndGroup();
-		GUI.EndGroup ();
-
-		GUI.BeginGroup (new Rect (transform.localPosition.x + expBarMaxLength - 20f, transform.localPosition.y, expBarMaxLength * GameControl.control.screenMulti, 25 * GameControl.control.screenMulti));
-		GUI.Label(new Rect(0, 0, 100, 100), "Lvl " + Mathf.Floor(GameControl.control.level).ToString(), GameControl.control.text);
-		// End both Groups
-		GUI.EndGroup ();
+		this.GetComponent<Image>().fillAmount = GameControl.control.level - (Mathf.Floor(GameControl.control.level));
 	}
 }
