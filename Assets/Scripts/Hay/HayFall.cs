@@ -11,6 +11,7 @@ public class HayFall : MonoBehaviour {
 	private TimeSpan deleteTimeSpan;
 
 	// Update is called once per frame
+	/*
 	void Update () {
 		if (!GameControl.control.pause){
 			if (transform.position.y <= -3.25f){
@@ -27,4 +28,5 @@ public class HayFall : MonoBehaviour {
 			if (GetComponent<Rigidbody>().drag > 0.05f)	GetComponent<Rigidbody>().drag = GetComponent<Rigidbody>().drag - 0.025f;
 		}
 	}
+	*/
 }

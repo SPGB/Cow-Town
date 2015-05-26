@@ -321,8 +321,9 @@ public class Cow : MonoBehaviour {
 
 	public void feed(int amount) {
 		GameControl.control.happiness += amount;
-		GameObject temp = initFloatText(amount.ToString ());
-		temp.GetComponent<Animator>().SetTrigger("hit");
+		string amount_prefix = (amount > 0)? "+" : "";
+		GameObject temp = initFloatText(amount_prefix + amount.ToString ());
+		temp.GetComponent<Animator>().SetTrigger( (amount > 0)? "hit" : "miss" );
 	}
 	public void award(string text) {
 		GameObject temp = initFloatText(text);

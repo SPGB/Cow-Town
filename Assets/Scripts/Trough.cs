@@ -12,7 +12,10 @@ public class Trough : MonoBehaviour {
 	
 	private float amount;
 	public Texture foreground_texture;
-	
+
+	//text
+	public GameObject floatText;
+
 	private float dist_from_edge = -1.0f;
 
 	// Use this for initialization
@@ -61,4 +64,26 @@ public class Trough : MonoBehaviour {
 	void OnMouseUp () {
 		amount = 0.0f;
 	} 
+	public void store(int amount) {
+		GameControl.control.troughExp += amount;
+		string amount_prefix = (amount > 0)? "+" : "";
+		GameObject temp = initFloatText( amount_prefix + amount.ToString() );
+		temp.GetComponent<Animator>().SetTrigger( (amount > 0)? "hit" : "miss" );
+	}
+	GameObject initFloatText(string text) {
+		Debug.Log("New hit: " + text);
+		GameObject temp = Instantiate (floatText) as GameObject;
+		temp.SetActive (true);
+		
+		RectTransform tempRect = temp.GetComponent<RectTransform>();
+		temp.transform.SetParent(transform.FindChild("Canvas"));
+		tempRect.transform.localPosition = floatText.transform.localPosition;
+		tempRect.transform.localScale = floatText.transform.localScale;
+		
+		temp.GetComponent<Text>().text = text;
+		
+		
+		Destroy (temp.gameObject, 1);
+		return temp;
+	}
 }

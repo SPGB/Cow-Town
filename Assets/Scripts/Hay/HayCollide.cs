@@ -26,12 +26,13 @@ public class HayCollide : MonoBehaviour {
 			if (hayValue < 0 || GameControl.control.troughExp <= (GameControl.control.troughMaxExp - hayValue)){
 				hay_real_value = hayValue;
 			}
-
-			GameControl.control.troughExp += hay_real_value;
 			GameControl.control.cow.feed(happiness_mod);
 
-			if (happiness_mod > 0 && GameControl.control.happiness >= GameControl.control.happinessMax) {
-				GameControl.control.totalHay++;
+			if (happiness_mod > 0) {
+				if (GameControl.control.happiness >= GameControl.control.happinessMax) GameControl.control.totalHay++;
+				GameControl.control.trough.store(hay_real_value);
+			} else {
+				GameControl.control.trough.store( happiness_mod / 2 );
 			}
 			if (hayValue == 5){ GameControl.control.totalSpecial++; }
 			Destroy(gameObject);
