@@ -19,9 +19,9 @@ public class Cow : MonoBehaviour {
 	public Texture switch1;
 	public Texture switch2;
 	public Texture switch3;
-	
-	
+
 	public int nullItems;
+	public int inventoryRows = 1;
 	
 	//game objects
 	public GameObject items;
@@ -48,7 +48,6 @@ public class Cow : MonoBehaviour {
 	public List<string> inv_str = new List<string>();
 	public List<string> inv_con = new List<string>();
 	public List<string> inv_rarity = new List<string>();
-	
 
 	void Start () {
 		GameControl.control.cow = this;
@@ -85,7 +84,6 @@ public class Cow : MonoBehaviour {
 			inv_con[i] = split[3].ToString();
 			inv_rarity[i] = split[4].ToString();
 		}
-		
 
 		item1 = (GameObject)Resources.Load("items/prefabs/" + inv_names[0], typeof(GameObject));
 		item1.transform.localPosition = new Vector3(item1.transform.localPosition.x, item1.transform.localPosition.y, -0.05f);
@@ -155,6 +153,8 @@ public class Cow : MonoBehaviour {
 		float width = Screen.width;
 		float height = Screen.height;
 		
+		float curRate = GameObject.Find ("barHap").GetComponent<Happiness>().getRate();
+		
 		// Draw the background image for shop
 		GUI.BeginGroup(new Rect (shopOffset, 0, width, height)); // left, top, width, height
 			GUI.DrawTexture(new Rect (0, 0, width, height), menu);
@@ -171,7 +171,7 @@ public class Cow : MonoBehaviour {
 			GUI.Label(new Rect(35 * GameControl.control.screenMulti, (310 * GameControl.control.screenMulti), 100, 100), "Inventory: " + (GameControl.control.inventory.Count - nullItems), GameControl.control.cowText);
 			GUI.BeginGroup(new Rect(35 * GameControl.control.screenMulti, (335 * GameControl.control.screenMulti), (200 * GameControl.control.screenMulti), (150 * GameControl.control.screenMulti)));
 				int i = 0;
-				for (int y = 0; y < 3; y++){
+				for (int y = 0; y < inventoryRows; y++){
 					for (int x = 0; x < 4; x++){
 						GUI.BeginGroup(new Rect(0 + ((x * 50) * GameControl.control.screenMulti), 0 + ((y * 50) * GameControl.control.screenMulti), (50 * GameControl.control.screenMulti), (50 * GameControl.control.screenMulti)));
 							Texture image = (Texture)Resources.Load("items/textures/" + inv_names[i], typeof(Texture));
@@ -225,11 +225,11 @@ public class Cow : MonoBehaviour {
 			} else if (hapDif){
 				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
 				GUI.Label(new Rect(10, 70 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
-				GUI.Label(new Rect(10, 90 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happiness.ToString("F1") + "/5s)", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 90 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happiness.ToString("F1") + "/" + curRate + "s)", GameControl.control.cowText);
 			} else {
 				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
 				GUI.Label(new Rect(10, 70 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);
-				GUI.Label(new Rect(10, 90 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happinessLose.ToString("F1") + "/5s)", GameControl.control.cowText);
+				GUI.Label(new Rect(10, 90 * GameControl.control.screenMulti, 100, 100), "\t\t (-" + GameControl.control.happinessLose.ToString("F1") + "/" + curRate + "s)", GameControl.control.cowText);
 			}
 			
 			GUI.Label(new Rect(10, 105 * GameControl.control.screenMulti, 100, 100), "Experience:", GameControl.control.cowText);
@@ -292,16 +292,65 @@ public class Cow : MonoBehaviour {
 			GUI.DrawTexture(new Rect(0, 0, width, height), menu);
 //			GUI.DrawTexture(new Rect((width - 100) * GameControl.control.screenMulti, 5 * GameControl.control.screenMulti, 90, 45), moneyBackground);
 //			GUI.Label(new Rect((width - 70) * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, 100, 100), "" + GameControl.control.money, GameControl.control.cowText);
-			
-			GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, (215 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankShopButton); // Trough upgrade
-			GUI.Label(new Rect(15 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 100, 100), "Trough Max +25, $500", GameControl.control.text); // Trough upgrade
-			if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, 215 * GameControl.control.screenMulti, 30 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){ // Trough upgrade
-				if (GameControl.control.money > 500){
+		
+			int curRows = GameControl.control.cow.getInventoryRows();
+			float curMinTime = Camera.main.GetComponent<SpawnHay>().getMinTime();
+			float curMaxTime = Camera.main.GetComponent<SpawnHay>().getMaxTime();
+
+			// Trough upgrade
+			GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, Screen.width - (20 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankShopButton);
+			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 100, 100), "Trough Max +25", GameControl.control.stats);
+			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 60 * GameControl.control.screenMulti, 100, 100), "\t\t\t\t$50", GameControl.control.stats);
+			if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 55 * GameControl.control.screenMulti, Screen.width - (20 * GameControl.control.screenMulti), 30 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){
+				if (GameControl.control.money > 50){
+
 					GameControl.control.troughMaxExp += 25.0f;
-					GameControl.control.money -= 500;
+
+					GameControl.control.money -= 50;
 				}
 			}
-			
+			// Inventory upgrade
+			GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 95 * GameControl.control.screenMulti, Screen.width - (20 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankShopButton);
+			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 100 * GameControl.control.screenMulti, 100, 100), "Inventory Row +1", GameControl.control.stats);
+			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 100 * GameControl.control.screenMulti, 100, 100), (curRows == 3)? "\t\t\t\tMAXED" : "\t\t\t\t$50", GameControl.control.stats);
+			if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 95 * GameControl.control.screenMulti, Screen.width - (20 * GameControl.control.screenMulti), 30 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){
+				if (GameControl.control.money > 50 && curRows < 3){
+					
+					GameControl.control.cow.setInventoryRows(curRows + 1);
+					//GameControl.control.inventoryRows += 1;
+
+					GameControl.control.money -= 50;
+				}
+			}
+			// Hay spawn rate upgrade
+			GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 135 * GameControl.control.screenMulti, Screen.width - (20 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankShopButton);
+			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 140 * GameControl.control.screenMulti, 100, 100), "Increase Hay Rate +5%", GameControl.control.stats);
+			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 140 * GameControl.control.screenMulti, 100, 100), (curMinTime < 1.2f)? "\t\t\t\tMAXED" : "\t\t\t\t$50", GameControl.control.stats);
+			if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 135 * GameControl.control.screenMulti, Screen.width - (20 * GameControl.control.screenMulti), 30 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){
+				if (GameControl.control.money > 50 && curMinTime >= 1.2f){
+
+					Camera.main.GetComponent<SpawnHay>().setMinTime(curMinTime - 0.2f);
+					Camera.main.GetComponent<SpawnHay>().setMaxTime(curMaxTime - 0.2f);
+					//GameControl.control.minSpawnTime -= 0.2f;
+					//GameControl.control.maxSpawnTime -= 0.2f;
+
+					GameControl.control.money -= 50;
+				}
+			}
+			// Happiness decline upgrade
+			GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 175 * GameControl.control.screenMulti, Screen.width - (20 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankShopButton);
+			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 180 * GameControl.control.screenMulti, 100, 100), "Reduce Happiness Decline -10%", GameControl.control.stats);
+			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 180 * GameControl.control.screenMulti, 100, 100), "\t\t\t\t$50", GameControl.control.stats);
+			if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 175 * GameControl.control.screenMulti, Screen.width - (20 * GameControl.control.screenMulti), 30 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){
+				if (GameControl.control.money > 50){
+					
+					GameObject.Find("barHap").GetComponent<Happiness>().setRate(curRate + 0.5f);
+
+					//GameControl.control.happinessDecRate += 0.5f;
+
+					GameControl.control.money -= 50;
+				}
+			}
 		GUI.EndGroup();
 
 		// Item popups
@@ -317,6 +366,13 @@ public class Cow : MonoBehaviour {
 				GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (335 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_int[selected1], GameControl.control.stats);
 			}
 		GUI.EndGroup();
+	}
+
+	public int getInventoryRows(){
+		return inventoryRows;
+	}
+	public void setInventoryRows(int invRows){
+		inventoryRows = invRows;
 	}
 
 	public void feed(int amount) {

@@ -462,6 +462,11 @@ public class GameControl : MonoBehaviour {
 		data.numberOfCowsBred = numberOfCowsBred;
 		
 		data.inventory = inventory;
+
+		data.minSpawnTime = Camera.main.GetComponent<SpawnHay>().getMinTime();
+		data.maxSpawnTime = Camera.main.GetComponent<SpawnHay>().getMaxTime();
+		data.happinessDecRate = GameObject.Find("barHap").GetComponent<Happiness>().getRate();
+		data.inventoryRows = cow.inventoryRows;
 		
 		data.saveTime = DateTime.Now;
 		
@@ -508,6 +513,11 @@ public class GameControl : MonoBehaviour {
 			
 			troughMaxExp = data.troughMaxExp;
 			troughPos = data.troughPos;
+			
+			Camera.main.GetComponent<SpawnHay>().setMinTime(data.minSpawnTime);
+			Camera.main.GetComponent<SpawnHay>().setMaxTime(data.maxSpawnTime);
+			GameObject.Find("barHap").GetComponent<Happiness>().setRate(data.happinessDecRate);
+			cow.setInventoryRows(data.inventoryRows);
 			
 			DateTime loadTime = DateTime.Now;
 			TimeSpan interval = loadTime - data.saveTime;
@@ -595,6 +605,11 @@ class PlayerData{
 	
 	public bool statsRandomized;
 	public int numberOfCowsBred;
+	
+	public float minSpawnTime;
+	public float maxSpawnTime;
+	public int inventoryRows;
+	public float happinessDecRate;
 	
 	public List<string> inventory = new List<string>();
 	

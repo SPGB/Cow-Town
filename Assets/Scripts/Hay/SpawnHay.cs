@@ -4,6 +4,7 @@ using System.Collections;
 public class SpawnHay : MonoBehaviour {
 
 	public GameObject prefab_hay;
+	public GameObject prefab_hay2;
 	public GameObject prefab_rock;
 	public GameObject prefab_coin;
 
@@ -21,7 +22,8 @@ public class SpawnHay : MonoBehaviour {
 
 		bool is_rock = Random.Range(0, 5) < 2;
 		bool is_coin = Random.Range(0, 5) < 2;
-		GameObject new_object = (is_rock)? prefab_rock : ((is_coin)? prefab_coin : prefab_hay);
+		bool is_haylife = Random.Range(0, 100) < 10;
+		GameObject new_object = (is_rock)? prefab_rock : ((is_coin)? prefab_coin : ((is_haylife)? prefab_hay2 : prefab_hay));
 
 		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
@@ -35,7 +37,21 @@ public class SpawnHay : MonoBehaviour {
 	void Update () {
 		if(!is_spawning) {
 			is_spawning = true; //Yep, we're going to spawn
+			//StartCoroutine(spawn(Random.Range(GameControl.control.minSpawnTime, GameControl.control.maxSpawnTime)));
 			StartCoroutine(spawn(Random.Range(minTime, maxTime)));
 		}
+	}
+
+	public float getMinTime(){
+		return minTime;
+	}
+	public float getMaxTime(){
+		return maxTime;
+	}
+	public void setMinTime(float time){
+		minTime = time;
+	}
+	public void setMaxTime(float time){
+		maxTime = time;
 	}
 }

@@ -9,7 +9,7 @@ public class HayCollide : MonoBehaviour {
 
 	void OnCollisionStay(Collision col){
 		if (GameControl.control.draggingItem && col.gameObject.tag == "Cow"){
-			GameControl.control.cow.feed(happiness_mod);
+				GameControl.control.cow.feed(happiness_mod);
 
 				Destroy(gameObject);
 				GameControl.control.draggingItem = false;
@@ -23,11 +23,9 @@ public class HayCollide : MonoBehaviour {
 		}
 		if (col.gameObject.tag == "Trough"){
 			int hay_real_value = 0;
-			if (hayValue < 0 || GameControl.control.troughExp <= (GameControl.control.troughMaxExp - hayValue)){
+			if ((hayValue < 0 && GameControl.control.troughExp >= 10) || GameControl.control.troughExp <= (GameControl.control.troughMaxExp - hayValue)){
 				hay_real_value = hayValue;
 			}
-			GameControl.control.cow.feed(happiness_mod);
-
 			if (happiness_mod > 0) {
 				if (GameControl.control.happiness >= GameControl.control.happinessMax) GameControl.control.totalHay++;
 				GameControl.control.trough.store(hay_real_value);
