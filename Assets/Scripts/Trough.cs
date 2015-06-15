@@ -4,9 +4,9 @@ using System.Collections;
 
 public class Trough : MonoBehaviour {
 
-	private GameObject wheel1;
-	private GameObject wheel2;
-	private GameObject wheel3;
+	public GameObject wheel1;
+	public GameObject wheel2;
+	public GameObject wheel3;
 	public GameObject bar;
 	private Vector3 mousePos;
 	
@@ -20,19 +20,8 @@ public class Trough : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GameControl.control.trough = this;
-		
+		GameControl.control.trough = this;		
 		GameControl.control.Load();
-		
-		wheel1 = GameObject.Find("wheel1");
-		wheel2 = GameObject.Find("wheel2");
-		wheel3 = GameObject.Find("wheel3");
-
-		//if (!GameControl.control.trough) {
-		//	GameControl.control.trough = this;
-		//	GameControl.control.Load(true, false);
-		//	Debug.Log("setting trough");
-		//}
 	}
 	
 	// Update is called once per frame

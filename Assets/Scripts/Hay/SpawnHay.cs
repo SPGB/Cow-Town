@@ -20,7 +20,7 @@ public class SpawnHay : MonoBehaviour {
 		
 		yield return new WaitForSeconds(seconds);
 
-		bool is_rock = Random.Range(0, 5) < 2;
+		bool is_rock = Random.Range(0, 10) < 2;
 		bool is_coin = Random.Range(0, 5) < 2;
 		bool is_haylife = Random.Range(0, 100) < 10;
 		GameObject new_object = (is_rock)? prefab_rock : ((is_coin)? prefab_coin : ((is_haylife)? prefab_hay2 : prefab_hay));

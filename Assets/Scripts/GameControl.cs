@@ -54,7 +54,8 @@ public class GameControl : MonoBehaviour {
 	public float totalSpecial = 0.0f;
 	
 	public GameObject haySelected;
-	
+	public GameObject barHap;
+
 	public int numberOfCowsBred = 0;
 	public bool statsRandomized;
 	
@@ -465,7 +466,7 @@ public class GameControl : MonoBehaviour {
 
 		data.minSpawnTime = Camera.main.GetComponent<SpawnHay>().getMinTime();
 		data.maxSpawnTime = Camera.main.GetComponent<SpawnHay>().getMaxTime();
-		data.happinessDecRate = GameObject.Find("barHap").GetComponent<Happiness>().getRate();
+		data.happinessDecRate = barHap.GetComponent<Happiness>().getRate();
 		data.inventoryRows = cow.inventoryRows;
 		
 		data.saveTime = DateTime.Now;
