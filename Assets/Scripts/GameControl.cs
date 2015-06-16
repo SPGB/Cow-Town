@@ -18,6 +18,8 @@ public class GameControl : MonoBehaviour {
 	public float native_height = 638.0f;
 	
 	public GameObject popup;
+
+	public bool initialRun;
 	
 	public int money = 0;
 	public float exp = 0.0f;
@@ -55,7 +57,7 @@ public class GameControl : MonoBehaviour {
 	
 	public GameObject haySelected;
 	public GameObject barHap;
-
+	
 	public int numberOfCowsBred = 0;
 	public bool statsRandomized;
 	
@@ -526,7 +528,7 @@ public class GameControl : MonoBehaviour {
 
 			float current_exp = data.troughCurExp;
 			for (int i = 0; i < hayUsed; i++){
-				if (current_exp == 0){
+				if (current_exp <= 0){
 					break;
 				}
 				exp++;

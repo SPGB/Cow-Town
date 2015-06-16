@@ -8,6 +8,8 @@ public class SpawnHay : MonoBehaviour {
 	public GameObject prefab_rock;
 	public GameObject prefab_coin;
 
+	public bool hayOfLife = false;
+
 	bool is_spawning = false;
 	private float minTime = 2.0f;
 	private float maxTime = 4.0f;
@@ -40,6 +42,39 @@ public class SpawnHay : MonoBehaviour {
 			//StartCoroutine(spawn(Random.Range(GameControl.control.minSpawnTime, GameControl.control.maxSpawnTime)));
 			StartCoroutine(spawn(Random.Range(minTime, maxTime)));
 		}
+
+		if (hayOfLife) {
+			Hay (true);
+			hayOfLife = false;
+		}
+	}
+
+	public void Hay(bool is_haylife){
+		GameObject new_object = (is_haylife)? prefab_hay2 : prefab_hay;
+		
+		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
+		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
+		int pos_x = Random.Range ( (int) min_x.x, (int) max_x.x);
+		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity) as GameObject;
+		Destroy (temp.gameObject, 20);
+	}
+	public void Rock(){
+		GameObject new_object = prefab_rock;
+		
+		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
+		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
+		int pos_x = Random.Range ( (int) min_x.x, (int) max_x.x);
+		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity) as GameObject;
+		Destroy (temp.gameObject, 20);
+	}
+	public void Coin(){
+		GameObject new_object = prefab_coin;
+		
+		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
+		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
+		int pos_x = Random.Range ( (int) min_x.x, (int) max_x.x);
+		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity) as GameObject;
+		Destroy (temp.gameObject, 20);
 	}
 
 	public float getMinTime(){
