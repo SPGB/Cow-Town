@@ -77,8 +77,6 @@ public class TitleScreen : MonoBehaviour {
 		GameControl.control.trough = GameObject.Find("trough").GetComponent<Trough>();
 		GameControl.control.cow = GameObject.Find("cow").GetComponent<Cow>();
 		GameControl.control.Load();
-		if (GameControl.control.initialRun == true) GameControl.control.initialRun = false;
-		else if (GameControl.control.initialRun != true && GameControl.control.initialRun != false) GameControl.control.initialRun = true;
 		GameControl.control.pause = false;
 		GameControl.control.titleScreen = false;
 		GameObject.Find ("gameControl").AddComponent<Tutorial>();

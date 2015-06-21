@@ -19,7 +19,7 @@ public class GameControl : MonoBehaviour {
 	
 	public GameObject popup;
 
-	public bool initialRun;
+	public bool initialRun = true;
 	
 	public int money = 0;
 	public float exp = 0.0f;
@@ -436,6 +436,8 @@ public class GameControl : MonoBehaviour {
 		FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 		
 		PlayerData data = new PlayerData();
+
+		data.initialRun = initialRun;
 		
 		data.troughPos = troughPos;
 		
@@ -468,7 +470,7 @@ public class GameControl : MonoBehaviour {
 
 		data.minSpawnTime = Camera.main.GetComponent<SpawnHay>().getMinTime();
 		data.maxSpawnTime = Camera.main.GetComponent<SpawnHay>().getMaxTime();
-		data.happinessDecRate = barHap.GetComponent<Happiness>().getRate();
+		data.happinessDecRate = GameObject.Find("barHap").GetComponent<Happiness>().getRate();
 		data.inventoryRows = cow.inventoryRows;
 		
 		data.saveTime = DateTime.Now;
@@ -488,6 +490,8 @@ public class GameControl : MonoBehaviour {
 			file.Close();
 			
 			Debug.Log("Loading from... " + Application.persistentDataPath + "/playerInfo.dat" + " at: " + DateTime.Now);
+
+			initialRun = data.initialRun;
 			
 			isBorn = data.isBorn;
 			
@@ -581,6 +585,8 @@ public class GameControl : MonoBehaviour {
 
 [Serializable]
 class PlayerData{
+
+	public bool initialRun;
 
 	public DateTime cowBorn;
 	public bool isBorn;
