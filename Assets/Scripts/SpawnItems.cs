@@ -203,4 +203,71 @@ public class SpawnItems : MonoBehaviour {
 			spawning = false;
 		}
 	}
+
+	public void Common(float x, float y){
+		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
+		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
+		int pos_x = (x == 0)? Random.Range ( (int) min_x.x, (int) max_x.x) : (int) x;
+		int pos_y = (y == 0) ? (int) GameControl.control.screenSizeY.y : (int) y;
+
+		int i = Random.Range(1, commonItems.Count);
+		
+		GameObject new_object = Instantiate((commonItems[i-1]), new Vector3(pos_x, pos_y, 4.4f), Quaternion.identity) as GameObject;
+			
+		itemStringSpawn = commonStrings[i-1];
+			
+		new_object.AddComponent<BoxCollider>();
+		new_object.AddComponent<Rigidbody>();
+		new_object.GetComponent<Rigidbody>().drag = 7;
+		new_object.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+		new_object.AddComponent<ItemCollide>();
+		new_object.GetComponent<ItemCollide>().popup = GameControl.control.popup;
+		new_object.GetComponent<ItemCollide>().itemString = itemStringSpawn;
+		new_object.AddComponent<DragItem>();
+		new_object.AddComponent<HayFall>();
+	}
+	public void Uncommon(float x, float y){
+		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
+		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
+		int pos_x = (x == 0)? Random.Range ( (int) min_x.x, (int) max_x.x) : (int) x;
+		int pos_y = (y == 0) ? (int) GameControl.control.screenSizeY.y : (int) y;
+
+		int i = Random.Range(1, uncommonItems.Count);
+		
+		GameObject new_object = Instantiate((uncommonItems[i-1]), new Vector3(pos_x, pos_y, 4.4f), Quaternion.identity) as GameObject;
+		
+		itemStringSpawn = uncommonStrings[i-1];
+		
+		new_object.AddComponent<BoxCollider>();
+		new_object.AddComponent<Rigidbody>();
+		new_object.GetComponent<Rigidbody>().drag = 7;
+		new_object.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+		new_object.AddComponent<ItemCollide>();
+		new_object.GetComponent<ItemCollide>().popup = GameControl.control.popup;
+		new_object.GetComponent<ItemCollide>().itemString = itemStringSpawn;
+		new_object.AddComponent<DragItem>();
+		new_object.AddComponent<HayFall>();
+	}
+	public void Rare(float x, float y){
+		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
+		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
+		int pos_x = (x == 0)? Random.Range ( (int) min_x.x, (int) max_x.x) : (int) x;
+		int pos_y = (y == 0) ? (int) GameControl.control.screenSizeY.y : (int) y;
+
+		int i = Random.Range(1, rareItems.Count);
+		
+		GameObject new_object = Instantiate((rareItems[i-1]), new Vector3(pos_x, pos_y, 4.4f), Quaternion.identity) as GameObject;
+		
+		itemStringSpawn = rareStrings[i-1];
+		
+		new_object.AddComponent<BoxCollider>();
+		new_object.AddComponent<Rigidbody>();
+		new_object.GetComponent<Rigidbody>().drag = 7;
+		new_object.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+		new_object.AddComponent<ItemCollide>();
+		new_object.GetComponent<ItemCollide>().popup = GameControl.control.popup;
+		new_object.GetComponent<ItemCollide>().itemString = itemStringSpawn;
+		new_object.AddComponent<DragItem>();
+		new_object.AddComponent<HayFall>();
+	}
 }

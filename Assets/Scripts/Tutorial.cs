@@ -21,8 +21,8 @@ public class Tutorial : MonoBehaviour {
 //	private string tut4 = "Make sure to drag rocks in the opposite\ndirection of your cow and trough, otherwise\nthe cow will become unhappy.";
 //	private string tut5 = "Money is used to buy most upgrades, collect\nit by dragging it to your cow or trough.";
 
-	private string[] tutorials = new string[7];
-	private int[] timers = new int[7];
+	private string[] tutorials = new string[8];
+	private int[] timers = new int[8];
 
 	private int stage = 0;
 	private bool showGUI = false;
@@ -38,16 +38,18 @@ public class Tutorial : MonoBehaviour {
 			tutorials[2] = "The trough under your cow will feed\nyour cow while you are offline.";
 			tutorials[3] = "Make sure to drag rocks in the opposite\ndirection of your cow and trough\notherwise the cow will become unhappy.";
 			tutorials[4] = "Money is used to buy most upgrades,\ncollect it by dragging it to your cow or\ntrough.";
-			tutorials[5] = "Drag left for your cow's stats and\ninventory, then drag right to hide it\nagain.";
-			tutorials[6] = "Drag right for the store, you can buy\na bunch of upgrades in there, try it now.";
+			tutorials[5] = "Items will occasionally drop from\nthe top, drag them to your cow to earn\nbonuses, however the cow must be at\nleast level 5 to use these bonuses.\nAlternatively you can drag items to\nthe trough to earn some money.";
+			tutorials[6] = "Drag from left of the screen for\nyour cow's stats and inventory, then\ndrag right to hide it again.";
+			tutorials[7] = "Drag from the right of the screen\nfor the store, you can buy a bunch\nof upgrades in there, try it now.";
 
 			timers[0] = 2;
 			timers[1] = 4;
 			timers[2] = 4;
 			timers[3] = 2;
 			timers[4] = 4;
-			timers[5] = 2;
+			timers[5] = 4;
 			timers[6] = 2;
+			timers[7] = 2;
 
 			StartCoroutine(stageIEnum());
 		}
@@ -88,7 +90,7 @@ public class Tutorial : MonoBehaviour {
 		GUI.BeginGroup(new Rect (0, 0, width, height)); // left, top, width, height
 
 		if (showGUI) GUI.Label (new Rect (10, 100, 100, 100), tutorials [stage], GameControl.control.text);
-		if (showTAP) GUI.Label (new Rect (10, 230, 100, 100), "Tap the screen to continue.", GameControl.control.text);
+		if (showTAP) GUI.Label (new Rect (10, 260, 100, 100), "Tap the screen to continue.", GameControl.control.text);
 		GUI.EndGroup();
 	}
 
@@ -103,6 +105,7 @@ public class Tutorial : MonoBehaviour {
 		else if (stage == 1) Camera.main.GetComponent<SpawnHay> ().Hay (spawnPos.x, spawnPos.y, true);
 		else if (stage == 3) Camera.main.GetComponent<SpawnHay> ().Rock (spawnPos.x, spawnPos.y);
 		else if (stage == 4) Camera.main.GetComponent<SpawnHay> ().Coin (spawnPos.x, spawnPos.y);
+		else if (stage == 5) Camera.main.GetComponent<SpawnItems> ().Common (spawnPos.x, spawnPos.y);
 		showGUI = true;
 		showTAP = true;
 		//GUI.Label(new Rect(10, 100, 100, 100), tutorials[stage], GameControl.control.text);
@@ -127,11 +130,11 @@ public class Tutorial : MonoBehaviour {
 
 		stage++;
 
-		if (stage < 7) {
+		if (stage < 8) {
 			StartCoroutine (stageIEnum ());
 		} else {
 			GameControl.control.initialRun = false;
-			Debug.Log ("T7: Ending Tutorial... Setting initialRun to FALSE.");
+			Debug.Log ("T8: Ending Tutorial... Setting initialRun to FALSE.");
 		}
 	}
 
