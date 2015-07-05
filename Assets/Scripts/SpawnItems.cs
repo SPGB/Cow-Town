@@ -184,19 +184,21 @@ public class SpawnItems : MonoBehaviour {
 			int rarity = Random.Range(0, 100);
 			int i = (rarity >= 92)? ((rarity >=97)? Random.Range(1, rareItems.Count) : Random.Range(1, uncommonItems.Count)) : Random.Range(1, commonItems.Count);
 			
-			GameObject new_object = Instantiate(((rarity >= 92)? ((rarity >=97)? rareItems[i-1] : uncommonItems[i-1]) : commonItems[i-1]), new Vector3(Random.Range(GameControl.control.screenSizeX1.x, GameControl.control.screenSizeX2.x), GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity) as GameObject;
+			if (!GameControl.control.initialRun){
+				GameObject new_object = Instantiate(((rarity >= 92)? ((rarity >=97)? rareItems[i-1] : uncommonItems[i-1]) : commonItems[i-1]), new Vector3(Random.Range(GameControl.control.screenSizeX1.x, GameControl.control.screenSizeX2.x), GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity) as GameObject;
 			
-			itemStringSpawn = (rarity >= 92)? ((rarity >=97)? rareStrings[i-1] : uncommonStrings[i-1]) : commonStrings[i-1];
+				itemStringSpawn = (rarity >= 92)? ((rarity >=97)? rareStrings[i-1] : uncommonStrings[i-1]) : commonStrings[i-1];
 			
-			new_object.AddComponent<BoxCollider>();
-			new_object.AddComponent<Rigidbody>();
-			new_object.GetComponent<Rigidbody>().drag = 7;
-			new_object.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
-			new_object.AddComponent<ItemCollide>();
-			new_object.GetComponent<ItemCollide>().popup = GameControl.control.popup;
-			new_object.GetComponent<ItemCollide>().itemString = itemStringSpawn;
-			new_object.AddComponent<DragItem>();
-			new_object.AddComponent<HayFall>();
+				new_object.AddComponent<BoxCollider>();
+				new_object.AddComponent<Rigidbody>();
+				new_object.GetComponent<Rigidbody>().drag = 7;
+				new_object.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+				new_object.AddComponent<ItemCollide>();
+				new_object.GetComponent<ItemCollide>().popup = GameControl.control.popup;
+				new_object.GetComponent<ItemCollide>().itemString = itemStringSpawn;
+				new_object.AddComponent<DragItem>();
+				new_object.AddComponent<HayFall>();
+			}
 			
 			spawning = false;
 		}

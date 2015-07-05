@@ -294,7 +294,6 @@ public class Cow : MonoBehaviour {
 //			GUI.Label(new Rect((width - 70) * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, 100, 100), "" + GameControl.control.money, GameControl.control.cowText);
 		
 			int curRows = GameControl.control.cow.getInventoryRows();
-			float curMinTime = Camera.main.GetComponent<SpawnHay>().getMinTime();
 			float curMaxTime = Camera.main.GetComponent<SpawnHay>().getMaxTime();
 
 			// Trough upgrade
@@ -325,11 +324,10 @@ public class Cow : MonoBehaviour {
 			// Hay spawn rate upgrade
 			GUI.DrawTexture(new Rect(10 * GameControl.control.screenMulti, 135 * GameControl.control.screenMulti, Screen.width - (20 * GameControl.control.screenMulti), (30 * GameControl.control.screenMulti)), blankShopButton);
 			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 140 * GameControl.control.screenMulti, 100, 100), "Increase Hay Rate +5%", GameControl.control.stats);
-			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 140 * GameControl.control.screenMulti, 100, 100), (curMinTime < 1.2f)? "\t\t\t\tMAXED" : "\t\t\t\t$50", GameControl.control.stats);
+			GUI.Label(new Rect(25 * GameControl.control.screenMulti, 140 * GameControl.control.screenMulti, 100, 100), (curMaxTime < 3.2f)? "\t\t\t\tMAXED" : "\t\t\t\t$50", GameControl.control.stats);
 			if (GUI.Button(new Rect(10 * GameControl.control.screenMulti, 135 * GameControl.control.screenMulti, Screen.width - (20 * GameControl.control.screenMulti), 30 * GameControl.control.screenMulti), emptyTexture, GUIStyle.none)){
-				if (GameControl.control.money > 50 && curMinTime >= 1.2f){
+				if (GameControl.control.money > 50 && curMaxTime >= 3.2f){
 
-					Camera.main.GetComponent<SpawnHay>().setMinTime(curMinTime - 0.2f);
 					Camera.main.GetComponent<SpawnHay>().setMaxTime(curMaxTime - 0.2f);
 					//GameControl.control.minSpawnTime -= 0.2f;
 					//GameControl.control.maxSpawnTime -= 0.2f;

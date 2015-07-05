@@ -15,17 +15,41 @@ public class Tutorial : MonoBehaviour {
 //	private bool stage5 = false;
 //	private int stage5run = 0;
 
-	private string tut1 = "Drag falling hay to your cow to feed it,\nor to the trough under the cow to fill it.";
-	private string tut2 = "Special hay called the Hay of Life will\nspawn, this hay is worth more. Drag it to\nyour cow or trough for an extra boost.";
-	private string tut3 = "The trough will feed your cow while you\nare offline.";
-	private string tut4 = "Make sure to drag rocks in the opposite\ndirection of your cow and trough, otherwise\nthe cow will become unhappy.";
-	private string tut5 = "Money is used to buy most upgrades, collect\nit by dragging it to your cow or trough.";
+//	private string tut1 = "Drag falling hay to your cow to feed it,\nor to the trough under the cow to fill it.";
+//	private string tut2 = "Special hay called the Hay of Life will\nspawn, this hay is worth more. Drag it to\nyour cow or trough for an extra boost.";
+//	private string tut3 = "The trough will feed your cow while you\nare offline.";
+//	private string tut4 = "Make sure to drag rocks in the opposite\ndirection of your cow and trough, otherwise\nthe cow will become unhappy.";
+//	private string tut5 = "Money is used to buy most upgrades, collect\nit by dragging it to your cow or trough.";
+
+	private string[] tutorials = new string[7];
+	private int[] timers = new int[7];
+
+	private int stage = 0;
+	private bool showGUI = false;
+	private bool showTAP = false;
 
 	// Use this for initialization
 	void Start () {
 		if (GameControl.control.initialRun == true) {
 //			stage1 = true;
-			StartCoroutine(stage1IEnum(5f, 20f));
+
+			tutorials[0] = "Drag falling hay to your cow to feed it,\nor to the trough under the cow to fill it.";
+			tutorials[1] = "Special hay called the Hay of Life will\nspawn, this hay is worth more. Drag it to\nyour cow or trough for an extra boost.";
+			tutorials[2] = "The trough under your cow will feed\nyour cow while you are offline.";
+			tutorials[3] = "Make sure to drag rocks in the opposite\ndirection of your cow and trough\notherwise the cow will become unhappy.";
+			tutorials[4] = "Money is used to buy most upgrades,\ncollect it by dragging it to your cow or\ntrough.";
+			tutorials[5] = "Drag left for your cow's stats and\ninventory, then drag right to hide it\nagain.";
+			tutorials[6] = "Drag right for the store, you can buy\na bunch of upgrades in there, try it now.";
+
+			timers[0] = 2;
+			timers[1] = 4;
+			timers[2] = 4;
+			timers[3] = 2;
+			timers[4] = 4;
+			timers[5] = 2;
+			timers[6] = 2;
+
+			StartCoroutine(stageIEnum());
 		}
 	}
 	
@@ -57,148 +81,138 @@ public class Tutorial : MonoBehaviour {
 //
 //	}
 //
-//	void OnGUI(){
-//		float width = Screen.width;
-//		float height = Screen.height;
-//
-//		GUI.BeginGroup(new Rect (0, 0, width, height)); // left, top, width, height
-//
-//			
-//
-//			if (stage1) {
-//				GUI.Label(new Rect(10, 100, 100, 100), tut1, GameControl.control.text);
-//				if (GUI.Button(new Rect(0, 0, width, height), emptyTexture, GUIStyle.none)){
-//					stage2 = true;
-//					stage1 = false;
-//				}
-//			} else if (stage2) {
-//				GUI.Label(new Rect(10, 100, 100, 100), tut2, GameControl.control.text);
-//				if (GUI.Button(new Rect(0, 0, width, height), emptyTexture, GUIStyle.none)){
-//					stage3 = true;
-//					stage2 = false;
-//				}
-//			} else if (stage3) {
-//				GUI.Label(new Rect(10, 100, 100, 100), tut3, GameControl.control.text);
-//				if (GUI.Button(new Rect(0, 0, width, height), emptyTexture, GUIStyle.none)){
-//					stage4 = true;
-//					stage3 = false;
-//				}
-//			} else if (stage4) {
-//				GUI.Label(new Rect(10, 100, 100, 100), tut4, GameControl.control.text);
-//				if (GUI.Button(new Rect(0, 0, width, height), emptyTexture, GUIStyle.none)){
-//					stage5 = true;
-//					stage4 = false;
-//				}
-//			} else if (stage5) {
-//				GUI.Label(new Rect(10, 100, 100, 100), tut5, GameControl.control.text);
-//				if (GUI.Button(new Rect(0, 0, width, height), emptyTexture, GUIStyle.none)){
-//					stage5 = false;
-//					RemoveTutorial();
-//				}
-//			}
-//		GUI.EndGroup();
-//	}
+	void OnGUI(){
+		float width = Screen.width;
+		float height = Screen.height;
 
-	IEnumerator stage1IEnum(float seconds1, float seconds2) {
+		GUI.BeginGroup(new Rect (0, 0, width, height)); // left, top, width, height
+
+		if (showGUI) GUI.Label (new Rect (10, 100, 100, 100), tutorials [stage], GameControl.control.text);
+		if (showTAP) GUI.Label (new Rect (10, 230, 100, 100), "Tap the screen to continue.", GameControl.control.text);
+		GUI.EndGroup();
+	}
+
+	IEnumerator stageIEnum() {
+		Vector2 spawnPos = new Vector2 (-1.46f, 1.46f);
+
 //		yield return new WaitForSeconds (2f);
 
-		Debug.Log ("T1: Waiting for " + seconds1 + " seconds.");
+		Debug.Log ("T" + (stage + 1) + ": Waiting for 5 seconds.");
 
-		Camera.main.GetComponent<SpawnHay>().Hay(false);
-		GUI.Label(new Rect(10, 100, 100, 100), tut1, GameControl.control.text);
+		if (stage == 0) Camera.main.GetComponent<SpawnHay> ().Hay (spawnPos.x, spawnPos.y, false);
+		else if (stage == 1) Camera.main.GetComponent<SpawnHay> ().Hay (spawnPos.x, spawnPos.y, true);
+		else if (stage == 3) Camera.main.GetComponent<SpawnHay> ().Rock (spawnPos.x, spawnPos.y);
+		else if (stage == 4) Camera.main.GetComponent<SpawnHay> ().Coin (spawnPos.x, spawnPos.y);
+		showGUI = true;
+		showTAP = true;
+		//GUI.Label(new Rect(10, 100, 100, 100), tutorials[stage], GameControl.control.text);
+
+		yield return new WaitForSeconds (1);
 
 		GameControl.control.pause = true;
-		
-		yield return new WaitForSeconds(seconds1);
-		Debug.Log ("T1: Waiting for " + seconds2 + " seconds.");
-		
-		GameControl.control.pause = false;
 
-		yield return new WaitForSeconds(seconds2);
+		yield return new WaitForSeconds (1);
+
+		showTAP = false;
+
+		yield return new WaitForSeconds (7);
+
+		Debug.Log ("T" + (stage + 1) + ": Waiting for " + timers [stage] + " seconds.");
+		showGUI = false;
+
+		yield return new WaitForSeconds (timers [stage]);
 
 //		stage1 = false;
 //		stage2 = true;
-		StartCoroutine(stage2IEnum(5f, 20f));
+
+		stage++;
+
+		if (stage < 7) {
+			StartCoroutine (stageIEnum ());
+		} else {
+			GameControl.control.initialRun = false;
+			Debug.Log ("T7: Ending Tutorial... Setting initialRun to FALSE.");
+		}
 	}
 
-	IEnumerator stage2IEnum(float seconds1, float seconds2) {
-		Debug.Log ("T2: Waiting for " + seconds1 +" seconds.");
-		
-		Camera.main.GetComponent<SpawnHay>().Hay(true);
-		GUI.Label(new Rect(10, 100, 100, 100), tut2, GameControl.control.text);
-		
-		GameControl.control.pause = true;
-		
-		yield return new WaitForSeconds(seconds1);
-		Debug.Log ("T2: Waiting for " + seconds2 + " seconds.");
-		
-		GameControl.control.pause = false;
-		
-		yield return new WaitForSeconds(seconds2);
-		
+//	IEnumerator stage2IEnum(float seconds1, float seconds2) {
+//		Debug.Log ("T2: Waiting for " + seconds1 +" seconds.");
+//		
+//		Camera.main.GetComponent<SpawnHay>().Hay(true);
+//		GUI.Label(new Rect(10, 100, 100, 100), tut2, GameControl.control.text);
+//		
+//		GameControl.control.pause = true;
+//		
+//		yield return new WaitForSeconds(seconds1);
+//		Debug.Log ("T2: Waiting for " + seconds2 + " seconds.");
+//		
+//		GameControl.control.pause = false;
+//		
+//		yield return new WaitForSeconds(seconds2);
+//		
 //		stage2 = false;
 //		stage3 = true;
-		StartCoroutine(stage3IEnum(5f, 20f));
-	}
-
-	IEnumerator stage3IEnum(float seconds1, float seconds2) {
-		Debug.Log ("T3: Waiting for " + seconds1 + " seconds.");
-
-		GUI.Label(new Rect(10, 100, 100, 100), tut3, GameControl.control.text);
-		
-		GameControl.control.pause = true;
-		
-		yield return new WaitForSeconds(seconds1);
-		Debug.Log ("T3: Waiting for seconds2 seconds.");
-		
-		GameControl.control.pause = false;
-		
-		yield return new WaitForSeconds(seconds2);
-		
+//		StartCoroutine(stage3IEnum(5f, 20f));
+//	}
+//
+//	IEnumerator stage3IEnum(float seconds1, float seconds2) {
+//		Debug.Log ("T3: Waiting for " + seconds1 + " seconds.");
+//
+//		GUI.Label(new Rect(10, 100, 100, 100), tut3, GameControl.control.text);
+//		
+//		GameControl.control.pause = true;
+//		
+//		yield return new WaitForSeconds(seconds1);
+//		Debug.Log ("T3: Waiting for seconds2 seconds.");
+//		
+//		GameControl.control.pause = false;
+//		
+//		yield return new WaitForSeconds(seconds2);
+//		
 //		stage3 = false;
 //		stage4 = true;
-		StartCoroutine(stage4IEnum(5f, 20f));
-	}
-
-	IEnumerator stage4IEnum(float seconds1, float seconds2) {
-		Debug.Log ("T4: Waiting for " + seconds1 + " seconds.");
-		
-		Camera.main.GetComponent<SpawnHay>().Rock();
-		GUI.Label(new Rect(10, 100, 100, 100), tut4, GameControl.control.text);
-		
-		GameControl.control.pause = true;
-		
-		yield return new WaitForSeconds(seconds1);
-		Debug.Log ("T4: Waiting for " + seconds2 + " seconds.");
-		
-		GameControl.control.pause = false;
-		
-		yield return new WaitForSeconds(seconds2);
-		
+//		StartCoroutine(stage4IEnum(5f, 20f));
+//	}
+//
+//	IEnumerator stage4IEnum(float seconds1, float seconds2) {
+//		Debug.Log ("T4: Waiting for " + seconds1 + " seconds.");
+//		
+//		Camera.main.GetComponent<SpawnHay>().Rock();
+//		GUI.Label(new Rect(10, 100, 100, 100), tut4, GameControl.control.text);
+//		
+//		GameControl.control.pause = true;
+//		
+//		yield return new WaitForSeconds(seconds1);
+//		Debug.Log ("T4: Waiting for " + seconds2 + " seconds.");
+//		
+//		GameControl.control.pause = false;
+//		
+//		yield return new WaitForSeconds(seconds2);
+//		
 //		stage4 = false;
 //		stage5 = true;
-		StartCoroutine(stage5IEnum(5f, 20f));
-	}
-
-	IEnumerator stage5IEnum(float seconds1, float seconds2) {
-		Debug.Log ("T5: Waiting for " + seconds1 + " seconds.");
-		
-		Camera.main.GetComponent<SpawnHay>().Coin();
-		GUI.Label(new Rect(10, 100, 100, 100), tut5, GameControl.control.text);
-		
-		GameControl.control.pause = true;
-		
-		yield return new WaitForSeconds(seconds1);
-		Debug.Log ("T5: Waiting for " + seconds2 + " seconds.");
-		
-		GameControl.control.pause = false;
-		
-		yield return new WaitForSeconds(seconds2);
-		
+//		StartCoroutine(stage5IEnum(5f, 20f));
+//	}
+//
+//	IEnumerator stage5IEnum(float seconds1, float seconds2) {
+//		Debug.Log ("T5: Waiting for " + seconds1 + " seconds.");
+//		
+//		Camera.main.GetComponent<SpawnHay>().Coin();
+//		GUI.Label(new Rect(10, 100, 100, 100), tut5, GameControl.control.text);
+//		
+//		GameControl.control.pause = true;
+//		
+//		yield return new WaitForSeconds(seconds1);
+//		Debug.Log ("T5: Waiting for " + seconds2 + " seconds.");
+//		
+//		GameControl.control.pause = false;
+//		
+//		yield return new WaitForSeconds(seconds2);
+//		
 //		stage5 = false;
-
-		GameControl.control.initialRun = false;
-	}
+//
+//		GameControl.control.initialRun = false;
+//	}
 
 	public void RemoveTutorial(){
 		Destroy(this);

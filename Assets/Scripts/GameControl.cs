@@ -93,6 +93,8 @@ public class GameControl : MonoBehaviour {
 	public float dragDifference = 0;
 	
 	private float runonce = 0;
+	public float spawnMaxTime;
+	public float happinessDeclineRate;
 
 	// Use this for initialization
 	void Awake () {
@@ -422,6 +424,10 @@ public class GameControl : MonoBehaviour {
 		screenSizeX1 = Camera.main.ScreenToWorldPoint (new Vector3 (50, 0, 0));
 		screenSizeX2 = Camera.main.ScreenToWorldPoint (new Vector3 (Camera.main.pixelWidth - 50, 0, 0));
 		screenSizeY = Camera.main.ScreenToWorldPoint (new Vector3 (0, Camera.main.pixelHeight + 100, 0));
+		if (Application.loadedLevelName == "barn") {
+			spawnMaxTime = Camera.main.GetComponent<SpawnHay> ().getMaxTime ();
+			happinessDeclineRate = GameObject.Find("barHap").GetComponent<Happiness>().getRate();
+		}
 	}
 	
 	public void Delete(){
@@ -468,9 +474,8 @@ public class GameControl : MonoBehaviour {
 		
 		data.inventory = inventory;
 
-		data.minSpawnTime = Camera.main.GetComponent<SpawnHay>().getMinTime();
-		data.maxSpawnTime = Camera.main.GetComponent<SpawnHay>().getMaxTime();
-		data.happinessDecRate = GameObject.Find("barHap").GetComponent<Happiness>().getRate();
+		data.maxSpawnTime = spawnMaxTime;
+		data.happinessDecRate = happinessDeclineRate;
 		data.inventoryRows = cow.inventoryRows;
 		
 		data.saveTime = DateTime.Now;
@@ -520,8 +525,7 @@ public class GameControl : MonoBehaviour {
 			
 			troughMaxExp = data.troughMaxExp;
 			troughPos = data.troughPos;
-			
-			Camera.main.GetComponent<SpawnHay>().setMinTime(data.minSpawnTime);
+
 			Camera.main.GetComponent<SpawnHay>().setMaxTime(data.maxSpawnTime);
 			GameObject.Find("barHap").GetComponent<Happiness>().setRate(data.happinessDecRate);
 			cow.setInventoryRows(data.inventoryRows);
@@ -614,8 +618,7 @@ class PlayerData{
 	
 	public bool statsRandomized;
 	public int numberOfCowsBred;
-	
-	public float minSpawnTime;
+
 	public float maxSpawnTime;
 	public int inventoryRows;
 	public float happinessDecRate;

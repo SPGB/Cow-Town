@@ -11,7 +11,6 @@ public class SpawnHay : MonoBehaviour {
 	public bool hayOfLife = false;
 
 	bool is_spawning = false;
-	private float minTime = 2.0f;
 	private float maxTime = 4.0f;
 	void Start () {
 		Debug.Log("Screen to World: X: " + GameControl.control.screenSizeX1.x + " / " + GameControl.control.screenSizeX2.x + " | Y: " + GameControl.control.screenSizeY.y);
@@ -37,54 +36,51 @@ public class SpawnHay : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(!is_spawning) {
+		if(!is_spawning && !GameControl.control.initialRun) {
 			is_spawning = true; //Yep, we're going to spawn
 			//StartCoroutine(spawn(Random.Range(GameControl.control.minSpawnTime, GameControl.control.maxSpawnTime)));
-			StartCoroutine(spawn(Random.Range(minTime, maxTime)));
+			StartCoroutine(spawn(Random.Range(maxTime - 2.0f, maxTime)));
 		}
 
 		if (hayOfLife) {
-			Hay (true);
+			Hay (0, 0, true);
 			hayOfLife = false;
 		}
 	}
 
-	public void Hay(bool is_haylife){
+	public void Hay(float x, float y, bool is_haylife){
 		GameObject new_object = (is_haylife)? prefab_hay2 : prefab_hay;
 		
 		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
-		int pos_x = Random.Range ( (int) min_x.x, (int) max_x.x);
-		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity) as GameObject;
+		int pos_x = (x == 0)? Random.Range ( (int) min_x.x, (int) max_x.x) : (int) x;
+		int pos_y = (y == 0) ? (int) GameControl.control.screenSizeY.y : (int) y;
+		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, pos_y, 4.4f), Quaternion.identity) as GameObject;
 		Destroy (temp.gameObject, 20);
 	}
-	public void Rock(){
+	public void Rock(float x, float y){
 		GameObject new_object = prefab_rock;
 		
 		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
-		int pos_x = Random.Range ( (int) min_x.x, (int) max_x.x);
-		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity) as GameObject;
+		int pos_x = (x == 0)? Random.Range ( (int) min_x.x, (int) max_x.x) : (int) x;
+		int pos_y = (y == 0) ? (int) GameControl.control.screenSizeY.y : (int) y;
+		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, pos_y, 4.4f), Quaternion.identity) as GameObject;
 		Destroy (temp.gameObject, 20);
 	}
-	public void Coin(){
+	public void Coin(float x, float y){
 		GameObject new_object = prefab_coin;
 		
 		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
-		int pos_x = Random.Range ( (int) min_x.x, (int) max_x.x);
-		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity) as GameObject;
+		int pos_x = (x == 0)? Random.Range ( (int) min_x.x, (int) max_x.x) : (int) x;
+		int pos_y = (y == 0) ? (int) GameControl.control.screenSizeY.y : (int) y;
+		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, pos_y, 4.4f), Quaternion.identity) as GameObject;
 		Destroy (temp.gameObject, 20);
 	}
 
-	public float getMinTime(){
-		return minTime;
-	}
 	public float getMaxTime(){
 		return maxTime;
-	}
-	public void setMinTime(float time){
-		minTime = time;
 	}
 	public void setMaxTime(float time){
 		maxTime = time;

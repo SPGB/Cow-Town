@@ -87,7 +87,7 @@ LightmapSettings:
     m_FinalGatherRayCount: 1024
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
---- !u!1 &3610699 stripped
+--- !u!1 &3610699
 GameObject:
   m_PrefabParentObject: {fileID: 100006, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
   m_PrefabInternal: {fileID: 249782579}
@@ -511,7 +511,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 354429829}
---- !u!4 &369109215 stripped
+--- !u!4 &369109215
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
   m_PrefabInternal: {fileID: 249782579}
@@ -592,7 +592,6 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
-  m_StereoMirrorMode: 0
 --- !u!4 &394633390
 Transform:
   m_ObjectHideFlags: 0
@@ -632,6 +631,7 @@ MonoBehaviour:
   prefab_hay2: {fileID: 100000, guid: 631d6b4239be96846ac1df2fca685113, type: 2}
   prefab_rock: {fileID: 149734, guid: fa0c53c5e4a69f14a83db8f4cac631c7, type: 2}
   prefab_coin: {fileID: 100000, guid: 3fdff71ba10508f4794c87cfdb5b5302, type: 2}
+  hayOfLife: 0
 --- !u!114 &394633393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,6 +988,7 @@ GameObject:
   - 54: {fileID: 1066411784}
   - 114: {fileID: 1066411786}
   - 114: {fileID: 1066411787}
+  - 114: {fileID: 1066411788}
   m_Layer: 0
   m_Name: cow
   m_TagString: Cow
@@ -1113,6 +1114,17 @@ MonoBehaviour:
   inv_str: []
   inv_con: []
   inv_rarity: []
+--- !u!114 &1066411788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1066411781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1485cd4598fa0444894ca907704cdad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1209906557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,7 +1192,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 753144923}
   m_RootOrder: 2
---- !u!1 &1248344777 stripped
+--- !u!1 &1248344777
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
   m_PrefabInternal: {fileID: 249782579}
@@ -1714,6 +1726,33 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1574427975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1574427976}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574427976
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1574427975}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.46000004, y: 1.46000004, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!1 &1644779869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,7 +1799,6 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
-  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &1644779872
 MonoBehaviour:
@@ -1930,13 +1968,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 753144923}
   m_RootOrder: 0
---- !u!114 &1752089083 stripped
+--- !u!114 &1752089083
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400000, guid: 3756a6b856b991e41919cf8290941f2d,
     type: 2}
   m_PrefabInternal: {fileID: 249782579}
   m_Script: {fileID: 11500000, guid: 1254b5432e86c54458770348f388abae, type: 3}
---- !u!1 &1817751198 stripped
+--- !u!1 &1817751198
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
   m_PrefabInternal: {fileID: 249782579}
@@ -2047,12 +2085,13 @@ MonoBehaviour:
   native_width: 399
   native_height: 638
   popup: {fileID: 100000, guid: 59a81cc1fb535af449edcdf6e0e9e260, type: 2}
+  initialRun: 1
   money: 0
   exp: 0
   expExpected: 0
   level: 1
   troughExp: 0
-  troughMaxExp: 0
+  troughMaxExp: 50
   happiness: 0
   happinessExpected: 0
   happinessLose: 1
