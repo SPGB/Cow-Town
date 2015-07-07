@@ -87,7 +87,7 @@ LightmapSettings:
     m_FinalGatherRayCount: 1024
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
---- !u!1 &3610699
+--- !u!1 &3610699 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100006, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
   m_PrefabInternal: {fileID: 249782579}
@@ -511,7 +511,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 354429829}
---- !u!4 &369109215
+--- !u!4 &369109215 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
   m_PrefabInternal: {fileID: 249782579}
@@ -592,6 +592,7 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &394633390
 Transform:
   m_ObjectHideFlags: 0
@@ -1192,7 +1193,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 753144923}
   m_RootOrder: 2
---- !u!1 &1248344777
+--- !u!1 &1248344777 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
   m_PrefabInternal: {fileID: 249782579}
@@ -1799,6 +1800,7 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
+  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &1644779872
 MonoBehaviour:
@@ -1968,13 +1970,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 753144923}
   m_RootOrder: 0
---- !u!114 &1752089083
+--- !u!114 &1752089083 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11400000, guid: 3756a6b856b991e41919cf8290941f2d,
     type: 2}
   m_PrefabInternal: {fileID: 249782579}
   m_Script: {fileID: 11500000, guid: 1254b5432e86c54458770348f388abae, type: 3}
---- !u!1 &1817751198
+--- !u!1 &1817751198 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
   m_PrefabInternal: {fileID: 249782579}
@@ -2365,6 +2367,8 @@ MonoBehaviour:
   statOffset: 0
   dragStart: 0
   dragDifference: 0
+  spawnMaxTime: 0
+  happinessDeclineRate: 0
 --- !u!4 &2008925017
 Transform:
   m_ObjectHideFlags: 0

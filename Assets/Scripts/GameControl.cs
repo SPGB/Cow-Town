@@ -382,8 +382,10 @@ public class GameControl : MonoBehaviour {
 	#if !(UNITY_STANDALONE || UNITY_EDITOR)
 	void OnApplicationPause (bool paused) {
 		if (paused){
-			pushNoti.scheduleLocalNotification("Your cow is hungry!", (int)(5 * (happiness / (1 - (constitution / 30)))));
-			pushNoti.scheduleLocalNotification("Your trough is empty!", (int)(60 * (troughExp * 2)));
+			float happDelay = 5 * (happiness / (1 - (constitution / 30)));
+			float troughDelay = 60 * (troughExp * 2);
+			pushNoti.scheduleLocalNotification("Your cow is hungry!", (int)( 360 + happDelay));
+			pushNoti.scheduleLocalNotification("Your trough is empty!", (int)(360 + troughDelay));
 		} else {
 			pushNoti.clearLocalNotifications();
 		}
