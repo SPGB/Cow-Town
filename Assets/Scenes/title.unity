@@ -272,7 +272,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
-  m_StereoMirrorMode: 0
 --- !u!4 &902772656
 Transform:
   m_ObjectHideFlags: 0
@@ -401,6 +400,7 @@ MonoBehaviour:
   native_width: 800
   native_height: 1280
   popup: {fileID: 100000, guid: 59a81cc1fb535af449edcdf6e0e9e260, type: 2}
+  initialRun: 1
   money: 0
   exp: 0
   expExpected: 0
@@ -418,6 +418,13 @@ MonoBehaviour:
   newConstitution: 10
   intelligence: 10
   newIntelligence: 10
+  cowName: Betty
+  defaultNames:
+  - 
+  - 
+  - 
+  - 
+  - 
   trough: {fileID: 0}
   cow: {fileID: 0}
   isBorn: 0
@@ -425,6 +432,7 @@ MonoBehaviour:
   totalHay: 0
   totalSpecial: 0
   haySelected: {fileID: 0}
+  barHap: {fileID: 0}
   numberOfCowsBred: 0
   statsRandomized: 0
   screenSizeX1: {x: 0, y: 0, z: 0}
@@ -666,6 +674,65 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  nameText:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
   textMulti: 20
   statTextMulti: 16
   moneyTextMulti: 28
@@ -679,6 +746,8 @@ MonoBehaviour:
   statOffset: 0
   dragStart: 0
   dragDifference: 0
+  spawnMaxTime: 0
+  happinessDeclineRate: 0
 --- !u!4 &1160128688
 Transform:
   m_ObjectHideFlags: 0

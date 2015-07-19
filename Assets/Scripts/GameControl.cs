@@ -41,6 +41,9 @@ public class GameControl : MonoBehaviour {
 	public float newConstitution = 10.0f;
 	public float intelligence = 10.0f;
 	public float newIntelligence = 10.0f;
+
+	public string cowName = "Betty";
+	public string[] defaultNames = new string[5];
 	
 	private int statMin = 10;
 	private int statMax = 18;
@@ -75,6 +78,7 @@ public class GameControl : MonoBehaviour {
 	public GUIStyle stats;
 	public GUIStyle cowText;
 	public GUIStyle moneyText;
+	public GUIStyle nameText;
 
 	public float textMulti = 20;
 	public float statTextMulti = 16;
@@ -120,9 +124,13 @@ public class GameControl : MonoBehaviour {
 		cowText.fontSize = 20;
 		cowText.normal.textColor = Color.white;
 
+		nameText = new GUIStyle();
+		nameText.fontSize = 22;
+		nameText.normal.textColor = Color.white;
+
 		moneyText = new GUIStyle();
 		moneyText.fontSize = 28;
-		moneyText.normal.textColor = Color.white;
+		moneyText.normal.textColor = Color.black;
 		
 		updateTime1 = DateTime.Now;
 		
@@ -142,8 +150,20 @@ public class GameControl : MonoBehaviour {
 			statsRandomized = true;
 		}
 
+		defaultNames[0] = "Betty";
+		defaultNames[1] = "Billy";
+		defaultNames[2] = "Bonny";
+		defaultNames[3] = "Bessy";
+		defaultNames[4] = "Bucky";
+
+		cowName = defaultNames [UnityEngine.Random.Range (0, 4)].Trim();
+
+		cow.setName (cowName);
+
 		statOffset = Screen.width;
 		shopOffset = 0 - Screen.width;
+
+		Load ();
 
 	}
 	
@@ -451,7 +471,7 @@ public class GameControl : MonoBehaviour {
 		
 		data.cowBorn = cowBorn;
 		data.isBorn = isBorn;
-		
+
 		data.money = money;
 		
 		data.exp = exp;
@@ -479,6 +499,8 @@ public class GameControl : MonoBehaviour {
 		data.maxSpawnTime = spawnMaxTime;
 		data.happinessDecRate = happinessDeclineRate;
 		data.inventoryRows = cow.inventoryRows;
+
+		data.cowName = cow.getName();
 		
 		data.saveTime = DateTime.Now;
 		
@@ -503,7 +525,7 @@ public class GameControl : MonoBehaviour {
 			isBorn = data.isBorn;
 			
 			cowBorn = data.cowBorn;
-			
+
 			exp = data.exp;
 			money = data.money;
 
@@ -531,6 +553,7 @@ public class GameControl : MonoBehaviour {
 			Camera.main.GetComponent<SpawnHay>().setMaxTime(data.maxSpawnTime);
 			GameObject.Find("barHap").GetComponent<Happiness>().setRate(data.happinessDecRate);
 			cow.setInventoryRows(data.inventoryRows);
+			cow.setName(data.cowName);
 			
 			DateTime loadTime = DateTime.Now;
 			TimeSpan interval = loadTime - data.saveTime;
@@ -596,6 +619,8 @@ class PlayerData{
 
 	public DateTime cowBorn;
 	public bool isBorn;
+
+	public string cowName;
 
 	public float troughPos;
 

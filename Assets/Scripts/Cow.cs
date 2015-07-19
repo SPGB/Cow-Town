@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Cow : MonoBehaviour {
+
+	private bool changingName = false;
 
 	//textures
 	public Texture menu;
@@ -36,7 +39,9 @@ public class Cow : MonoBehaviour {
 	public DateTime born;
 	public DateTime now;
 	public TimeSpan age;
-	
+
+	private string name = "Bessy";
+
 	private int selected1 = -1;
 	private int selected2 = -1;
 	private Vector2 selected1Pos;
@@ -75,7 +80,7 @@ public class Cow : MonoBehaviour {
 	
 
 	void Update () {
-		
+
 		for (int i = 0; i < GameControl.control.inventory.Count; i++){ //draw inventory
 			string[] split = GameControl.control.inventory[i].Split();
 			inv_names[i] = split[0].ToString();
@@ -216,8 +221,16 @@ public class Cow : MonoBehaviour {
 			//Trough trough_obj = GameControl.control.trough;
 			float troughExp = GameControl.control.troughExp;
 			float troughMaxExp = GameControl.control.troughMaxExp;
-			
-			GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), "Betty", GameControl.control.moneyText);
+
+			//if (changingName) {
+				name = GUI.TextField(new Rect(10, 47 * GameControl.control.screenMulti, Screen.width, GameControl.control.moneyText.lineHeight), name, 25, GameControl.control.nameText);
+			//} else {
+			//	GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), name, GameControl.control.moneyText);
+			//}
+
+			//if (GUI.Button (new Rect (10, 50 * GameControl.control.screenMulti, Screen.width, GameControl.control.moneyText.lineHeight), emptyTexture, GUIStyle.none)) {
+			//	changingName = !changingName;
+			//}
 
 			if (GameControl.control.happiness < 0.1f){
 				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
@@ -371,6 +384,13 @@ public class Cow : MonoBehaviour {
 	}
 	public void setInventoryRows(int invRows){
 		inventoryRows = invRows;
+	}
+
+	public string getName (){
+		return name;
+	}
+	public void setName (string name){
+		this.name = name;
 	}
 
 	public void feed(int amount) {

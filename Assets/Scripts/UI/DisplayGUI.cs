@@ -9,7 +9,7 @@ public class DisplayGUI : MonoBehaviour {
 	}
 
 	void OnGUI () {
-		GameControl.control.moneyText.normal.textColor = Color.black;
+		//GameControl.control.moneyText.normal.textColor = Color.black;
 		GUI.BeginGroup(new Rect (-5f, 0, Screen.width, Screen.height)); // left, top, width, height
 
 		GUI.DrawTexture(new Rect(Screen.width - (100 * GameControl.control.screenMulti), 5 * GameControl.control.screenMulti, 90 * GameControl.control.screenMulti, 45 * GameControl.control.screenMulti), moneyBackground);
