@@ -39,8 +39,8 @@ public class Tutorial : MonoBehaviour {
 			tutorials[3] = "Make sure to drag rocks in the opposite\ndirection of your cow and trough\notherwise the cow will become unhappy.";
 			tutorials[4] = "Money is used to buy most upgrades,\ncollect it by dragging it to your cow or\ntrough.";
 			tutorials[5] = "Items will occasionally drop from\nthe top, drag them to your cow to earn\nbonuses, however the cow must be at\nleast level 5 to use these bonuses.\nAlternatively you can drag items to\nthe trough to earn some money.";
-			tutorials[6] = "Drag from left of the screen for\nyour cow's stats and inventory, then\ndrag right to hide it again.";
-			tutorials[7] = "Drag from the right of the screen\nfor the store, you can buy a bunch\nof upgrades in there, try it now.";
+			tutorials[6] = "Drag from the right side of the screen\nfor your cow's stats and inventory,\nthen drag right to hide it again.";
+			tutorials[7] = "Drag from the left side of the screen\nfor the store, you can buy a bunch\nof upgrades in there, try it now.";
 
 			timers[0] = 2;
 			timers[1] = 4;
@@ -89,8 +89,8 @@ public class Tutorial : MonoBehaviour {
 
 		GUI.BeginGroup(new Rect (0, 0, width, height)); // left, top, width, height
 
-		if (showGUI) GUI.Label (new Rect (10, 100, 100, 100), tutorials [stage], GameControl.control.text);
-		if (showTAP) GUI.Label (new Rect (10, 260, 100, 100), "Tap the screen to continue.", GameControl.control.text);
+		if (showGUI) GUI.Label (new Rect (10 * GameControl.control.screenMulti, 100 * GameControl.control.screenMulti, 100, 100), tutorials [stage], GameControl.control.text);
+		if (showTAP) GUI.Label (new Rect (10 * GameControl.control.screenMulti, 260 * GameControl.control.screenMulti, 100, 100), "Tap the screen to continue.", GameControl.control.text);
 		GUI.EndGroup();
 	}
 
