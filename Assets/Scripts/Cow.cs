@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -217,20 +216,13 @@ public class Cow : MonoBehaviour {
 
 		// Stats
 		GUI.BeginGroup(new Rect (statOffset, 0, Screen.width, Screen.height)); // left, top, width, height
-			bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
-			//Trough trough_obj = GameControl.control.trough;
-			float troughExp = GameControl.control.troughExp;
-			float troughMaxExp = GameControl.control.troughMaxExp;
+		bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
+		//Trough trough_obj = GameControl.control.trough;
+		float troughExp = GameControl.control.troughExp;
+		float troughMaxExp = GameControl.control.troughMaxExp;
 
-			//if (changingName) {
-				name = GUI.TextField(new Rect(10, 47 * GameControl.control.screenMulti, Screen.width, GameControl.control.moneyText.lineHeight), name, 25, GameControl.control.nameText);
-			//} else {
-			//	GUI.Label(new Rect(10, 50 * GameControl.control.screenMulti, 100, 100), name, GameControl.control.moneyText);
-			//}
-
-			//if (GUI.Button (new Rect (10, 50 * GameControl.control.screenMulti, Screen.width, GameControl.control.moneyText.lineHeight), emptyTexture, GUIStyle.none)) {
-			//	changingName = !changingName;
-			//}
+		Rect nameRect = new Rect (10, 47 * GameControl.control.screenMulti, Screen.width, GameControl.control.moneyText.lineHeight);
+		GUI.TextField (nameRect, getName(), 25, GameControl.control.nameText);
 
 			if (GameControl.control.happiness < 0.1f){
 				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
@@ -268,9 +260,9 @@ public class Cow : MonoBehaviour {
 				GUI.Label(new Rect(10, 150 * GameControl.control.screenMulti, 100, 100), "\t\t (" + troughMinutes.ToString("F0") + " minutes)", GameControl.control.cowText);
 			}
 			
-			int addativeStr = (GameControl.control.level >= 5)? int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2]) : 0;
-			int addativeCon = (GameControl.control.level >= 5)? int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]) : 0;
-			int addativeInt = (GameControl.control.level >= 5)? int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]) : 0;
+			int addativeStr = int.Parse(inv_str[0]) + int.Parse(inv_str[1]) + int.Parse(inv_str[2]);
+			int addativeCon = int.Parse(inv_con[0]) + int.Parse(inv_con[1]) + int.Parse(inv_con[2]);
+			int addativeInt = int.Parse(inv_int[0]) + int.Parse(inv_int[1]) + int.Parse(inv_int[2]);
 			if (addativeStr == 0){
 				GUI.Label(new Rect(10, 180 * GameControl.control.screenMulti, 100, 100), "Strength:", GameControl.control.cowText);
 				GUI.Label(new Rect(10, 180 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.strength.ToString(), GameControl.control.cowText);
@@ -386,8 +378,8 @@ public class Cow : MonoBehaviour {
 		inventoryRows = invRows;
 	}
 
-	public string getName (){
-		return name;
+	public string getName(){
+		return ( String.IsNullOrEmpty(name) )? "Betty" : name;
 	}
 	public void setName (string name){
 		this.name = name;

@@ -33,12 +33,12 @@ public class Tutorial : MonoBehaviour {
 		if (GameControl.control.initialRun == true) {
 //			stage1 = true;
 
-			tutorials[0] = "Drag falling hay to your cow to feed it,\nor to the trough under the cow to fill it.";
-			tutorials[1] = "Special hay called the Hay of Life will\nspawn, this hay is worth more. Drag it to\nyour cow or trough for an extra boost.";
+			tutorials[0] = "Drag hay to your cow to feed it,\nor to the trough under the cow to fill it.";
+			tutorials[1] = "Special hay called the Hay of Life can\nappear, this hay is worth more. Drag it to\nyour cow or trough for an extra boost.";
 			tutorials[2] = "The trough under your cow will feed\nyour cow while you are offline.";
 			tutorials[3] = "Make sure to drag rocks in the opposite\ndirection of your cow and trough\notherwise the cow will become unhappy.";
 			tutorials[4] = "Money is used to buy most upgrades,\ncollect it by dragging it to your cow or\ntrough.";
-			tutorials[5] = "Items will occasionally drop from\nthe top, drag them to your cow to earn\nbonuses, however the cow must be at\nleast level 5 to use these bonuses.\nAlternatively you can drag items to\nthe trough to earn some money.";
+			tutorials[5] = "Items will occasionally drop from\nthe top, drag them to your cow to earn\nbonuses.";
 			tutorials[6] = "Drag from the right side of the screen\nfor your cow's stats and inventory,\nthen drag right to hide it again.";
 			tutorials[7] = "Drag from the left side of the screen\nfor the store, you can buy a bunch\nof upgrades in there, try it now.";
 

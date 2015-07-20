@@ -43,8 +43,8 @@ public class TitleScreen : MonoBehaviour {
 
 		//logo
 		GUI.DrawTexture(new Rect (
-			(xPos / 2) - (100 * GameControl.control.screenMulti),
-			0 * GameControl.control.screenMulti,
+			(xPos / 2) - (150 * GameControl.control.screenMulti),
+			10 * GameControl.control.screenMulti,
 			300 * GameControl.control.screenMulti,
 			300 * GameControl.control.screenMulti),
 		    logo);
