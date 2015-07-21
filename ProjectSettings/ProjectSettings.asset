@@ -72,13 +72,13 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: ca.dspc.game.cowtown
-  bundleVersion: 0.102
+  bundleVersion: 0.103
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
   productGUID: 6de94a33e04b6334c87e6fcaba52f55b
-  AndroidBundleVersionCode: 102
+  AndroidBundleVersionCode: 103
   AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 1
   aotOptions: 
