@@ -11,7 +11,7 @@ public class SpawnHay : MonoBehaviour {
 	public bool hayOfLife = false;
 
 	bool is_spawning = false;
-	private float maxTime = 4.0f;
+	private float maxTime = 3.0f;
 	void Start () {
 		Debug.Log("Screen to World: X: " + GameControl.control.screenSizeX1.x + " / " + GameControl.control.screenSizeX2.x + " | Y: " + GameControl.control.screenSizeY.y);
 	}
