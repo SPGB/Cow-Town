@@ -32,8 +32,9 @@ public class Cow : MonoBehaviour {
 	public GameObject item3;
 	public GameObject item4;
 
-	//text
+	//floats
 	public GameObject floatText;
+	public GameObject floatMilk;
 
 	public DateTime born;
 	public DateTime now;
@@ -135,6 +136,7 @@ public class Cow : MonoBehaviour {
 		GameControl.control.inventory[itemInt2] = switch1;
 	}
 
+	/*
 	void OnMouseDrag () {
 		GameObject.Find ("gameControl").transform.position = new Vector3 (0.0f, 0.0f, 1.0f);
 	}
@@ -142,8 +144,17 @@ public class Cow : MonoBehaviour {
 	void OnMouseUp () {
 		GameObject.Find ("gameControl").transform.position = new Vector3 (0.0f, 0.0f, 6.0f);
 	}
-	
-	
+	*/
+
+	void OnMouseDown () {
+		if (GameControl.control.happiness <= 0) {
+			return;
+		}
+		GameControl.control.milk++;
+		GameControl.control.happiness -= 1f;
+		initFloatMilk();
+	}
+
 	void OnGUI () {
 
 		float shopOffset = GameControl.control.shopOffset;
@@ -389,14 +400,15 @@ public class Cow : MonoBehaviour {
 		GameControl.control.happiness += amount;
 		string amount_prefix = (amount > 0)? "+" : "";
 		GameObject temp = initFloatText(amount_prefix + amount.ToString ());
-		temp.GetComponent<Animator>().SetTrigger( (amount > 0)? "hit" : "miss" );
+		string trigger = (amount > 0) ? "hit" : "miss";
+		Debug.Log("New " + trigger + ": " + amount);
+		temp.GetComponent<Animator>().SetTrigger( trigger );
 	}
 	public void award(string text) {
 		GameObject temp = initFloatText(text);
 		temp.GetComponent<Animator>().SetTrigger("award");
 	}
 	GameObject initFloatText(string text) {
-		Debug.Log("New hit: " + text);
 		GameObject temp = Instantiate (floatText) as GameObject;
 		temp.SetActive (true);
 
@@ -409,6 +421,18 @@ public class Cow : MonoBehaviour {
 
 
 		Destroy (temp.gameObject, 1);
+		return temp;
+	}
+	GameObject initFloatMilk() {
+		GameObject temp = Instantiate (floatMilk) as GameObject;
+		temp.SetActive (true);
+		
+		RectTransform tempRect = temp.GetComponent<RectTransform>();
+		temp.transform.SetParent(transform.FindChild("Canvas"));
+		tempRect.transform.localPosition = floatText.transform.localPosition;
+		tempRect.transform.localScale = floatText.transform.localScale;
+		
+		Destroy (temp.gameObject, 0.5f);
 		return temp;
 	}
 }

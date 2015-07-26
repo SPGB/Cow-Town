@@ -22,6 +22,7 @@ public class GameControl : MonoBehaviour {
 	public bool initialRun = true;
 	
 	public int money = 0;
+	public int milk = 0;
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
 	public float level = 1.0f;
