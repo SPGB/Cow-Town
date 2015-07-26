@@ -233,7 +233,7 @@ public class Cow : MonoBehaviour {
 		float troughMaxExp = GameControl.control.troughMaxExp;
 
 		Rect nameRect = new Rect (10, 47 * GameControl.control.screenMulti, Screen.width, GameControl.control.moneyText.lineHeight);
-		GUI.TextField (nameRect, getName(), 25, GameControl.control.nameText);
+		name = GUI.TextField (nameRect, getName(), 25, GameControl.control.nameText);
 
 			if (GameControl.control.happiness < 0.1f){
 				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);

@@ -239,6 +239,9 @@ public class GameControl : MonoBehaviour {
 		if (money < 0){
 			money = 0;
 		}
+		if (milk < 0) {
+			milk = 0;
+		}
 		
 		if (cow) {
 		
@@ -474,7 +477,8 @@ public class GameControl : MonoBehaviour {
 		data.isBorn = isBorn;
 
 		data.money = money;
-		
+		data.milk = milk;
+
 		data.exp = exp;
 
 		data.troughCurExp = troughExp;
@@ -529,6 +533,7 @@ public class GameControl : MonoBehaviour {
 
 			exp = data.exp;
 			money = data.money;
+			milk = data.milk;
 
 			expExpected = data.expExpected;
 			level = data.level;
@@ -585,7 +590,8 @@ public class GameControl : MonoBehaviour {
 		troughPos = 0.0f;
 		
 		money = 0;
-		
+		milk = 0;
+
 		exp = 0.0f;
 		expExpected = 0.0f;
 		level = 1.0f;
@@ -626,6 +632,7 @@ class PlayerData{
 	public float troughPos;
 
 	public int money;
+	public int milk;
 
 	public float exp;
 	public float expExpected;

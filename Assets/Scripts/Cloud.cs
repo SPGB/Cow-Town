@@ -6,6 +6,8 @@ public class Cloud : MonoBehaviour {
 
 	private float range_min = 0.0001f;
 	private float range_max = 0.005f;
+	public float spawn_y_min = 0f;
+	public float spawn_y_max = 80f;
 	void Start () {
 	
 	}
@@ -26,10 +28,10 @@ public class Cloud : MonoBehaviour {
 	void OnBecameInvisible () {
 		direction_right = !direction_right;
 		Vector3 temp = transform.position;
-		temp.y = Random.Range(0f, 4f);
+		temp.y = Random.Range(spawn_y_min, spawn_y_max);
 		transform.position = temp;
 		Quaternion quat = transform.rotation;
-		quat.y = (direction_right)? 180.0f : 0.0f;
+		quat.y = (direction_right)? 0f : 180f;
 		transform.rotation = quat;
 	}
 }
