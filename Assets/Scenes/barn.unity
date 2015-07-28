@@ -681,6 +681,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyText: {fileID: 2098439665}
   milkText: {fileID: 994656404}
+  moneyIcon: {fileID: 314345637}
+  milkIcon: {fileID: 683478741}
 --- !u!114 &394633392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,7 +923,7 @@ GameObject:
   - 114: {fileID: 610986221}
   - 114: {fileID: 610986223}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -982,6 +984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f674d2caaecc2478d9a3b9d751c49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: .100000001
 --- !u!1 &666357506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,7 +2144,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 424116, guid: 523aa800dbcfd064f9d759a930c2db65, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 424116, guid: 523aa800dbcfd064f9d759a930c2db65, type: 2}
       propertyPath: m_LocalScale.y
@@ -2951,6 +2954,7 @@ MonoBehaviour:
   textMulti: 20
   statTextMulti: 16
   moneyTextMulti: 28
+  nameTextMulti: 22
   buttonSize: {x: 128, y: 64}
   templateHeight: 640
   screenMulti: 0
@@ -2985,7 +2989,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 20, y: 20, z: 1}
+  m_Size: {x: 15, y: 15, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2098439665
 GameObject:

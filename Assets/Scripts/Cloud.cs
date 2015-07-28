@@ -31,7 +31,7 @@ public class Cloud : MonoBehaviour {
 		temp.y = Random.Range(spawn_y_min, spawn_y_max);
 		transform.position = temp;
 		Quaternion quat = transform.rotation;
-		quat.y = (direction_right)? 0f : 180f;
+		quat.y = (direction_right)? 180f : 0f;
 		transform.rotation = quat;
 	}
 }

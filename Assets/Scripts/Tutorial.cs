@@ -52,18 +52,22 @@ public class Tutorial : MonoBehaviour {
 			timers[7] = 2;
 
 			StartCoroutine(stageIEnum());
+
+
 		}
 	}
 	
 	// Update is called once per frame
-//	void Update () {
-//		if (GameControl.control.initialRun == false) {
+	void Update () {
+		if (GameControl.control.initialRun == false) {
+			StopAllCoroutines();
+			Destroy(this);
 //			stage1 = false;
 //			stage2 = false;
 //			stage3 = false;
 //			stage4 = false;
 //			stage5 = false;
-//		}
+		}
 //
 //		if (stage2 == true) {
 //			if (stage2run == 0){
@@ -81,7 +85,7 @@ public class Tutorial : MonoBehaviour {
 //			}
 //		}
 //
-//	}
+	}
 //
 	void OnGUI(){
 		float width = Screen.width;
@@ -97,7 +101,7 @@ public class Tutorial : MonoBehaviour {
 	IEnumerator stageIEnum() {
 		Vector2 spawnPos = new Vector2 (-1.46f, 1.46f);
 
-//		yield return new WaitForSeconds (2f);
+		if (stage == 0) yield return new WaitForSeconds (1f);
 
 		Debug.Log ("T" + (stage + 1) + ": Waiting for 5 seconds.");
 

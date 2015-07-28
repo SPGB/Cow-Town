@@ -3,6 +3,8 @@ using System.Collections;
 
 public class sky : MonoBehaviour {
 
+	public float speed = 0.1f;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -10,6 +12,6 @@ public class sky : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate(0f, 0f, 0.1f);
+		if (!GameControl.control.pause) transform.Rotate(0f, 0f, speed);
 	}
 }

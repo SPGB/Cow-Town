@@ -11,6 +11,6 @@ public class ExperienceLevel : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.GetComponent<Text> ().text = ( GameControl.control.level ).ToString("F0");
+		this.GetComponent<Text> ().text = ( Mathf.Floor( GameControl.control.level ) ).ToString("F0");
 	}
 }

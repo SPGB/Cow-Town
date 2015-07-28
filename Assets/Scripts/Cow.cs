@@ -136,16 +136,6 @@ public class Cow : MonoBehaviour {
 		GameControl.control.inventory[itemInt2] = switch1;
 	}
 
-	/*
-	void OnMouseDrag () {
-		GameObject.Find ("gameControl").transform.position = new Vector3 (0.0f, 0.0f, 1.0f);
-	}
-
-	void OnMouseUp () {
-		GameObject.Find ("gameControl").transform.position = new Vector3 (0.0f, 0.0f, 6.0f);
-	}
-	*/
-
 	void OnMouseDown () {
 		if (GameControl.control.happiness <= 0) {
 			return;
@@ -232,8 +222,8 @@ public class Cow : MonoBehaviour {
 		float troughExp = GameControl.control.troughExp;
 		float troughMaxExp = GameControl.control.troughMaxExp;
 
-		Rect nameRect = new Rect (10, 47 * GameControl.control.screenMulti, Screen.width, GameControl.control.moneyText.lineHeight);
-		name = GUI.TextField (nameRect, getName(), 25, GameControl.control.nameText);
+		Rect nameRect = new Rect (10, 47 * GameControl.control.screenMulti, Screen.width, GameControl.control.nameText.lineHeight);
+		name = GUI.TextField (nameRect, name, GameControl.control.nameText);
 
 			if (GameControl.control.happiness < 0.1f){
 				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);

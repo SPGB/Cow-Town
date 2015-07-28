@@ -84,6 +84,7 @@ public class GameControl : MonoBehaviour {
 	public float textMulti = 20;
 	public float statTextMulti = 16;
 	public float moneyTextMulti = 28;
+	public float nameTextMulti = 22;
 
 	public Vector2 buttonSize = new Vector2(128, 64);
 	public float templateHeight = 640;
@@ -175,11 +176,13 @@ public class GameControl : MonoBehaviour {
 		float moneyTextScale = 28 * screenMulti;
 		float textScale = 20 * screenMulti;
 		float statScale = 16 * screenMulti;
+		float nameTextScale = 22 * screenMulti;
 
 		text.fontSize = (int)textScale;
 		stats.fontSize = (int)statScale;
 		cowText.fontSize = (int)textScale;
 		moneyText.fontSize = (int)moneyTextScale;
+		nameText.fontSize = (int)nameTextScale;
 
 		update_camera ();
 
@@ -584,6 +587,8 @@ public class GameControl : MonoBehaviour {
 	}
 	
 	public void Reset(){
+		initialRun = true;
+
 		cowBorn = DateTime.Now;
 		isBorn = false;
 		
@@ -611,11 +616,17 @@ public class GameControl : MonoBehaviour {
 		
 		statsRandomized = false;
 		numberOfCowsBred = 0;
-		
+
+		spawnMaxTime = 4.0f;
+		cow.inventoryRows = 4;
+		happinessDeclineRate = 1.0f;
+
 		inventory.Clear();
 		for (int i = 0; i < 12; i++){
 			inventory.Add("empty\n0\n0\n0\ncommon");
 		}
+
+		Save ();
 	}
 }
 

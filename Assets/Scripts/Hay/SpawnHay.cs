@@ -29,7 +29,8 @@ public class SpawnHay : MonoBehaviour {
 		Vector3 min_x = Camera.main.ScreenToWorldPoint(new Vector3(50, 0, 0));
 		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
 		int pos_x = Random.Range ( (int) min_x.x, (int) max_x.x);
-		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, GameControl.control.screenSizeY.y, 4.4f), Quaternion.identity) as GameObject;
+		float pos_z = (is_rock)? 4.7f : 4.4f;
+		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, GameControl.control.screenSizeY.y, pos_z), Quaternion.identity) as GameObject;
 		Destroy (temp.gameObject, 20);
 		is_spawning = false;
 	}
@@ -65,7 +66,7 @@ public class SpawnHay : MonoBehaviour {
 		Vector3 max_x = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth - 50, 0, 0));
 		int pos_x = (x == 0)? Random.Range ( (int) min_x.x, (int) max_x.x) : (int) x;
 		int pos_y = (y == 0) ? (int) GameControl.control.screenSizeY.y : (int) y;
-		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, pos_y, 4.4f), Quaternion.identity) as GameObject;
+		GameObject temp = Instantiate (new_object, new Vector3 (pos_x, pos_y, 4.7f), Quaternion.identity) as GameObject;
 		Destroy (temp.gameObject, 20);
 	}
 	public void Coin(float x, float y){
