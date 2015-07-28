@@ -18,12 +18,15 @@ public class ItemCollide : MonoBehaviour {
 				}
 				Destroy(gameObject);
 				GameControl.control.draggingItem = false;
+				transform.gameObject.GetComponent<DragHay>().dragging = false;
 			}
 		} else if (col.gameObject.tag == "Trough"){
 			if (GameControl.control.trough){
 				GameControl.control.money += 10;
 				GameControl.control.cow.award("$10");
 				Destroy(gameObject);
+				GameControl.control.draggingItem = false;
+				transform.gameObject.GetComponent<DragHay>().dragging = false;
 			}
 		}
 	}

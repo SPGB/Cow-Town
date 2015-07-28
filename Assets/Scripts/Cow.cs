@@ -137,12 +137,14 @@ public class Cow : MonoBehaviour {
 	}
 
 	void OnMouseDown () {
-		if (GameControl.control.happiness <= 0) {
-			return;
+		if (GameControl.control.level >= 5){
+			if (GameControl.control.happiness <= 0) {
+				return;
+			}
+			GameControl.control.milk++;
+			GameControl.control.happiness -= 1f;
+			initFloatMilk ();
 		}
-		GameControl.control.milk++;
-		GameControl.control.happiness -= 1f;
-		initFloatMilk();
 	}
 
 	void OnGUI () {
