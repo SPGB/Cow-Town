@@ -72,14 +72,13 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleIdentifier: ca.dspc.game.cowtown
-  bundleVersion: 0.105
+  bundleVersion: 0.106
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
-  virtualRealitySupported: 0
   productGUID: 6de94a33e04b6334c87e6fcaba52f55b
-  AndroidBundleVersionCode: 105
+  AndroidBundleVersionCode: 106
   AndroidMinSdkVersion: 14
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -121,8 +120,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Jordan/Documents/cowtownkeystore.keystore
-  AndroidKeyaliasName: cowtown
+  AndroidKeystoreName: F:/Users/Avow/Downloads/user2.keystore
+  AndroidKeyaliasName: cow town
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
@@ -262,6 +261,7 @@ PlayerSettings:
   psp2InfoBarOnStartup: 0
   psp2InfoBarColor: 0
   psmSplashimage: {fileID: 0}
+  virtualRealitySupported: 0
   spritePackerPolicy: 
   scriptingDefineSymbols:
     4: 
