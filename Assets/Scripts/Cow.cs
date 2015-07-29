@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class Cow : MonoBehaviour {
 
@@ -219,14 +220,21 @@ public class Cow : MonoBehaviour {
 
 		// Stats
 		GUI.BeginGroup(new Rect (statOffset, 0, Screen.width, Screen.height)); // left, top, width, height
-		bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
-		//Trough trough_obj = GameControl.control.trough;
-		float troughExp = GameControl.control.troughExp;
-		float troughMaxExp = GameControl.control.troughMaxExp;
+			bool hapDif = (GameControl.control.happiness < GameControl.control.happinessLose);
+			//Trough trough_obj = GameControl.control.trough;
+			float troughExp = GameControl.control.troughExp;
+			float troughMaxExp = GameControl.control.troughMaxExp;
+			
+			TouchScreenKeyboard.hideInput = true;
+			
+			Rect nameRect = new Rect (10, 47 * GameControl.control.screenMulti, Screen.width, GameControl.control.nameText.lineHeight);
 
-		Rect nameRect = new Rect (10, 47 * GameControl.control.screenMulti, Screen.width, GameControl.control.nameText.lineHeight);
-		name = GUI.TextField (nameRect, name, GameControl.control.nameText);
-
+			// Input field for name.
+			name = GUI.TextField (nameRect, name, 25, GameControl.control.nameText);
+			// Replaces any characters other than letters (lower and upper case), numbers, and spaces.
+			name = Regex.Replace (name, "[^a-zA-Z0-9 ]", "");
+			
+			
 			if (GameControl.control.happiness < 0.1f){
 				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "Happiness:", GameControl.control.cowText);
 				GUI.Label(new Rect(10, 80 * GameControl.control.screenMulti, 100, 100), "\t\t " + GameControl.control.happiness.ToString("F1") + " / " + GameControl.control.happinessMax.ToString(), GameControl.control.cowText);

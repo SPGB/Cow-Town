@@ -77,6 +77,7 @@ PlayerSettings:
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   xboxOneDisableKinectGpuReservation: 0
+  virtualRealitySupported: 0
   productGUID: 6de94a33e04b6334c87e6fcaba52f55b
   AndroidBundleVersionCode: 106
   AndroidMinSdkVersion: 14
@@ -120,8 +121,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: F:/Users/Avow/Downloads/user2.keystore
-  AndroidKeyaliasName: cow town
+  AndroidKeystoreName: C:/Users/Jordan/Documents/cowtownkeystore.keystore
+  AndroidKeyaliasName: cowtown
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
@@ -261,7 +262,6 @@ PlayerSettings:
   psp2InfoBarOnStartup: 0
   psp2InfoBarColor: 0
   psmSplashimage: {fileID: 0}
-  virtualRealitySupported: 0
   spritePackerPolicy: 
   scriptingDefineSymbols:
     4: 
