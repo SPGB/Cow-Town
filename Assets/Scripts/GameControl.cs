@@ -101,6 +101,7 @@ public class GameControl : MonoBehaviour {
 	private float runonce = 0;
 	public float spawnMaxTime;
 	public float happinessDeclineRate;
+	public int skinCount = 0;
 
 	// Use this for initialization
 	void Awake () {
@@ -286,16 +287,16 @@ public class GameControl : MonoBehaviour {
 
 			if (statOffset < 0) {
 				statOffset = 0;
-				shopOffset = 0 - (Screen.width * 2);
-			} else if (statOffset > Screen.width * 2){
-				statOffset = Screen.width * 2;
+				shopOffset = 0 - (Camera.main.pixelWidth * 2);
+			} else if (statOffset > Camera.main.pixelWidth * 2){
+				statOffset = Camera.main.pixelWidth * 2;
 				shopOffset = 0;
 			}
 			if (shopOffset > 0) {
 				shopOffset = 0;
-				statOffset = Screen.width * 2;
-			} else if (shopOffset < 0 - (Screen.width * 2)){
-				shopOffset = 0 - (Screen.width * 2);
+				statOffset = Camera.main.pixelWidth * 2;
+			} else if (shopOffset < 0 - (Camera.main.pixelWidth * 2)){
+				shopOffset = 0 - (Camera.main.pixelWidth * 2);
 				statOffset = 0;
 			}
 		}
@@ -312,7 +313,7 @@ public class GameControl : MonoBehaviour {
 
 		if (!draggingItem && !titleScreen) {
 			if (!statDragged && !shopDragged){
-				if (dragStart <= 0 + (Screen.width / 10) || dragStart >= Screen.width - (Screen.width / 10)){
+				if (dragStart <= 0 + (Camera.main.pixelWidth / 10) || dragStart >= Camera.main.pixelWidth - (Camera.main.pixelWidth / 10)){
 					pause = true;
 					dragDifference = Input.mousePosition.x - dragStart;
 				}
@@ -327,7 +328,7 @@ public class GameControl : MonoBehaviour {
 				}
 
 				statOffset = 0 + dragDifference;
-				shopOffset = (0 - (Screen.width * 2)) + dragDifference;
+				shopOffset = (0 - (Camera.main.pixelWidth * 2)) + dragDifference;
 
 			} else if (shopDragged){
 				pause = true;
@@ -337,12 +338,12 @@ public class GameControl : MonoBehaviour {
 					dragDifference = 0;
 				}
 
-				statOffset = (Screen.width * 2) + dragDifference;
+				statOffset = (Camera.main.pixelWidth * 2) + dragDifference;
 				shopOffset = 0 + dragDifference;
 
 			} else {
-				statOffset = Screen.width + dragDifference;
-				shopOffset = (0 - Screen.width) + dragDifference;
+				statOffset = Camera.main.pixelWidth + dragDifference;
+				shopOffset = (0 - Camera.main.pixelWidth) + dragDifference;
 			}
 		}
 	}
@@ -350,43 +351,43 @@ public class GameControl : MonoBehaviour {
 	void OnMouseUp(){
 
 		if (statDragged) {
-			if (statOffset > Screen.width / 8) {
-				statOffset = Screen.width;
-				shopOffset = 0 - Screen.width;
+			if (statOffset > Camera.main.pixelWidth / 8) {
+				statOffset = Camera.main.pixelWidth;
+				shopOffset = 0 - Camera.main.pixelWidth;
 				statDragged = false;
 				pause = false;
 			} else {
 				statOffset = 0;
-				shopOffset = 0 - (Screen.width * 2);
+				shopOffset = 0 - (Camera.main.pixelWidth * 2);
 				pause = true;
 			}
 		} else if (shopDragged) {
-			if (shopOffset < 0 - (Screen.width / 8)) {
-				statOffset = Screen.width;
-				shopOffset = 0 - Screen.width;
+			if (shopOffset < 0 - (Camera.main.pixelWidth / 8)) {
+				statOffset = Camera.main.pixelWidth;
+				shopOffset = 0 - Camera.main.pixelWidth;
 				shopDragged = false;
 				pause = false;
 			} else {
-				statOffset = Screen.width * 2;
+				statOffset = Camera.main.pixelWidth * 2;
 				shopOffset = 0;
 				pause = true;
 			}
 		} else {
-			if (shopOffset > 0 - (Screen.width / 2) - (Screen.width / 8)) {
-				statOffset = Screen.width * 2;
+			if (shopOffset > 0 - (Camera.main.pixelWidth / 2) - (Camera.main.pixelWidth / 8)) {
+				statOffset = Camera.main.pixelWidth * 2;
 				shopOffset = 0;
 				shopDragged = true;
 				Save();
 				pause = true;
-			} else if (statOffset < (Screen.width / 2) + (Screen.width / 8)) {
+			} else if (statOffset < (Camera.main.pixelWidth / 2) + (Camera.main.pixelWidth / 8)) {
 				statOffset = 0;
-				shopOffset = 0 - (Screen.width * 2);
+				shopOffset = 0 - (Camera.main.pixelWidth * 2);
 				statDragged = true;
 				Save();
 				pause = true;
 			} else {
-				statOffset = Screen.width;
-				shopOffset = 0 - Screen.width;
+				statOffset = Camera.main.pixelWidth;
+				shopOffset = 0 - Camera.main.pixelWidth;
 				statDragged = false;
 				shopDragged = false;
 				pause = false;

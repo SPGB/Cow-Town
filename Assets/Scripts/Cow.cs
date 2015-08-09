@@ -164,14 +164,14 @@ public class Cow : MonoBehaviour {
 		float curRate = GameObject.Find ("barHap").GetComponent<Happiness>().getRate();
 		
 		// Draw the background image for shop
-		GUI.BeginGroup(new Rect (shopOffset, 0, width, height)); // left, top, width, height
-			GUI.DrawTexture(new Rect (0, 0, width, height), menu);
-		GUI.EndGroup();
+		//GUI.BeginGroup(new Rect (shopOffset, 0, width, height)); // left, top, width, height
+		//	GUI.DrawTexture(new Rect (0, 0, width, height), menu);
+		//GUI.EndGroup();
 
 		// Draw the background image for stats
-		GUI.BeginGroup(new Rect (statOffset, 0, width, height)); // left, top, width, height
-			GUI.DrawTexture(new Rect (0, 0, width, height), menu);
-		GUI.EndGroup();
+		//GUI.BeginGroup(new Rect (statOffset, 0, width, height)); // left, top, width, height
+		//	GUI.DrawTexture(new Rect (0, 0, width, height), menu);
+		//GUI.EndGroup();
 
 		// Inventory stuff
 		GUI.BeginGroup(new Rect(statOffset, 0, width, height));
@@ -304,8 +304,8 @@ public class Cow : MonoBehaviour {
 
 		// Shop stuff
 		GUI.BeginGroup(new Rect (shopOffset, 0, width, height));
-			GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.95f);
-			GUI.DrawTexture(new Rect(0, 0, width, height), menu);
+			//GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.95f);
+			//GUI.DrawTexture(new Rect(0, 0, width, height), menu);
 //			GUI.DrawTexture(new Rect((width - 100) * GameControl.control.screenMulti, 5 * GameControl.control.screenMulti, 90, 45), moneyBackground);
 //			GUI.Label(new Rect((width - 70) * GameControl.control.screenMulti, 10 * GameControl.control.screenMulti, 100, 100), "" + GameControl.control.money, GameControl.control.cowText);
 		
