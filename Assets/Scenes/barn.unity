@@ -1710,6 +1710,7 @@ MonoBehaviour:
   inventorySlot10: {fileID: 676945035}
   inventorySlot11: {fileID: 496894060}
   inventorySlot12: {fileID: 1954544385}
+  statUpdateRate: .5
 --- !u!114 &394633392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2397,7 +2398,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f674d2caaecc2478d9a3b9d751c49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: .00999999978
+  speed: .100000001
+  seconds: 2
+  is_spinning: 0
 --- !u!1 &666357506
 GameObject:
   m_ObjectHideFlags: 0

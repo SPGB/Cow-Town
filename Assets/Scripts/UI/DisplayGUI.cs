@@ -39,6 +39,9 @@ public class DisplayGUI : MonoBehaviour {
 	public GameObject inventorySlot11;
 	public GameObject inventorySlot12;
 
+	private bool isUpdateStat = false;
+	public float statUpdateRate = 0.25f;
+
 	void Start () {
 
 	}
@@ -52,11 +55,21 @@ public class DisplayGUI : MonoBehaviour {
 		moneyText.GetComponent<Text>().text = "" + GameControl.control.money;
 		milkText.GetComponent<Text>().text = "" + GameControl.control.milk;
 
+		if (GameControl.control.pause) {
+			if (!isUpdateStat) {
+				isUpdateStat = true;
+				StartCoroutine(statsPanel(statUpdateRate));
+			}
+
+		}
+	}
+	IEnumerator statsPanel(float seconds) {
+		yield return new WaitForSeconds (seconds);
 		updateStats ();
 		updateInventory ();
 		updateShop ();
+		isUpdateStat = false;
 	}
-
 	private void updateStats () {
 		name.GetComponent<Text>().text = GameControl.control.cow.getName();
 
@@ -77,7 +90,9 @@ public class DisplayGUI : MonoBehaviour {
 		Sprite[] sprites = new Sprite[12];
 
 		for (int i = 0; i < 12; i++){
-			sprites[i] = (Sprite)Resources.Load("items/textures/" + GameControl.control.cow.inv_names[i], typeof(Sprite));
+			if (!sprites[i] || sprites[i].name != GameControl.control.cow.inv_names[i]) {
+				sprites[i] = (Sprite)Resources.Load("items/textures/" + GameControl.control.cow.inv_names[i], typeof(Sprite));
+			}
 		}
 
 		inventorySlot1.GetComponent<Image> ().sprite = sprites [0];
