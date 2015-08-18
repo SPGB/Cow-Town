@@ -26,7 +26,8 @@ public class DisplayGUI : MonoBehaviour {
 
 	public string InventoryItems = "INVENTORY ITEMS";
 
-	public GameObject inventorySlot1;
+	public GameObject[] inventorySlots = new GameObject[12];
+	/**public GameObject inventorySlot1;
 	public GameObject inventorySlot2;
 	public GameObject inventorySlot3;
 	public GameObject inventorySlot4;
@@ -37,7 +38,7 @@ public class DisplayGUI : MonoBehaviour {
 	public GameObject inventorySlot9;
 	public GameObject inventorySlot10;
 	public GameObject inventorySlot11;
-	public GameObject inventorySlot12;
+	public GameObject inventorySlot12;**/
 
 	private bool isUpdateStat = false;
 	public float statUpdateRate = 0.25f;
@@ -92,10 +93,17 @@ public class DisplayGUI : MonoBehaviour {
 		for (int i = 0; i < 12; i++){
 			if (!sprites[i] || sprites[i].name != GameControl.control.cow.inv_names[i]) {
 				sprites[i] = (Sprite)Resources.Load("items/textures/" + GameControl.control.cow.inv_names[i], typeof(Sprite));
+
+				if (sprites [i].name == "empty") {
+					inventorySlots[i].SetActive(false);
+				} else {
+					inventorySlots[i].SetActive(true);
+				}
 			}
+			inventorySlots[i].GetComponent<Image>().sprite = sprites[i];
 		}
 
-		inventorySlot1.GetComponent<Image> ().sprite = sprites [0];
+		/**inventorySlot1.GetComponent<Image> ().sprite = sprites [0];
 		if (sprites [0].name == "empty") {
 			inventorySlot1.GetComponentInChildren<Button> ().enabled = false;
 		} else {
@@ -177,7 +185,7 @@ public class DisplayGUI : MonoBehaviour {
 			inventorySlot12.GetComponentInChildren<Button> ().enabled = false;
 		} else {
 			inventorySlot12.GetComponentInChildren<Button> ().enabled = true;
-		}
+		}**/
 	}
 
 	private void updateShop () {

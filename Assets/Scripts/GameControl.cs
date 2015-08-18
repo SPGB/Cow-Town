@@ -302,6 +302,10 @@ public class GameControl : MonoBehaviour {
 		}
 	}
 
+	public void PAUSE (bool paused) {
+		GameControl.control.pause = paused;
+	}
+
 	void OnMouseDrag(){
 
 		if (runonce > 0){

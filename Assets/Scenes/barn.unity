@@ -1698,18 +1698,19 @@ MonoBehaviour:
   skins: {fileID: 888926027}
   inventory: {fileID: 1064775563}
   InventoryItems: INVENTORY ITEMS
-  inventorySlot1: {fileID: 458721654}
-  inventorySlot2: {fileID: 170268356}
-  inventorySlot3: {fileID: 1344767277}
-  inventorySlot4: {fileID: 362288720}
-  inventorySlot5: {fileID: 1510191343}
-  inventorySlot6: {fileID: 2046487215}
-  inventorySlot7: {fileID: 1311255669}
-  inventorySlot8: {fileID: 1054027933}
-  inventorySlot9: {fileID: 855128829}
-  inventorySlot10: {fileID: 676945035}
-  inventorySlot11: {fileID: 496894060}
-  inventorySlot12: {fileID: 1954544385}
+  inventorySlots:
+  - {fileID: 458721654}
+  - {fileID: 170268356}
+  - {fileID: 1344767277}
+  - {fileID: 362288720}
+  - {fileID: 1510191343}
+  - {fileID: 2046487215}
+  - {fileID: 1311255669}
+  - {fileID: 1054027933}
+  - {fileID: 855128829}
+  - {fileID: 676945035}
+  - {fileID: 496894060}
+  - {fileID: 1954544385}
   statUpdateRate: .5
 --- !u!114 &394633392
 MonoBehaviour:
@@ -2375,7 +2376,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Sprite: {fileID: 21300000, guid: cbf772e551fdbdc4482806ef060ce649, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -6791,10 +6792,10 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 360, y: 640}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
