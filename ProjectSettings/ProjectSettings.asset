@@ -121,8 +121,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: F:/Users/Avow/Downloads/user2.keystore
-  AndroidKeyaliasName: cow town
+  AndroidKeystoreName: C:/Users/Jordan/Documents/cowtownkeystore.keystore
+  AndroidKeyaliasName: cowtown
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
