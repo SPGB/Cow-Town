@@ -49,6 +49,12 @@ public class GameControl : MonoBehaviour {
 	private int statMin = 10;
 	private int statMax = 18;
 
+	public float[] upgradePrice = new float[4];
+	public float[] upgradePriceBase = new float[4];
+	public float[] upgradePriceMultiplier = new float[4];
+	public float[] upgradeQuantity = new float[4];
+	public float[] upgradeOwned = new float[4];
+
 	public Trough trough;
 	public Cow cow;
 	public DateTime cowBorn = DateTime.Now;
@@ -166,8 +172,18 @@ public class GameControl : MonoBehaviour {
 		statOffset = Screen.width;
 		shopOffset = 0 - Screen.width;
 
-		Load ();
+		for (int i = 0; i < 4; i++) {
+			upgradePriceBase [i] = 50f;
+			upgradePrice [i] = upgradePriceBase [i];
+			upgradePriceMultiplier [i] = 1.15f;
+			upgradeOwned [i] = 0f;
+		}
+		upgradeQuantity [0] = 25f;
+		upgradeQuantity [1] = 1f;
+		upgradeQuantity [2] = 0.2f;
+		upgradeQuantity [3] = 0.5f;
 
+		Load ();
 	}
 	
 	void Update () {
@@ -416,8 +432,8 @@ public class GameControl : MonoBehaviour {
 		if (paused){
 			float happDelay = 5 * (happiness / (1 - (constitution / 30)));
 			float troughDelay = 60 * (troughExp * 2);
-			pushNoti.scheduleLocalNotification("Your cow is hungry!", (int)( 360 + happDelay));
-			pushNoti.scheduleLocalNotification("Your trough is empty!", (int)(360 + troughDelay));
+			pushNoti.scheduleLocalNotification("Your cow is hungry!", (int) (7200 + happDelay));
+			pushNoti.scheduleLocalNotification("Your trough is empty!", (int) (7200 + troughDelay));
 		} else {
 			pushNoti.clearLocalNotifications();
 		}

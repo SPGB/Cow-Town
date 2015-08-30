@@ -303,7 +303,7 @@ public class Cow : MonoBehaviour {
 //		GUI.EndGroup ();
 
 		// Shop stuff
-		GUI.BeginGroup(new Rect (shopOffset, 0, width, height));
+		/**GUI.BeginGroup(new Rect (shopOffset, 0, width, height));
 			//GUI.color = new Color(1.0f, 1.0f, 1.0f, 0.95f);
 			//GUI.DrawTexture(new Rect(0, 0, width, height), menu);
 //			GUI.DrawTexture(new Rect((width - 100) * GameControl.control.screenMulti, 5 * GameControl.control.screenMulti, 90, 45), moneyBackground);
@@ -379,7 +379,7 @@ public class Cow : MonoBehaviour {
 				GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (335 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "Int:", GameControl.control.stats);
 				GUI.Label(new Rect((50 + (selected1Pos.x * 50)) * GameControl.control.screenMulti, (335 + (selected1Pos.y * 50)) * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti, 70 * GameControl.control.screenMulti), "          " + inv_int[selected1], GameControl.control.stats);
 			}
-		GUI.EndGroup();
+		GUI.EndGroup();**/
 	}
 
 	public int getInventoryRows(){
@@ -434,5 +434,29 @@ public class Cow : MonoBehaviour {
 		
 		Destroy (temp.gameObject, 0.5f);
 		return temp;
+	}
+
+	public void buyUpgrade (int upgrade){
+		if (upgrade == 0 && GameControl.control.money >= GameControl.control.upgradePrice[0]) {
+			GameControl.control.troughMaxExp += 25f;
+			GameControl.control.money -= (int)GameControl.control.upgradePrice[0];
+			GameControl.control.upgradeOwned[0]++;
+			GameControl.control.upgradePrice[0] = GameControl.control.upgradePriceBase[0] * (GameControl.control.upgradePriceMultiplier[0] * GameControl.control.upgradeOwned[0]);
+		} else if (upgrade == 1 && GameControl.control.money >= GameControl.control.upgradePrice[1]) {
+			inventoryRows += 1;
+			GameControl.control.money -= (int)GameControl.control.upgradePrice[1];
+			GameControl.control.upgradeOwned[1]++;
+			GameControl.control.upgradePrice[1] = GameControl.control.upgradePriceBase[1] * (GameControl.control.upgradePriceMultiplier[1] * GameControl.control.upgradeOwned[1]);
+		} else if (upgrade == 2 && GameControl.control.money >= GameControl.control.upgradePrice[2]) {
+			GameControl.control.spawnMaxTime -= 0.2f;
+			GameControl.control.money -= (int)GameControl.control.upgradePrice[2];
+			GameControl.control.upgradeOwned[2]++;
+			GameControl.control.upgradePrice[2] = GameControl.control.upgradePriceBase[2] * (GameControl.control.upgradePriceMultiplier[2] * GameControl.control.upgradeOwned[2]);
+		} else if (upgrade == 3 && GameControl.control.money >= GameControl.control.upgradePrice[3]) {
+			GameControl.control.happinessDeclineRate -= 0.5f;
+			GameControl.control.money -= (int)GameControl.control.upgradePrice[3];
+			GameControl.control.upgradeOwned[3]++;
+			GameControl.control.upgradePrice[3] = GameControl.control.upgradePriceBase[3] * (GameControl.control.upgradePriceMultiplier[3] * GameControl.control.upgradeOwned[3]);
+		}
 	}
 }

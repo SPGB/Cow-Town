@@ -11,6 +11,8 @@ public class DisplayGUI : MonoBehaviour {
 
 	public string StatsAndShop = "STATS AND SHOP STUFF";
 
+	public string Stats = "STATS";
+
 	public GameObject stats;
 	public GameObject shop;
 
@@ -23,6 +25,13 @@ public class DisplayGUI : MonoBehaviour {
 	public GameObject intelligence;
 	public GameObject skins;
 	public GameObject inventory;
+
+	public string Shop = "SHOP";
+
+	public GameObject[] shopButton = new GameObject[4];
+	public GameObject[] shopQuantity = new GameObject[4];
+	public GameObject[] shopPrice = new GameObject[4];
+	public GameObject[] shopOwned = new GameObject[4];
 
 	public string InventoryItems = "INVENTORY ITEMS";
 
@@ -50,19 +59,18 @@ public class DisplayGUI : MonoBehaviour {
 	void Update () {
 		stats.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(GameControl.control.statOffset, 0.0f, 0.0f));
 		shop.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(GameControl.control.shopOffset, 0.0f, 0.0f));
-	}
-
-	void OnGUI () {
-		moneyText.GetComponent<Text>().text = "" + GameControl.control.money;
-		milkText.GetComponent<Text>().text = "" + GameControl.control.milk;
 
 		if (GameControl.control.pause) {
 			if (!isUpdateStat) {
 				isUpdateStat = true;
 				StartCoroutine(statsPanel(statUpdateRate));
 			}
-
 		}
+	}
+
+	void OnGUI () {
+		moneyText.GetComponent<Text>().text = "" + GameControl.control.money;
+		milkText.GetComponent<Text>().text = "" + GameControl.control.milk;
 	}
 	IEnumerator statsPanel(float seconds) {
 		yield return new WaitForSeconds (seconds);
@@ -189,6 +197,16 @@ public class DisplayGUI : MonoBehaviour {
 	}
 
 	private void updateShop () {
+		for (int i = 0; i < 4; i++) {
+			if (GameControl.control.upgradePrice [i] > GameControl.control.money) shopButton [i].GetComponent<Button>().interactable = false; 
+			else if (GameControl.control.upgradePrice [i] <= GameControl.control.money) shopButton [i].GetComponent<Button>().interactable = true;
 
+			shopPrice [i].GetComponent<Text>().text = "$" + GameControl.control.upgradePrice [i].ToString("F0");
+			shopOwned [i].GetComponent<Text>().text = GameControl.control.upgradeOwned [i].ToString("F0");
+		}
+		shopQuantity [0].GetComponent<Text>().text = "+" + GameControl.control.upgradeQuantity [0].ToString("F0");
+		shopQuantity [1].GetComponent<Text>().text = "+" + GameControl.control.upgradeQuantity [1].ToString("F0");
+		shopQuantity [2].GetComponent<Text>().text = "+" + GameControl.control.upgradeQuantity [2].ToString("F1");
+		shopQuantity [3].GetComponent<Text>().text = "-" + GameControl.control.upgradeQuantity [3].ToString("F1");
 	}
 }
