@@ -2954,8 +2954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f674d2caaecc2478d9a3b9d751c49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: .100000001
-  seconds: 2
+  speed: .0500000007
+  seconds: .100000001
   is_spinning: 0
 --- !u!1 &639462792
 GameObject:

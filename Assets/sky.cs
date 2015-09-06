@@ -4,7 +4,7 @@ using System.Collections;
 public class sky : MonoBehaviour {
 
 	public float speed = 0.0001f;
-	public float seconds = 1;
+	public float seconds = 0.5f;
 	public bool is_spinning = false;
 	// Update is called once per frame
 	IEnumerator spin(float seconds) {

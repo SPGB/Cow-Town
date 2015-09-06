@@ -11,7 +11,8 @@ public class SpawnHay : MonoBehaviour {
 	public bool hayOfLife = false;
 
 	bool is_spawning = false;
-	private float maxTime = 3.0f;
+	private float minTime = 1.0f;
+	private float maxTime = 2.0f;
 	void Start () {
 		Debug.Log("Screen to World: X: " + GameControl.control.screenSizeX1.x + " / " + GameControl.control.screenSizeX2.x + " | Y: " + GameControl.control.screenSizeY.y);
 	}
@@ -40,7 +41,7 @@ public class SpawnHay : MonoBehaviour {
 		if(!is_spawning && !GameControl.control.initialRun) {
 			is_spawning = true; //Yep, we're going to spawn
 			//StartCoroutine(spawn(Random.Range(GameControl.control.minSpawnTime, GameControl.control.maxSpawnTime)));
-			StartCoroutine(spawn(Random.Range(maxTime - 2.0f, maxTime)));
+			StartCoroutine(spawn(Random.Range(minTime, maxTime)));
 		}
 
 		if (hayOfLife) {
