@@ -2129,7 +2129,7 @@ MonoBehaviour:
   - {fileID: 676945035}
   - {fileID: 496894060}
   - {fileID: 1954544385}
-  statUpdateRate: .5
+  statUpdateRate: .100000001
 --- !u!114 &394633392
 MonoBehaviour:
   m_ObjectHideFlags: 0

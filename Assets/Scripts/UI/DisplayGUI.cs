@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class DisplayGUI : MonoBehaviour {	
 	public GameObject moneyText;
@@ -36,21 +37,9 @@ public class DisplayGUI : MonoBehaviour {
 	public string InventoryItems = "INVENTORY ITEMS";
 
 	public GameObject[] inventorySlots = new GameObject[12];
-	/**public GameObject inventorySlot1;
-	public GameObject inventorySlot2;
-	public GameObject inventorySlot3;
-	public GameObject inventorySlot4;
-	public GameObject inventorySlot5;
-	public GameObject inventorySlot6;
-	public GameObject inventorySlot7;
-	public GameObject inventorySlot8;
-	public GameObject inventorySlot9;
-	public GameObject inventorySlot10;
-	public GameObject inventorySlot11;
-	public GameObject inventorySlot12;**/
 
 	private bool isUpdateStat = false;
-	public float statUpdateRate = 0.25f;
+	public float statUpdateRate = 0.1f;
 
 	void Start () {
 
@@ -73,7 +62,7 @@ public class DisplayGUI : MonoBehaviour {
 		milkText.GetComponent<Text>().text = "" + GameControl.control.milk;
 	}
 	IEnumerator statsPanel(float seconds) {
-		yield return new WaitForSeconds (seconds);
+		yield return StartCoroutine(WaitForRealTime(1));
 		updateStats ();
 		updateInventory ();
 		updateShop ();
@@ -110,90 +99,6 @@ public class DisplayGUI : MonoBehaviour {
 			}
 			inventorySlots[i].GetComponent<Image>().sprite = sprites[i];
 		}
-
-		/**inventorySlot1.GetComponent<Image> ().sprite = sprites [0];
-		if (sprites [0].name == "empty") {
-			inventorySlot1.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot1.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot2.GetComponent<Image> ().sprite = sprites [1];
-		if (sprites [1].name == "empty") {
-			inventorySlot2.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot2.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot3.GetComponent<Image> ().sprite = sprites [2];
-		if (sprites [2].name == "empty") {
-			inventorySlot3.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot3.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot4.GetComponent<Image> ().sprite = sprites [3];
-		if (sprites [3].name == "empty") {
-			inventorySlot4.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot4.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot5.GetComponent<Image> ().sprite = sprites [4];
-		if (sprites [4].name == "empty") {
-			inventorySlot5.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot5.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot6.GetComponent<Image> ().sprite = sprites [5];
-		if (sprites [5].name == "empty") {
-			inventorySlot6.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot6.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot7.GetComponent<Image> ().sprite = sprites [6];
-		if (sprites [6].name == "empty") {
-			inventorySlot7.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot7.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot8.GetComponent<Image> ().sprite = sprites [7];
-		if (sprites [7].name == "empty") {
-			inventorySlot8.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot8.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot9.GetComponent<Image> ().sprite = sprites [8];
-		if (sprites [8].name == "empty") {
-			inventorySlot9.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot9.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot10.GetComponent<Image> ().sprite = sprites [9];
-		if (sprites [9].name == "empty") {
-			inventorySlot10.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot10.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot11.GetComponent<Image> ().sprite = sprites [10];
-		if (sprites [10].name == "empty") {
-			inventorySlot11.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot11.GetComponentInChildren<Button> ().enabled = true;
-		}
-
-		inventorySlot12.GetComponent<Image> ().sprite = sprites [11];
-		if (sprites [11].name == "empty") {
-			inventorySlot12.GetComponentInChildren<Button> ().enabled = false;
-		} else {
-			inventorySlot12.GetComponentInChildren<Button> ().enabled = true;
-		}**/
 	}
 
 	private void updateShop () {
@@ -208,5 +113,15 @@ public class DisplayGUI : MonoBehaviour {
 		shopQuantity [1].GetComponent<Text>().text = "+" + GameControl.control.upgradeQuantity [1].ToString("F0");
 		shopQuantity [2].GetComponent<Text>().text = "+" + GameControl.control.upgradeQuantity [2].ToString("F1");
 		shopQuantity [3].GetComponent<Text>().text = "-" + GameControl.control.upgradeQuantity [3].ToString("F1");
+	}
+
+	public static IEnumerator WaitForRealTime(float delay){
+		while(true){
+			float pauseEndTime = Time.realtimeSinceStartup + delay;
+			while (Time.realtimeSinceStartup < pauseEndTime){
+				yield return 0;
+			}
+			break;
+		}
 	}
 }

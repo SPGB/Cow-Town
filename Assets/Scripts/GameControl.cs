@@ -221,6 +221,7 @@ public class GameControl : MonoBehaviour {
 		if (!pushNoti) pushNoti = GetComponent<PushNotificationsAndroid>();
 		
 		if (pause){
+			//When paused slow down time instead of stopping it completely
 			Time.timeScale = 0.0f;
 			gameObject.transform.position = new Vector3(0.0f, 0.0f, 3.0f);
 		} else {
