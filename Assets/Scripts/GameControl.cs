@@ -20,6 +20,9 @@ public class GameControl : MonoBehaviour {
 	public GameObject popup;
 
 	public bool initialRun = true;
+
+	public int cowTexture = 0;
+	public int barnTexture = 0;
 	
 	public int money = 0;
 	public int milk = 0;
@@ -28,7 +31,8 @@ public class GameControl : MonoBehaviour {
 	public float level = 1.0f;
 	public float troughExp = 0.0f;
 	public float troughMaxExp = 50.0f;
-	
+	public float barnLevel = 0.0f;
+
 	public float happiness = 0.0f;
 	public float happinessExpected = 0.0f;
 	
@@ -315,6 +319,9 @@ public class GameControl : MonoBehaviour {
 				shopOffset = 0 - (Camera.main.pixelWidth * 2);
 				statOffset = 0;
 			}
+
+			if (level < 5) cowTexture = 1;
+			else cowTexture = 0;
 		}
 	}
 
@@ -494,6 +501,10 @@ public class GameControl : MonoBehaviour {
 		PlayerData data = new PlayerData();
 
 		data.initialRun = initialRun;
+
+		data.cowTexture = cowTexture;
+		data.barnTexture = barnTexture;
+		data.barnLevel = barnLevel;
 		
 		data.troughPos = troughPos;
 		
@@ -550,6 +561,10 @@ public class GameControl : MonoBehaviour {
 			Debug.Log("Loading from... " + Application.persistentDataPath + "/playerInfo.dat" + " at: " + DateTime.Now);
 
 			initialRun = data.initialRun;
+
+			cowTexture = data.cowTexture;
+			barnTexture = data.barnTexture;
+			barnLevel = data.barnLevel;
 			
 			isBorn = data.isBorn;
 			
@@ -612,6 +627,10 @@ public class GameControl : MonoBehaviour {
 
 		cowBorn = DateTime.Now;
 		isBorn = false;
+
+		cowTexture = 0;
+		barnTexture = 0;
+		barnLevel = 0.0f;
 		
 		troughPos = 0.0f;
 		
@@ -660,6 +679,10 @@ class PlayerData{
 	public bool isBorn;
 
 	public string cowName;
+
+	public int cowTexture;
+	public int barnTexture;
+	public float barnLevel;
 
 	public float troughPos;
 

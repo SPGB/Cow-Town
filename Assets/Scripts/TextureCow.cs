@@ -7,37 +7,27 @@ public class TextureCow : MonoBehaviour {
 	public Sprite cowTex1;
 	public Sprite cowTex2;
 	public Sprite cowTex3;
+	public Sprite cowTex4;
+	public Sprite cowTex5;
+	public Sprite cowTex6;
 	
-	public Sprite cowTex;
-	
+	private Sprite cowTex;
 
 	// Use this for initialization
 	void Start () {
-		cowTex = cowTex0;
-		if (GameControl.control.level >= 5.0f){
-			cowTex = cowTex1;
-		}
-		if (GameControl.control.exp >= 500){
-			cowTex = cowTex2;
-		}
-		if (GameControl.control.exp >= 1000){
-			cowTex = cowTex3;
-		}
-		gameObject.GetComponent<SpriteRenderer>().sprite = cowTex;
+	
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		cowTex = cowTex0;
-		if (GameControl.control.level >= 5.0f){
-			cowTex = cowTex1;
-		}
-		if (GameControl.control.exp >= 500){
-			cowTex = cowTex2;
-		}
-		if (GameControl.control.exp >= 1000){
-			cowTex = cowTex3;
-		}
+		if (GameControl.control.cowTexture == 0) cowTex = cowTex0;
+		if (GameControl.control.cowTexture == 1) cowTex = cowTex1;
+		if (GameControl.control.cowTexture == 2) cowTex = cowTex2;
+		if (GameControl.control.cowTexture == 3) cowTex = cowTex3;
+		if (GameControl.control.cowTexture == 4) cowTex = cowTex4;
+		if (GameControl.control.cowTexture == 5) cowTex = cowTex5;
+		if (GameControl.control.cowTexture == 6) cowTex = cowTex6;
 		gameObject.GetComponent<SpriteRenderer>().sprite = cowTex;
 	}
 }

@@ -91,6 +91,67 @@ LightmapSettings:
 GameObject:
   m_PrefabParentObject: {fileID: 100006, guid: 3756a6b856b991e41919cf8290941f2d, type: 2}
   m_PrefabInternal: {fileID: 249782579}
+--- !u!1 &10366263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 10366264}
+  - 222: {fileID: 10366266}
+  - 114: {fileID: 10366265}
+  m_Layer: 5
+  m_Name: skin (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &10366264
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 10366263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1516685807}
+  m_RootOrder: 5
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 473.5, y: -61.5001106}
+  m_SizeDelta: {x: 106, y: 64}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &10366265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 10366263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 18a77071acdb86b4a8dcb3db73b2e9d6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &10366266
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 10366263}
 --- !u!1 &21430473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,7 +1295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 0fba288b6319510498053185a8494bb8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 250e815a2c6e8e04cac5a94f5a4632f8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1830,7 +1891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 250e815a2c6e8e04cac5a94f5a4632f8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d35bdae7fdb50e4ea300c5460591576, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3856,7 +3917,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 3247a0fd63cd19b45a0786f7fd656c0a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0fba288b6319510498053185a8494bb8, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4658,11 +4719,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2bc13c10dcb6c248a7731f46769fd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cowTex0: {fileID: 21300000, guid: 3247a0fd63cd19b45a0786f7fd656c0a, type: 3}
-  cowTex1: {fileID: 21300000, guid: 0fba288b6319510498053185a8494bb8, type: 3}
+  cowTex0: {fileID: 21300000, guid: 0fba288b6319510498053185a8494bb8, type: 3}
+  cowTex1: {fileID: 21300000, guid: 3247a0fd63cd19b45a0786f7fd656c0a, type: 3}
   cowTex2: {fileID: 21300000, guid: 250e815a2c6e8e04cac5a94f5a4632f8, type: 3}
-  cowTex3: {fileID: 21300000, guid: a6f764b818eadde4f9f0deedace1cbf3, type: 3}
-  cowTex: {fileID: 0}
+  cowTex3: {fileID: 21300000, guid: 6d35bdae7fdb50e4ea300c5460591576, type: 3}
+  cowTex4: {fileID: 21300000, guid: 66b659b56f223e94b94b9ae3358ac97b, type: 3}
+  cowTex5: {fileID: 21300000, guid: 18a77071acdb86b4a8dcb3db73b2e9d6, type: 3}
+  cowTex6: {fileID: 21300000, guid: a6f764b818eadde4f9f0deedace1cbf3, type: 3}
 --- !u!114 &1066411787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5568,6 +5631,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f34d839cce11634e9626f88ee3fde3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1371396832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1371396833}
+  - 222: {fileID: 1371396835}
+  - 114: {fileID: 1371396834}
+  m_Layer: 5
+  m_Name: skin (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1371396833
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1371396832}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1516685807}
+  m_RootOrder: 4
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 359.5, y: -61.5001106}
+  m_SizeDelta: {x: 106, y: 64}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &1371396834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1371396832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 66b659b56f223e94b94b9ae3358ac97b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1371396835
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1371396832}
 --- !u!1 &1379489484
 GameObject:
   m_ObjectHideFlags: 0
@@ -6628,6 +6752,67 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1469987960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1469987961}
+  - 222: {fileID: 1469987963}
+  - 114: {fileID: 1469987962}
+  m_Layer: 5
+  m_Name: skin (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1469987961
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1469987960}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1516685807}
+  m_RootOrder: 6
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 587.5, y: -61.5001106}
+  m_SizeDelta: {x: 106, y: 64}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &1469987962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1469987960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a6f764b818eadde4f9f0deedace1cbf3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1469987963
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1469987960}
 --- !u!1001 &1470730951
 Prefab:
   m_ObjectHideFlags: 0
@@ -6853,6 +7038,9 @@ RectTransform:
   - {fileID: 854003966}
   - {fileID: 285859351}
   - {fileID: 364301644}
+  - {fileID: 1371396833}
+  - {fileID: 10366264}
+  - {fileID: 1469987961}
   m_Father: {fileID: 1454184893}
   m_RootOrder: 8
   m_AnchorMin: {x: 0, y: 0}
@@ -8758,6 +8946,8 @@ MonoBehaviour:
   native_height: 638
   popup: {fileID: 100000, guid: 59a81cc1fb535af449edcdf6e0e9e260, type: 2}
   initialRun: 1
+  cowTexture: 0
+  barnTexture: 0
   money: 0
   milk: 0
   exp: 0
@@ -8765,6 +8955,7 @@ MonoBehaviour:
   level: 1
   troughExp: 0
   troughMaxExp: 50
+  barnLevel: 0
   happiness: 0
   happinessExpected: 0
   happinessLose: 1
