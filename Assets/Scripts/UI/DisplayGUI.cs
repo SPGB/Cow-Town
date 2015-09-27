@@ -25,6 +25,7 @@ public class DisplayGUI : MonoBehaviour {
 	public GameObject constitution;
 	public GameObject intelligence;
 	public GameObject skins;
+	public GameObject skinFrame;
 	public GameObject inventory;
 
 	public string Shop = "SHOP";
@@ -80,6 +81,7 @@ public class DisplayGUI : MonoBehaviour {
 		intelligence.GetComponent<Text>().text = GameControl.control.newIntelligence.ToString("F0");
 
 		skins.GetComponent<Text>().text = GameControl.control.skinCount.ToString("F0");
+		skinFrame.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (-14 - GameControl.control.skinOffset, skinFrame.transform.position.y, skinFrame.transform.position.z));
 		
 		inventory.GetComponent<Text>().text = (GameControl.control.inventory.Count - GameControl.control.cow.nullItems).ToString("F0");
 	}

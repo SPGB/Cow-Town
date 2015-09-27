@@ -29,6 +29,7 @@ public class GameControl : MonoBehaviour {
 	public float exp = 0.0f;
 	public float expExpected = 0.0f;
 	public float level = 1.0f;
+	public sealed float ADULTLEVEL = 5.0f;
 	public float troughExp = 0.0f;
 	public float troughMaxExp = 50.0f;
 	public float barnLevel = 0.0f;
@@ -112,6 +113,8 @@ public class GameControl : MonoBehaviour {
 	public float spawnMaxTime;
 	public float happinessDeclineRate;
 	public int skinCount = 0;
+	public bool cowChanged = false;
+	public float skinOffset;
 
 	// Use this for initialization
 	void Awake () {
@@ -222,11 +225,12 @@ public class GameControl : MonoBehaviour {
 		
 		if (pause){
 			//When paused slow down time instead of stopping it completely
-			Time.timeScale = 0.0f;
+			Time.timeScale = 0.01f;
 			gameObject.transform.position = new Vector3(0.0f, 0.0f, 3.0f);
 		} else {
 			Time.timeScale = 1.0f;
 			gameObject.transform.position = new Vector3(0.0f, 0.0f, 6.0f);
+			skinOffset = 0;
 		}
 	
 		if (Input.GetKey(KeyCode.Escape)){
@@ -270,7 +274,7 @@ public class GameControl : MonoBehaviour {
 		
 		if (cow) {
 		
-			if (GameControl.control.level >= 5){
+			if (GameControl.control.level >= ADULTLEVEL){
 				float additionStr = int.Parse(cow.inv_str[0]) + int.Parse(cow.inv_str[1]) + int.Parse(cow.inv_str[2]);
 				newStrength = strength + additionStr;
 				
@@ -320,9 +324,19 @@ public class GameControl : MonoBehaviour {
 				shopOffset = 0 - (Camera.main.pixelWidth * 2);
 				statOffset = 0;
 			}
-
-			if (level < 5) cowTexture = 1;
-			else cowTexture = 0;
+			/**
+			if (skinOffset > 0) {
+				skinOffset = 0;
+			} else if (skinOffset < 0 - Camera.main.pixelWidth) {
+				skinOffset = 0 - Camera.main.pixelWidth;
+			}
+			**/
+			if (level > ADULTLEVEL && cowChanged == false) {
+				cowTexture = 0;
+				cowChanged = true;
+			} else {
+				cowTexture = 1;
+			}
 		}
 	}
 
@@ -348,6 +362,12 @@ public class GameControl : MonoBehaviour {
 			}
 
 			if (statDragged){
+				/**
+				if (Input.mousePosition.y > GameObject.Find("skinFrame").transform.position.y && Input.mousePosition.y < GameObject.Find("skinFrame").transform.position.y + (100 * screenMulti)){
+					skinOffset = Camera.main.pixelWidth + (Input.mousePosition.x - dragStart);
+				}
+				**/
+
 				pause = true;
 				dragDifference = Input.mousePosition.x - dragStart;
 
@@ -577,6 +597,7 @@ public class GameControl : MonoBehaviour {
 
 			expExpected = data.expExpected;
 			level = data.level;
+			if (level > 5) cowChanged = true;
 			
 			happiness = data.happiness;
 			happinessExpected = data.happinessExpected;
@@ -630,6 +651,7 @@ public class GameControl : MonoBehaviour {
 		isBorn = false;
 
 		cowTexture = 0;
+		cowChanged = false;
 		barnTexture = 0;
 		barnLevel = 0.0f;
 		

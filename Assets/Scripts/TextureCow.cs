@@ -30,4 +30,8 @@ public class TextureCow : MonoBehaviour {
 		if (GameControl.control.cowTexture == 6) cowTex = cowTex6;
 		gameObject.GetComponent<SpriteRenderer>().sprite = cowTex;
 	}
+
+	public void setSkin (int tex) {
+		GameControl.control.cowTexture = tex;
+	}
 }

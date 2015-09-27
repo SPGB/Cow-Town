@@ -138,7 +138,7 @@ public class Cow : MonoBehaviour {
 	}
 
 	void OnMouseDown () {
-		if (GameControl.control.level >= 5){
+		if (GameControl.control.level >= GameControl.control.ADULTLEVEL){
 			if (GameControl.control.happiness <= 0) {
 				return;
 			}
